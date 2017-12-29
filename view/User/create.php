@@ -1,58 +1,65 @@
-<div class="container">
-    <div class="row">
-        <div class="box">
+<div class="card card-register mx-auto mt-5">
+    <div class="card-body">
+        <div class="card-header text-center"><?php echo $titre; ?> Utilisateur</div>
 
-            <form method="post" action="index.php?action=<?php echo $action; ?>" >
-                <fieldset class="text-center">
-                    <legend><?php echo $titre; ?> User</legend>
-                    <div class="col-lg-12">
-                        <p>
+        <form method="post" action="index.php?action=<?php echo $action; ?>" >
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label class="card-header" for="login_id">identifiant</label>
+                        <input type="text" value="<?php echo $vLogin ?>"placeholder="login" name="login" id="login_id"required/>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="card-header" for="pwd_id">Mot de passe</label><br>
 
-                            <label for="login_id">Login</label><br>
+                        <input type="password" placeholder="******" name="password" id="pwd_id" required/>
+                    </div>
+                </div>
+            </div>
 
-                            <input type="text" value="<?php echo $vLogin ?>"placeholder="login" name="login" id="login_id"required/>
-                           
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label class="card-header" for="prenom_id">Prénom</label><br>
 
-
-                        </p>
-                        <p>
-                            <label for="pwd_id">Password</label><br>
-
-                            <input type="password" placeholder="*****" name="password" id="pwd_id" required/>
-
-                        </p>
-
-
-                        <p>
-                            <label for="admin_id">Admin?</label><br>
-                            <input type="radio" name="admin" value="1" required/> Oui
-                            <input type="radio" name="admin" value="0" required/> Non<br>
-                        </p>
-
-                        <p>
-                            <label for="cell_id">Cell</label><br>
-
-                            <input type="text" value="<?php echo $cell; ?> "placeholder="514-546-3332" name="cell" id=" cell_id" required/>
-
-                        </p>
-
+                        <input type="text" value="<?php echo $prenom; ?> " placeholder="MonPrenom" name="prenom" id="prenom_id" required/>
 
                     </div>
+                    <div class="col-md-6">
+                        <label class="card-header" for="nom_id">Nom</label><br>
 
+                        <input type="text" value="<?php echo $nom; ?> " placeholder="MonNom" name="nom" id=" nom_id" required/>
 
-                    <div class="col-lg-12">
-                        <p>
-                            <input type="hidden" name="idUser" value="<?php echo $id; ?> " />
-                            <input class="btn bg-primary" type="submit" value="Enregistrer" />
-                        </p>
                     </div>
-                </fieldset> 
-            </form>
-        </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-row">
+                    <div class="col-md-12 text-center">
+                       
+                            <label class="card-header" for="admin_id">Administrateur</label><br>
 
+                            <p class="onoff">
+                                <input name="admin" type="checkbox" value="0" id="checkboxID">
+                                <label for="checkboxID"></label>
+                            </p>
+                       
+
+                    </div>
+                </div>
+            </div
+
+
+            <div class="form-group">
+                <div class="form-row">
+
+                    <div class="col-lg-12 text-center">
+                        <input class="btn btn-success" type="submit" value="Enregistrer" />
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-</div>
-
 
 
 
