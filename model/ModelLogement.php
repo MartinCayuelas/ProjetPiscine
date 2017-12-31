@@ -43,7 +43,7 @@ class ModelLogement {
              }
             }
     }
-    public function getAllLogement() {
+    public function getAllLogements() {
         $sql = "SELECT * FROM logement";
         $req = Model::$pdo->query($sql);
         $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelLogement');
