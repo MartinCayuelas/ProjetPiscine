@@ -13,7 +13,7 @@
                  
                       <div class="col-md-6">
                             <label class="card-header" for="nbtables_id">NbreTables</label>
-                            <input type="text" value="<?php echo $nbtables ?>"placeholder="NbreTables" name="nbtables" id="nbtables_id"/>
+                            <input type="number" value="<?php echo $nbtables ?>"placeholder="NbreTables" name="nbtables" id="nbtables_id"/>
                         
                        
                             <label class="card-header" for="prixplacestd_id">PrixPlaceStandard</label>
