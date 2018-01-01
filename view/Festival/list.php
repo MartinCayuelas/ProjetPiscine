@@ -19,8 +19,8 @@ echo <<<EOF
                   
                   
                   <th>Date</th>
-                  <th>NbreTables</th>
-                   <th>PrixPlaceStandard</th>
+                  <th>Nombre de Tables</th>
+                   <th>Prix Place Standard</th>
                 </tr>
               </thead>
 EOF;

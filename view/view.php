@@ -47,7 +47,7 @@
                         </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reservations">
-                        <a class="nav-link" href="reservation.html">
+                        <a class="nav-link" href="index.php?action=listResa">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                             <span class="nav-link-text">Reservations</span>
                         </a>
@@ -67,7 +67,7 @@
                         </ul>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Festival">
-                        <a class="nav-link" href="festival.html">
+                        <a class="nav-link" href="index.php?action=listFestival">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
                             <span class="nav-link-text">Festival</span>
                         </a>

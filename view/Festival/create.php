@@ -7,8 +7,12 @@
             <div class="form-group">
                 <div class="form-row">
                     <div class="col-md-6">
+                        <label class="card-header" for="annee_id">Année</label>
+                        <input type="number" value="<?php echo $annee ?>"placeholder="2018" name="annee" id="annee_id"required/>
+                    </div>
+                    <div class="col-md-6">
                         <label class="card-header" for="date_id">Date</label>
-                        <input type="text" value="<?php echo $date ?>"placeholder="Date" name="date" id="date_id"required/>
+                        <input type="date" value="<?php echo $date ?>"placeholder="Date" name="date" id="date_id"required/>
                     </div>
                  
                       <div class="col-md-6">
@@ -17,7 +21,7 @@
                         
                        
                             <label class="card-header" for="prixplacestd_id">PrixPlaceStandard</label>
-                            <input type="number" value="<?php echo $prixplacestd ?>"placeholder="PrixPlaceStandard" name="prixplacestd" id="prixplacestd_id"/>
+                            <input type="number" step="0.1" value="<?php echo $prixplacestd ?>"placeholder="PrixPlaceStandard" name="prixplacestd" id="prixplacestd_id"/>
                         
                         		</div>
                     </div>
