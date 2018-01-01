@@ -366,3 +366,147 @@ class Controller {
     }
 
 }
+
+############Festival#############
+
+    public function listFestival() {
+
+        /*
+         * Fonction pour afficher la liste des festivals
+         */
+
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+
+            $tab = ModelFestival::getAllFestivals();
+            $controller = 'Festival';
+            $view = 'list';
+            $pagetitle = 'Liste des festivals';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
+
+    public static function createFestival() {
+        if (!Session::is_connected()) {
+            Controller::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $action = 'createdFestival';
+
+
+            $titre = 'Ajout d\'un';
+
+            $date = NULL;
+            $nbplaces = NULL;
+            $prixplacestd = NULL;
+
+
+            $controller = 'Festival';
+            $view = 'create';
+            $pagetitle = 'Ajouter un festival';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
+
+    public static function createdFestival() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+
+
+            $edit = new ModelFestival(0, $_POST['date'], $_POST['nbplaces'], $_POST['prixplacestd'];
+            if ($edit->save() == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Erreur lors de la creation';
+                require FILE::build_path(array("view", "view.php"));
+            } else {
+                Controller::listFestival();
+            }
+        }
+    }
+
+    public function deleteFestival() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $idLogement = $_GET['idFestival'];
+
+            $d = ModelFestival::deleteByAnnee($annee);
+            if ($d == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Impossible à supprimer';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                Controller::listFestival();
+            }
+        }
+    }
+
+    public function updateFestival() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+
+            $action = 'updatedLogement';
+
+
+            $titre = 'Modification';
+
+
+            $date = $_POST['date'];
+            $nbplaces = $_POST['nbplaces'];
+            $prixplacestd = $_POST['prixplacestd'];
+
+
+            $controller = 'Festival';
+            $view = 'create';
+            $pagetitle = 'Mise à jour Festival';
+            require FILE::build_path(array("view", "view.php"));
+        }
+    }
+
+    public function updatedFestival() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            requireFile::build_path(array("view", "view.php"));
+        } else {
+
+            $edit = new ModelFestival(0, $_POST['date'], $_POST['nbplaces'], $_POST['prixplacestd'];
+            if ($edit->updated($_POST['anneeFestival']) == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Erreur lors de la creation';
+                require FILE::build_path(array("view", "view.php"));
+            } else {
+                Controller::listFestival();
+            }
+        }
+    }
+
+}
