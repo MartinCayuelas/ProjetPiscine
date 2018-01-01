@@ -304,7 +304,7 @@ class Controller {
             $pagetitle = 'Error Accès';
             require File::build_path(array("view", "view.php"));
         } else {
-            $num = $_GET['numContact'];
+            $num = $_GET['num'];
 
             $d = ModelEditeur::deleteByNum($num);
             if ($d == false) {
