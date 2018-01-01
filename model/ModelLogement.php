@@ -42,7 +42,7 @@ class ModelLogement {
             $this->CPNLogement = $cpnl;
              }
             }
-    }
+    
     public function getAllLogements() {
         $sql = "SELECT * FROM logement";
         $req = Model::$pdo->query($sql);

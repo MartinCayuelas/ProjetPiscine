@@ -1,35 +1,41 @@
 
 <?php
+
 require_once File::build_path(array('model', 'Model.php'));
+
 class ModelFestival {
+
     private $anneeFestival;
     private $dateFestival;
-    private $nbPlacesFestival;
-    private $prixPlaceStdFestival;
+    private $nbTablesFest;
+    private $prixPlacesStandard;
 
     function getAnneeFestival() {
         return $this->anneeFestival;
     }
+
     function getDateFestival() {
         return $this->dateFestival;
     }
-    function getnNbPlacesFestival() {
-        return $this->nbPlacesFestival;
-    }
-    function getPrixPlaceStdFestival() {
-        return $this->prixPlaceStdFestival;
+
+    function getNbTablesFest() {
+        return $this->nbTablesFest;
     }
 
+    function getPrixPlacesStandard() {
+        return $this->prixPlacesStandard;
+    }
 
-    public function __construct($anneef = NULL, $df = NULL, $nbplacesf = NULL, $prixplacestdf = NULL {
-        if (!is_null($anneef) && !is_null($df) && !is_null($nbplacesf) && !is_null($prixplacestdf) {
+    
+    public function __construct($anneef = NULL, $df = NULL, $nbplacesf = NULL, $prixplacestdf = NULL) {
+        if (!is_null($anneef) && !is_null($df) && !is_null($nbplacesf) && !is_null($prixplacestdf)) {
             $this->anneeFestival = $anneef;
             $this->dateFestival = $df;
-            $this->nbPlacesFestival = $nbplacesf;
-            $this->prixPlacesStdFestival = $prixplacestdf;
-             }
-            }
+            $this->nbTablesFest = $nbplacesf;
+            $this->prixPlacesStandard = $prixplacestdf;
+        }
     }
+
     public function getAllFestival() {
         $sql = "SELECT * FROM festival";
         $req = Model::$pdo->query($sql);
@@ -39,6 +45,7 @@ class ModelFestival {
         }
         return $tab_prod;
     }
+
     public function getNbFestival() {
         $sql = "SELECT COUNT(*) AS totalFestival FROM festival";
         $req = Model::$pdo->query($sql);
@@ -48,7 +55,7 @@ class ModelFestival {
         }
         return $tab_prod;
     }
-    
+
     public function getFestivalById($id) {
         $sql = "SELECT * FROM festival WHERE anneeFestival=:read1";
         $req = Model::$pdo->prepare($sql);
@@ -62,22 +69,23 @@ class ModelFestival {
         }
         return $tab_prod;
     }
+
     public function save() {
         try {
-            $sql = "INSERT INTO festival (anneeFestival,dateFestival, nbPlacesFestival, PrixPlaceStdFestival) VALUES (:annee, :date, :nbplaces, :prixplacestd)";
+            $sql = "INSERT INTO festival (anneeFestival,dateFestival, nbTablesFest, prixPlacesStandard) VALUES (:annee, :date, :nbplaces, :prixplacestd)";
             $req = Model::$pdo->prepare($sql);
             $values = array(
                 'annee' => $this->anneeFestival,
                 'date' => $this->dateFestival,
-                'nbplaces' => $this->nbPlacesFestival,
-                'prixplacestd' => $this->prixPlaceStdFestival,
-                
+                'nbplaces' => $this->nbTablesFest,
+                'prixplacestd' => $this->prixPlacesStandard,
             );
             return $req->execute($values);
         } catch (PDOException $e) {
             return false;
         }
     }
+
     public function deleteByNum($id) {
         try {
             $sql = "DELETE FROM festival WHERE anneeFestival =:read1";
@@ -91,7 +99,7 @@ class ModelFestival {
             return false;
         }
     }
-   
+
     public function updated($num) {
         $sql = "UPDATE = festival SET  dateFestival =:read2, nbPlacesFestival =:read3, prixPlaceStdFestival =:read4 WHERE anneeFestival=:read7";
         $req = Model::$pdo->prepare($sql);
@@ -99,9 +107,8 @@ class ModelFestival {
             "read2" => $this->dateFestival,
             "read3" => $this->nbPlacesFestival,
             "read4" => $this->PrixPlaceStdFestival,
-
         );
         return $req->execute($values);
     }
-    
+
 }

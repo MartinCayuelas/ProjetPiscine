@@ -6,7 +6,7 @@ class ModelReservation {
 
     private $numResa;
     private $dateResa;
-    private $comentaire;
+    private $commentaire;
     private $prixPlaceNego;
     private $statut;
     private $etatFacture;
@@ -19,8 +19,8 @@ class ModelReservation {
         return $this->dateResa;
     }
 
-    function getComentaire() {
-        return $this->comentaire;
+    function getCommentaire() {
+        return $this->commentaire;
     }
 
     function getPrixPlaceNego() {
@@ -35,8 +35,8 @@ class ModelReservation {
         return $this->etatFacture;
     }
 
-    function setComentaire($comentaire) {
-        $this->comentaire = $comentaire;
+    function setCommentaire($commentaire) {
+        $this->commentaire = $commentaire;
     }
 
     function setPrixPlaceNego($prixPlaceNego) {
@@ -51,11 +51,11 @@ class ModelReservation {
         $this->etatFacture = $etatFacture;
     }
 
-    public function __construct($numResa = NULL, $dateResa = NULL, $comentaire = NULL, $prixPlaceNego = NULL, $statut = NULL, $etatFacture = NULL) {
-        if (!is_null($numResa) && !is_null($dateResa) && !is_null($comentaire) && !is_null($prixPlaceNego) && !is_null($statut) && !is_null($etatFacture)) {
+    public function __construct($numResa = NULL, $dateResa = NULL, $commentaire = NULL, $prixPlaceNego = NULL, $statut = NULL, $etatFacture = NULL) {
+        if (!is_null($numResa) && !is_null($dateResa) && !is_null($commentaire) && !is_null($prixPlaceNego) && !is_null($statut) && !is_null($etatFacture)) {
             $this->numResa = $numResa;
             $this->dateResa = $dateResa;
-            $this->comentaire = $comentaire;
+            $this->commentaire = $commentaire;
             $this->prixPlaceNego = $prixPlaceNego;
             $this->statut = $statut;
             $this->etatFacture = $etatFacture;

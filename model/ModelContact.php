@@ -4,50 +4,51 @@ require_once File::build_path(array('model', 'Model.php'));
 
 class ModelContact {
 
-    private $NumContact;
-    private $NomContact;
-    private $PrenomContact;
-    private $NumTelContact;
-    private $MailContact;
-    private $NumEditeur;
+    private $numContact;
+    private $nomContact;
+    private $prenomContact;
+    private $numTelContact;
+    private $mailContact;
+    private $numEditeur;
 
     function getNumContact() {
-        return $this->NumContact;
+        return $this->numContact;
     }
 
     function getNomContact() {
-        return $this->NomContact;
+        return $this->nomContact;
     }
 
     function getPrenomContact() {
-        return $this->PrenomContact;
+        return $this->prenomContact;
     }
 
     function getNumTelContact() {
-        return $this->NumTelContact;
+        return $this->numTelContact;
     }
 
     function getMailContact() {
-        return $this->MailContact;
+        return $this->mailContact;
     }
 
     function getNumEditeur() {
-        return $this->NumEditeur;
+        return $this->numEditeur;
     }
 
+    
     function __construct($NumContact = NULL, $NomContact = NULL, $PrenomContact = NULL, $NumTelContact = NULL, $MailContact = NULL, $NumEditeur = NULL) {
         if (!is_null($NumContact) && !is_null($NomContact) && !is_null($PrenomContact) && !is_null($NumTelContact) && !is_null($MailContact) && !is_null($NumEditeur)) {
 
-            $this->NumContact = $NumContact;
-            $this->NomContact = $NomContact;
-            $this->PrenomContact = $PrenomContact;
-            $this->NumTelContact = $NumTelContact;
-            $this->MailContact = $MailContact;
-            $this->NumEditeur = $NumEditeur;
+            $this->numContact = $NumContact;
+            $this->nomContact = $NomContact;
+            $this->prenomContact = $PrenomContact;
+            $this->numTelContact = $NumTelContact;
+            $this->mailContact = $MailContact;
+            $this->numEditeur = $NumEditeur;
         }
     }
 
-    public static function getAllContactByNum($num) {
+    public static function getAllContactsByNum($num) {
         $sql = "SELECT * FROM contact WHERE numEditeur=:read1";
         $req = Model::$pdo->prepare($sql);
         $value = array(
@@ -66,12 +67,12 @@ class ModelContact {
             $sql = "INSERT INTO contact (numContact, nomContact, prenomContact,numTelContact,mailContact,numEditeur ) VALUES (:num,:nom,:prenom,:tel,:mail,:numE)";
             $req = Model::$pdo->prepare($sql);
             $values = array(
-                'num' => $this->NumContact,
-                'nom'=> $this->NomContact,
-                'prenom'=> $this->PrenomContact,
-                'tel'=> $this->NumTelContact,
-                "mail"=> $this->MailContact,
-                'numE' => $this->NumEditeur,
+                'num' => $this->numContact,
+                'nom'=> $this->nomContact,
+                'prenom'=> $this->prenomContact,
+                'tel'=> $this->numTelContact,
+                "mail"=> $this->mailContact,
+                'numE' => $this->numEditeur,
                 
                 
                 
@@ -95,22 +96,22 @@ class ModelContact {
             return false;
         }
     }
-
-
-   
+    
     public function updated($num) {
-        $sql = "UPDATE editeur SET  nomContact =:nom, prenomContact =:prenom, numTelContact =:tel, mailContact =:mail, numEditeur =: numE WHERE numContact=:num";
+        $sql = "UPDATE contact SET  nomContact =:read2, prenomContact =:read3, numTelContact =:read4, mailContact =:read6, numEditeur =:read7 WHERE numContact=:read5";
         $req = Model::$pdo->prepare($sql);
         $values = array(
-            'num' => $num,
-                'nom'=> $this->NomContact,
-                'prenom'=> $this->PrenomContact,
-                'tel'=> $this->NumTelContact,
-                "mail"=> $this->MailContact,
-                'numE' => $this->NumEditeur,
+            "read2" => $this->nomContact,
+            "read3" => $this->prenomContact,
+            "read4" => $this->numTelContact,
+            "read6" => $this->mailContact,
+            "read7" => $this->numEditeur,
+            "read5" => $num,
         );
         return $req->execute($values);
     }
 
+   
+   
 
 }
