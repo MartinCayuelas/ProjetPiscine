@@ -9,7 +9,6 @@ require_once File::build_path(array("model", "ModelContact.php"));
 require_once File::build_path(array("model", "ModelSuivi.php"));
 require_once File::build_path(array("model", "ModelFestival.php"));
 require_once File::build_path(array("model", "ModelLogement.php"));
-
 /* Lib */
 
 require_once File::build_path(array("lib", "Security.php"));
@@ -24,8 +23,11 @@ class Controller {
          */
         //$tab_produit = ModelRealisation::getAllPrincipales(); //On récupère les images principales
         //$tab = ModelPresentation::getPresentation(); // On recupère la présentation pour le petite description
+        
+        $tr=ModelReservation:: getTablesReservees();
+        $nbE=ModelEditeur::getNbEditeur();
         $controller = 'Accueil';
-        $view = 'list';
+        $view = 'index';
         $pagetitle = 'Accueil Festival du Jeu';
         require File::build_path(array("view", "view.php"));
     }
@@ -493,9 +495,9 @@ class Controller {
             $prenom = $_POST['prenomContact'];
             $num = $_POST['numTelContact'];
             $mail = $_POST['mailContact'];
-            $numContact = $_POST['numContact'];
+            $numContact = $_GET['numContact'];
             $numEditeur = $_GET['numEditeur'];
-
+            print($nom);
 
             $controller = 'Contact';
             $view = 'create';
@@ -514,7 +516,7 @@ class Controller {
             requireFile::build_path(array("view", "view.php"));
         } else {
 
-            $contact = new ModelContact(0, $_POST['nomContact'], $_POST['prenomContact'], $_POST['numTelContact'], $_POST['mailContact'], $_GET['numEditeur']);
+            $contact = new ModelContact( $_POST['nomContact'], $_POST['prenomContact'], $_POST['numTelContact'], $_POST['mailContact'], $_GET['numEditeur']);
             if ($contact->updated($_POST['numContact']) == false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
@@ -537,15 +539,23 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $numEditeur = $_GET['numEditeur'];
-            
+
             $tab = ModelSuivi::getSuivisByEditeur($numEditeur);
             
 
-            $controller = 'Suivi';
-            $view = 'list';
+            if (empty($tab)) {
+                $controller = 'Suivi';
+                $view = 'listVide';
+                $pagetitle = 'Liste des suivis';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                $controller = 'Suivi';
+               $view = 'list';
             $pagetitle = 'Liste des suivis';
             require File::build_path(array("view", "view.php"));
+            }
         }
+     
     }
 
     public static function createSuivi() {
