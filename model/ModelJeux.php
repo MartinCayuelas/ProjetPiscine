@@ -34,7 +34,7 @@ class ModelJeux {
         return $this->numEditeur;
     }
 
-    public function construct($num = NULL, $nom = NULL, $nbjoueurs = NULL, $date = NULL, $duree = NULL, $categorie = NULL, $editeur = NULL) {
+    public function construct($num = NULL, $nom = NULL, $nbjoueurs = NULL, $dates = NULL, $duree = NULL, $categorie = NULL, $editeur = NULL) {
         if (!is_null($num) && !is_null($nom) && !is_null($nbjoueurs) && !is_null($dates) && !is_null($duree) && !is_null($categorie) && !is_null($editeur)) {
             $this->numJeux = $num;
             $this->nomJeu = $nom;
