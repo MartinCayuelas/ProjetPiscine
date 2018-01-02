@@ -113,7 +113,7 @@ class ModelJeux {
         }
     }
     
-    public function updated($num) {
+    public function updatedJeux($num) {
         $sql = "UPDATE Jeux SET  nomJeu =:read2, nbjoueurs =:read3, dates =:read4, duree =:read6, categorie =:read7, editeur =:read8 WHERE numJeux=:read5";
         $req = Model::$pdo->prepare($sql);
         $values = array(
