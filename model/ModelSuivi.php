@@ -31,13 +31,19 @@ class ModelSuivi {
         return $this->numEditeur;
     }
 
-    function __construct($refSuivi, $premierContact, $relance, $reponse, $numEditeur) {
-        $this->refSuivi = $refSuivi;
-        $this->premierContact = $premierContact;
-        $this->relance = $relance;
-        $this->reponse = $reponse;
-        $this->numEditeur = $numEditeur;
+    function __construct($refSuivi = NULL, $premierContact = NULL, $relance = NULL, $reponse = NULL, $numEditeur =NULL) {
+        if (!is_null($refSuivi) && !is_null($premierContact) && !is_null($relance) && !is_null($reponse) && !is_null($numEditeur)){
+         $this->refSuivi = $refSuivi;
+         $this->premierContact = $premierContact;
+         $this->relance = $relance;
+         $this->reponse = $reponse;
+         $this->numEditeur = $numEditeur;
+     }
     }
+
+ 
+
+    
 
     
     public static function getSuivisByEditeur($numE) {
