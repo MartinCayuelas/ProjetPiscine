@@ -27,8 +27,8 @@ EOF;
 foreach ($tab as $v) {
     $annee = htmlspecialchars($v->getAnneeFestival());
     $date = htmlspecialchars($v->getDateFestival());
-    $nbtables = htmlspecialchars($v->getNbTablesFestival());
-    $prixplacestd = htmlspecialchars($v->getPrixPlaceStdFestival());
+    $nbtables = htmlspecialchars($v->getNbTablesFest());
+    $prixplacestd = htmlspecialchars($v->getPrixPlacesStandard());
     echo <<< EOF
              <tbody>
                 <tr>
