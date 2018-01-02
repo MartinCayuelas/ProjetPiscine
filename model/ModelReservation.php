@@ -74,4 +74,12 @@ class ModelReservation {
         return $tab_prod;
     }
 
+    public static function getTablesReservees() {
+        $sql = "SELECT COUNT(numResa) FROM reservation ";
+        $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
+
+    }
+
 }

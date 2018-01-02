@@ -131,6 +131,12 @@ class ModelEditeur {
         return $req->execute($values);
     }
 
+public static function getNbEditeur() {
+        $sql = "SELECT COUNT(numEditeur) FROM editeur ";
+        $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
+    }
     
 
 }
