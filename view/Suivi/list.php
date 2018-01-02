@@ -41,7 +41,7 @@ foreach ($tab as $v) {
     if(empty($premier)){
         echo 'VIDE prmeier';
     } else {
-        echo 'Notttttt vdie prmeier';
+        echo '';
     }
 
 
@@ -54,8 +54,8 @@ foreach ($tab as $v) {
                    <th>{$premier}</th>
                    <th>{$relance}</th>
                    <th>{$reponse}</th>
-                   <th>{$ref}</th>
-                   <th>{$numEditeur}</th>
+                   <!--<th>{$ref}</th>
+                   <th>{$numEditeur}</th>-->
                    
 EOF;
     if (isset($_SESSION['login']) && Session::is_admin()) {
@@ -65,11 +65,11 @@ EOF;
                    <th class="text-center" ><a href="index.php?action=deleteSuivi&refSuivi={$ref}&numEditeur={$numEditeur}"><button class="btn btn-danger" type="button">Supprimer</button></a></th> 
                              <form action="index.php?action=updateSuivi" method = "POST">
                                 
-                                <input type="hidden" name="numEditeur" value="{$num}" />
-                                <input type="hidden" name="nom" value="{$nom}" />
-                                <input type="hidden" name="ville" value="{$ville}" />
-                                <input type="hidden" name="rue" value="{$rue}" />
-                                <input type="hidden" name="cp" value="{$cp}" />
+                                <input type="hidden" name="numEditeur" value="{$premier}" />
+                                <input type="hidden" name="nom" value="{$relance}" />
+                                <input type="hidden" name="ville" value="{$reponse}" />
+                                <input type="hidden" name="rue" value="{$ref}" />
+                                <input type="hidden" name="cp" value="{$numEditeur}" />
                                 
 
 
