@@ -2,14 +2,15 @@
 echo <<< EOF
  <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Liste des jeux</div>
+          <i class="fa fa-th"></i> Détail du jeu </div>
+
+<div class="card-header">
+   
+    <a href="index.php?action=listCategorie"><button class="btn btn-warning retour" type="button">Retour aux Catégories</button></a>
+    </div>
+
 EOF;
-if (isset($_SESSION['login']) && Session::is_admin()) {
-    echo <<<EOF
-            <a class="ajout" href="index.php?action=construct">Ajouter un Jeu</a>
-             
-EOF;
-}
+
 echo <<<EOF
         <div class="card-body">
           <div class="table-responsive">
@@ -26,7 +27,8 @@ echo <<<EOF
               </thead>
 
 EOF;
-foreach ($tab as $v) {
+
+   foreach ($tab as $v) {
     $num = htmlspecialchars($v->getnumJeu());
     $nom = htmlspecialchars($v->getNomJeu());
     $nbjoueurs = htmlspecialchars($v->getnbjoueurs());
@@ -85,10 +87,14 @@ EOF;
     echo <<< EOF
         </tr>
       </tbody>
-                         
-              
+                    
+  
+             
                       
 EOF;
-}
+   }
+
+   
 echo "</div>";
+
 echo "</div>";

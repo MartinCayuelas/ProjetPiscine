@@ -1,66 +1,76 @@
 <?php
+
 echo <<< EOF
  <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Liste des catégories</div>
+          <i class="fa fa-table"></i> Liste des jeux par Catégorie</div>
 EOF;
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
-            <a class="ajout" href="index.php?action=createCategorie">Ajouter une Catégorie</a>
+            <a class="ajout" href="index.php?action=createCategorie"><i class="fa fa-plus-circle" aria-hidden="true"></i> Catégorie</a>
              
 EOF;
 }
-echo <<<EOF
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-               <thead>
-                <tr>
-                  
-                  <th>Code</th>
-                  <th>Nom</th>
-                </tr>
-              </thead>
-EOF;
-foreach ($tab as $v) {
+
+
+foreach ($cat as $v) {
     $code = htmlspecialchars($v->getCodeCategorie());
     $nom = htmlspecialchars($v->getNomCategorie());
-  
-    echo <<< EOF
-             <tbody>
-                <tr>
-                  
-                  <th>{$code}</th>
-                   <th>{$nom}</th>
 
+    echo <<<EOF
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered bordertable">
+               <thead>
+                <tr>
+                  <th class="thCategorie text-center" >{$nom} 
+                      
+ 
 EOF;
-    if (isset($_SESSION['login']) && Session::is_admin()) {
+                  
+                   if (isset($_SESSION['login']) && Session::is_admin()) {
         echo <<< EOF
                    
-                   <th class="text-center" ><a href="index.php?action=deleteCategorie={$code}"><button class="btn btn-danger" type="button">Supprimer</button></a></th> 
-                             <form action="index.php?action=updateCategorie" method = "POST">
-                                
-                                <input type="hidden" name="code" value="{$code}" />
-                                
-                                <input type="hidden" name="nom" value="{$nom}" />
-                         
-                               
-                                
-                                <br>
-                               <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
-                            </form>
-                               
+                  <a href="index.php?action=deleteCategorie={$code}"><button class="btn btn-danger" type="button"> <i class="fa fa-trash" aria-hidden="true"></i></button></a> 
+                            
                        
                        
 EOF;
     }
+   
+    echo <<<EOF
+                  </th>
+                  
+                </tr>
+              </thead>
+EOF;
     echo <<< EOF
-        </tr>
+             <tbody>
+                
+
+EOF;
+    foreach ($games as $v) {
+        if ($v->getcodeCategorie() == $code) {
+            $nomJeu = htmlspecialchars($v->getNomJeu());
+            $num = htmlspecialchars($v->getnumJeu());
+            echo <<< EOF
+                    <tr>
+       
+                   <td class="tdHover text-center"><a class="nav-link" href="index.php?action=detailJeu&num={$nomJeu}">{$nomJeu}</a></td>
+                   
+                   </tr>
+EOF;
+        }
+    }
+
+    echo <<< EOF
+        
       </tbody>
-                         
+             
               
                       
 EOF;
 }
+echo '  </table>  ';
 echo "</div>";
 echo "</div>";
