@@ -111,4 +111,11 @@ class ModelFestival {
         return $req->execute($values);
     }
 
+
+    public static function getTablesDispo() {
+        $sql = "SELECT nbTablesFest FROM festival ";
+        $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
+    }
 }

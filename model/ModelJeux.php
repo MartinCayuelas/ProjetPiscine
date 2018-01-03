@@ -1,17 +1,13 @@
-
 <?php
-
 require_once File::build_path(array('model', 'Model.php'));
-
 class ModelJeux {
     private $numJeux;
     private $NomJeu;
     private $Nbrejoueurs;
     private $dateSortie;
     private $dureePartie;
-    private $codeCategorie
-    private $numEditeur
-
+    private $codeCategorie;
+    private $numEditeur;
     function getnumJeu() {
         return $this->numJeux;
     }
@@ -33,7 +29,6 @@ class ModelJeux {
     function getnumEditeur() {
         return $this->numEditeur;
     }
-
     public function construct($num = NULL, $nom = NULL, $nbjoueurs = NULL, $dates = NULL, $duree = NULL, $categorie = NULL, $editeur = NULL) {
         if (!is_null($num) && !is_null($nom) && !is_null($nbjoueurs) && !is_null($dates) && !is_null($duree) && !is_null($categorie) && !is_null($editeur)) {
             $this->numJeux = $num;
@@ -45,7 +40,6 @@ class ModelJeux {
             $this->numEditeur = $editeur;
         }
     }
-
     public function getAllJeux() {
         $sql = "SELECT * FROM Jeux";
         $req = Model::$pdo->query($sql);
@@ -55,7 +49,6 @@ class ModelJeux {
         }
         return $tab_prod;
     }
-
     public function getNbJeux() {
         $sql = "SELECT COUNT(*) AS totalJeux FROM Jeux";
         $req = Model::$pdo->query($sql);
@@ -79,7 +72,6 @@ class ModelJeux {
         }
         return $tab_prod;
     }
-
     public function save() {
         try {
             $sql = "INSERT INTO Jeux (numJeux, nomJeu, NbreJoueurs, dateSortie, dureePartie, codeCategorie, numEditeur) VALUES (:num, :nom, :nbjoueurs, :dates, :duree, :categorie, :editeur) ";
@@ -98,7 +90,6 @@ class ModelJeux {
             return false;
         }
     }
-
     public function deleteByNum($num) {
         try {
             $sql = "DELETE FROM Jeux WHERE numEditeur =:read1";
@@ -126,6 +117,13 @@ class ModelJeux {
             "read5" => $num,
         );
         return $req->execute($values);
+    }
+
+    public static function getNbreJeux() {
+        $sql = "SELECT COUNT(numJeux) FROM jeux ";
+        $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
     }
     
 }
