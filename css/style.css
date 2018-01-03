@@ -1,3 +1,12 @@
+.choix{
+	background-color:white;
+	width: 1.5em;
+	height: 1.5em;
+	/*border-radius:50%;*/
+	display : inline-block;
+	text-align: center;
+	margin-left :30%;
+}
 #logo{
 	margin-left: 5%;
 }
@@ -7,7 +16,9 @@
 	color: white !important;
 }
 .card-header{
-	background-color: #333333;
+	color :#ffffff;
+	font-weight: 500;
+	background-color:#333333;
 }
 .h4.mb-0.text{
 	color:#ffffff;
@@ -25,28 +36,6 @@
 }
 .list-group-item.list-group-item-action{
 	color: white;
-}
-
-/*accueil*/
-
-.list-group-item-action:hover{
-  background-color: #333333 !important;
-} 
-
-.espace{
-  text-align: center;
-  display:inline-block;
-
-}
-.esp{
-  font-size: 25px;
-  width: 1000px;
-  display:inline-block;
-  text-align: center;
-}
-.text-muted .smaller{
-  /*font-size: 20px;*/
-  color:#f45b63 !important;
 }
 
 .card.mb-3.v{
@@ -103,12 +92,49 @@
 	height: 500px!important;
 }
 .card-header:first-child{
+    border:none;
     color:white;
+    background-color:#333333;
 }
+
+
+
+
+.thCategorie{
+    width: 50%;
+    background-color:#f45b63;
+    color: #FFF;
+}
+.tdHover{
+    width: 50%;
+}
+.tdHover:hover{
+    width: 50%;
+     background-color: #f45b63;
+    color: #FFF;
+}
+
+.retour:hover{
+    background-color: #fd7e14;
+}
+/*connexion*/
 
 .bg-connect{
     background-color:#333333 !important;
 }
+#login_id{
+    border-color: #f45b63 ;
+    border-radius: 5px;
+    padding: 7px;
+}
+#password_id{
+    border-color: #f45b63 ;
+    border-radius: 5px;
+    padding: 7px;
+}
+/*#{
+    margin-left: -1.5%;
+}*/
 
 /* Boutton */
 
