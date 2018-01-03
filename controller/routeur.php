@@ -32,11 +32,11 @@ if (class_exists($controller_class)) {
             $controller_class::$action();
         }
         else {
-			Controller::festivalConnect();
+			Controller::festivalAccueil();
 		}
     }
     else {
-        Controller::festivalConnect();
+        Controller::festivalAccueil();
     }
 }
 
