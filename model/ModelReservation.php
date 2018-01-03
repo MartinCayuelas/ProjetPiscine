@@ -79,7 +79,40 @@ class ModelReservation {
         $req = Model::$pdo->query($sql);
         $res=$req->fetchColumn();
         return $res;
-
     }
 
+    /* permet affichage des paiment avenir de la page d'accueil*/
+
+    public static function getPrixFacture(){
+        $sql=" SELECT prixPlaceNego, numResa FROM reservation WHERE etatFacture= 'editee' LIMIT 0,5";
+        $req = Model::$pdo->query($sql);
+        $tab= $req->FETCHALL(PDO::FETCH_CLASS, 'ModelReservation');
+        if (empty($tab)) {
+            return false;
+        }
+        return $tab;
+    }
+
+    public static function getNumJeux($numResa) {
+        $sq2="SELECT numJeux FROM concerner WHERE numResa=".$numResa;
+        $req2 = Model::$pdo->query($sq2);
+        $res=$req2->fetchColumn();
+        return $res;
+    }
+
+    public static function getEditeur($numJ) {
+        $sq2="SELECT numEditeur FROM jeux WHERE numJeux=".$numJ;
+        $req2 = Model::$pdo->query($sq2);
+        $res=$req2->fetchColumn();
+        return $res;
+    }
+
+    public static function getNomEdit($numE) {
+        $sq2="SELECT nomEditeur FROM editeur WHERE numEditeur=".$numE;
+        $req2 = Model::$pdo->query($sq2);
+        $res=$req2->fetchColumn();
+        return $res;
+    }
+
+   
 }

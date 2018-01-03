@@ -125,5 +125,37 @@ class ModelJeux {
         $res=$req->fetchColumn();
         return $res;
     }
+
+    /*permet affichage des jeux qui vont être recu sur la page d'accueil*/
+
+    public static function getJeuxConcern() {
+        $sql = "SELECT numJeux FROM concerner WHERE recu=0 LIMIT 0,5";
+        $req = Model::$pdo->query($sql);
+        $tab= $req->FETCHALL(PDO::FETCH_CLASS, 'ModelJeux');
+        if (empty($tab)) {
+            return false;
+        }
+        return $tab;
+
+    }
+
+    public static function getJeuxARecevoir($numJ) {
+        $sq2="SELECT nomJeu FROM jeux WHERE numJeux=".$numJ;
+        $req2 = Model::$pdo->query($sq2);
+        $res=$req2->fetchColumn();
+        return $res;
+    }
     
+    public static function getJeuxRecuEd($numJ) {
+        $sq2="SELECT numEditeur FROM jeux WHERE numJeux=".$numJ;
+        $req2 = Model::$pdo->query($sq2);
+        $res=$req2->fetchColumn();
+        return $res;
+    }
+    public static function getEditJeux($numE) {
+        $sq2="SELECT nomEditeur FROM editeur WHERE numEditeur=".$numE;
+        $req2 = Model::$pdo->query($sq2);
+        $res=$req2->fetchColumn();
+        return $res;
+    }
 }
