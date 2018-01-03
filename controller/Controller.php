@@ -9,6 +9,8 @@ require_once File::build_path(array("model", "ModelContact.php"));
 require_once File::build_path(array("model", "ModelSuivi.php"));
 require_once File::build_path(array("model", "ModelFestival.php"));
 require_once File::build_path(array("model", "ModelLogement.php"));
+require_once File::build_path(array("model", "ModelJeux.php"));
+
 /* Lib */
 
 require_once File::build_path(array("lib", "Security.php"));
@@ -24,8 +26,13 @@ class Controller {
         //$tab_produit = ModelRealisation::getAllPrincipales(); //On récupère les images principales
         //$tab = ModelPresentation::getPresentation(); // On recupère la présentation pour le petite description
         
-        $tr=ModelReservation:: getTablesReservees();
-        $nbE=ModelEditeur::getNbEditeur();
+        $tr=ModelReservation:: getTablesReservees(); //nombre de tables reservées
+        $nbE=ModelEditeur::getNbEditeur(); //nombre d'éditeur dans la bdd
+        $nbJ=ModelJeux::getNbreJeux(); //nombre de jeux presents au festival
+        $tD1=ModelFestival::getTablesDispo(); 
+        $tD2=$tD1-$tr;//donne le nombres de tables disponibles 
+        $c=ModelJeux::getJeuxConcern(); //affiche les jeux a recevoir 
+        $p=ModelReservation:: getPrixFacture(); //affiche les paiements a venir 
         $controller = 'Accueil';
         $view = 'index';
         $pagetitle = 'Accueil Festival du Jeu';
@@ -497,7 +504,6 @@ class Controller {
             $mail = $_POST['mailContact'];
             $numContact = $_GET['numContact'];
             $numEditeur = $_GET['numEditeur'];
-            print($nom);
 
             $controller = 'Contact';
             $view = 'create';
@@ -516,7 +522,7 @@ class Controller {
             requireFile::build_path(array("view", "view.php"));
         } else {
 
-            $contact = new ModelContact( $_POST['nomContact'], $_POST['prenomContact'], $_POST['numTelContact'], $_POST['mailContact'], $_GET['numEditeur']);
+            $contact = new ModelContact( 0,$_POST['nomContact'], $_POST['prenomContact'], $_POST['numTelContact'], $_POST['mailContact'], $_GET['numEditeur']);
             if ($contact->updated($_POST['numContact']) == false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
@@ -645,6 +651,56 @@ class Controller {
         }
     }
 
+     public function updateSuivi() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+
+            $action = 'updatedSuivi';
+
+
+            $titre = 'Modification';
+
+            $premierContact = $_POST['premierContact'];
+            $relance =  $_POST['relance'];
+            $reponse =  $_POST['reponse'];
+            $numEditeur= $_POST['numEditeur'];
+            $ref=$_POST['ref'];
+
+
+            $controller = 'Suivi';
+            $view = 'create';
+            $pagetitle = 'Mise à jour Suivi';
+            require FILE::build_path(array("view", "view.php"));
+        }
+    }
+
+    public function updatedSuivi() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            requireFile::build_path(array("view", "view.php"));
+        } else {
+            $edit = new ModelSuivi(0, $_POST['premierContact'], $_POST['relance'], $_POST['reponse'], $_POST['numEditeur']);
+            if ($edit->updated($_POST['refSuivi']) == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Erreur lors de la creation';
+                require FILE::build_path(array("view", "view.php"));
+            } else {
+                Controller::listSuivi();
+            }
+        }
+    }
+
     ####################Reservations############"
 
     public function listResa() {
@@ -767,11 +823,10 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         } else {
 
-            $action = 'updatedLogement';
+            $action = 'updatedFestival';
 
 
             $titre = 'Modification';
-
 
             $date = $_POST['date'];
             $nbplaces = $_POST['nbplaces'];
@@ -803,137 +858,6 @@ class Controller {
                 require FILE::build_path(array("view", "view.php"));
             } else {
                 Controller::listFestival();
-            }
-        }
-    }
-    
-    
-    
-    
-    
-    
-    ######################## JEUX ########################
-
-public function listJeux() {
-        /*
-         * Fonction pour afficher la liste des jeux
-         */
-        if (!Session::is_connected()) {
-            Controller::FestivalConnect();
-        } else {
-            $tab = ModelJeux::getAllJeux();
-            $controller = 'Jeux';
-            $view = 'list';
-            $pagetitle = 'Liste des jeux';
-            require File::build_path(array("view", "view.php"));
-        }
-    }
-
-    public static function createJeux() {
-        if (!Session::is_connected()) {
-            Controller::festivalConnect();
-        } elseif (!Session::is_admin()) {
-            $controller = 'Accueil';
-            $view = 'listVide';
-            $pagetitle = 'Error Accès';
-            require File::build_path(array("view", "view.php"));
-        } else {
-            $action = 'createdJeux';
-            $titre = 'Ajout d\'un';
-            $nom = NULL;
-            $nbjoueurs = NULL;
-            $dates = NULL;
-            $duree = NULL;
-            $categorie = NULL;
-            $editeur = NULL;
-            $controller = 'Jeux';
-            $view = 'create';
-            $pagetitle = 'Ajouter un jeu';
-            require File::build_path(array("view", "view.php"));
-        }
-    }
-    public static function createdJeux() {
-        if (!Session::is_connected()) {
-            self::festivalConnect();
-        } elseif (!Session::is_admin()) {
-            $controller = 'Accueil';
-            $view = 'listVide';
-            $pagetitle = 'Error Accès';
-            require File::build_path(array("view", "view.php"));
-        } else {
-            $edit = new ModelJeux(0, $_POST['nom'], $_POST['nbjoueurs'], $_POST['dates'], $_POST['duree'], $_POST['categorie'], $_POST['editeur']);
-            if ($edit->save() == false) {
-                $controller = 'Accueil';
-                $view = 'listVide';
-                $pagetitle = 'Erreur lors de la creation';
-                require FILE::build_path(array("view", "view.php"));
-            } else {
-                Controller::listJeux();
-            }
-        }
-    }
-    public function deleteJeux() {
-        if (!Session::is_connected()) {
-            self::festivalConnect();
-        } elseif (!Session::is_admin()) {
-            $controller = 'Accueil';
-            $view = 'listVide';
-            $pagetitle = 'Error Accès';
-            require File::build_path(array("view", "view.php"));
-        } else {
-            $num = $_GET['num'];
-            $d = ModelJeux::deleteByNum($num);
-            if ($d == false) {
-                $controller = 'Accueil';
-                $view = 'listVide';
-                $pagetitle = 'Impossible à supprimer';
-                require File::build_path(array("view", "view.php"));
-            } else {
-                Controller::listJeux();
-            }
-        }
-    }
-    public function updateJeux() {
-        if (!Session::is_connected()) {
-            self::festivalConnect();
-        } elseif (!Session::is_admin()) {
-            $controller = 'Accueil';
-            $view = 'listVide';
-            $pagetitle = 'Error Accès';
-            require File::build_path(array("view", "view.php"));
-        } else {
-            $action = 'updatedJeux';
-            $titre = 'Modification';
-            $nom = $_POST['nom'];
-            $nbjoeurs = $_POST['nbjoueurs'];
-            $dates = $_POST['dates'];
-            $duree = $_POST['duree'];
-            $categorie = $_POST['categorie'];
-            $editeur = $_POST['editeur'];
-            $num = $_POST['numJeux'];
-            $controller = 'Jeux';
-            $view = 'create';
-            $pagetitle = 'Mise à jour Jeux';
-            require FILE::build_path(array("view", "view.php"));
-        }
-    }
-    public function updatedJeux() {
-        if (!Session::is_connected()) {
-            self::festivalConnect();
-        } elseif (!Session::is_admin()) {
-            $controller = 'Accueil';
-            $view = 'listVide';
-            $pagetitle = 'Error Accès';
-            requireFile::build_path(array("view", "view.php"));
-        } else {
-            $edit = new ModelJeux(0, $_POST['nom'], $_POST['nbjoueurs'], $_POST['dates'], $_POST['duree'], $_POST['categorie'], $_POST['editeur']);
-            if ($edit->updated($_POST['numJeux']) == false) {
-                $controller = 'Accueil';
-                $view = 'listVide';
-                $pagetitle = 'Erreur lors de la creation';
-                require FILE::build_path(array("view", "view.php"));
-            } else {
-                Controller::listJeux();
             }
         }
     }
