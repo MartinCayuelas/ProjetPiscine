@@ -35,17 +35,24 @@
                         </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Jeux">
-                        <a class="nav-link" href="jeux.html">
+                        <a class="nav-link" href="index.php?action=listJeux">
                             <i class="fa fa-fort-awesome" aria-hidden="true"></i>
                             <span class="nav-link-text">Jeux</span>
                         </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Categories">
+                        <a class="nav-link" href="index.php?action=listCategorie">
+                            <i class="fa fa-server" aria-hidden="true"></i>
+                            <span class="nav-link-text">Catégories</span>
+                        </a>
+                    </li>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Categories">
                         <a class="nav-link" href="Zone.html">
-                            <i class="fa fa-th" aria-hidden="true"></i>
+                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
                             <span class="nav-link-text">Zones</span>
                         </a>
                     </li>
+                    
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reservations">
                         <a class="nav-link" href="index.php?action=listResa">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
