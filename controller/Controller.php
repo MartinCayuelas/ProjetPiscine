@@ -10,6 +10,8 @@ require_once File::build_path(array("model", "ModelSuivi.php"));
 require_once File::build_path(array("model", "ModelFestival.php"));
 require_once File::build_path(array("model", "ModelLogement.php"));
 require_once File::build_path(array("model", "ModelJeux.php"));
+require_once File::build_path(array("model", "ModelCategorie.php"));
+
 
 /* Lib */
 
@@ -23,20 +25,23 @@ class Controller {
         /*
          * Affiche la page d'Accueil
          */
-        //$tab_produit = ModelRealisation::getAllPrincipales(); //On récupère les images principales
-        //$tab = ModelPresentation::getPresentation(); // On recupère la présentation pour le petite description
-        
-        $tr=ModelReservation:: getTablesReservees(); //nombre de tables reservées
-        $nbE=ModelEditeur::getNbEditeur(); //nombre d'éditeur dans la bdd
-        $nbJ=ModelJeux::getNbreJeux(); //nombre de jeux presents au festival
-        $tD1=ModelFestival::getTablesDispo(); 
-        $tD2=$tD1-$tr;//donne le nombres de tables disponibles 
-        $c=ModelJeux::getJeuxConcern(); //affiche les jeux a recevoir 
-        $p=ModelReservation:: getPrixFacture(); //affiche les paiements a venir 
-        $controller = 'Accueil';
-        $view = 'index';
-        $pagetitle = 'Accueil Festival du Jeu';
-        require File::build_path(array("view", "view.php"));
+
+        if (!Session::is_connected()) {
+            Controller::festivalConnect();
+        } else {
+
+            $tr = ModelReservation:: getTablesReservees(); //nombre de tables reservées
+            $nbE = ModelEditeur::getNbEditeur(); //nombre d'éditeur dans la bdd
+            $nbJ = ModelJeux::getNbreJeux(); //nombre de jeux presents au festival
+            $tD1 = ModelFestival::getTablesDispo();
+            $tD2 = $tD1 - $tr; //donne le nombres de tables disponibles 
+            $c = ModelJeux::getJeuxConcern(); //affiche les jeux a recevoir 
+            $p = ModelReservation:: getPrixFacture(); //affiche les paiements a venir 
+            $controller = 'Accueil';
+            $view = 'index';
+            $pagetitle = 'Accueil Festival du Jeu';
+            require File::build_path(array("view", "view.php"));
+        }
     }
 
     /* Connexion */
@@ -522,7 +527,7 @@ class Controller {
             requireFile::build_path(array("view", "view.php"));
         } else {
 
-            $contact = new ModelContact( 0,$_POST['nomContact'], $_POST['prenomContact'], $_POST['numTelContact'], $_POST['mailContact'], $_GET['numEditeur']);
+            $contact = new ModelContact(0, $_POST['nomContact'], $_POST['prenomContact'], $_POST['numTelContact'], $_POST['mailContact'], $_GET['numEditeur']);
             if ($contact->updated($_POST['numContact']) == false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
@@ -547,7 +552,7 @@ class Controller {
             $numEditeur = $_GET['numEditeur'];
 
             $tab = ModelSuivi::getSuivisByEditeur($numEditeur);
-            
+
 
             if (empty($tab)) {
                 $controller = 'Suivi';
@@ -556,12 +561,11 @@ class Controller {
                 require File::build_path(array("view", "view.php"));
             } else {
                 $controller = 'Suivi';
-               $view = 'list';
-            $pagetitle = 'Liste des suivis';
-            require File::build_path(array("view", "view.php"));
+                $view = 'list';
+                $pagetitle = 'Liste des suivis';
+                require File::build_path(array("view", "view.php"));
             }
         }
-     
     }
 
     public static function createSuivi() {
@@ -651,7 +655,7 @@ class Controller {
         }
     }
 
-     public function updateSuivi() {
+    public function updateSuivi() {
         if (!Session::is_connected()) {
             self::festivalConnect();
         } elseif (!Session::is_admin()) {
@@ -667,10 +671,10 @@ class Controller {
             $titre = 'Modification';
 
             $premierContact = $_POST['premierContact'];
-            $relance =  $_POST['relance'];
-            $reponse =  $_POST['reponse'];
-            $numEditeur= $_POST['numEditeur'];
-            $ref=$_POST['ref'];
+            $relance = $_POST['relance'];
+            $reponse = $_POST['reponse'];
+            $numEditeur = $_POST['numEditeur'];
+            $ref = $_POST['ref'];
 
 
             $controller = 'Suivi';
@@ -859,6 +863,138 @@ class Controller {
             } else {
                 Controller::listFestival();
             }
+        }
+    }
+
+    ###################Jeux#################""
+
+    public function listJeux() {
+
+        /*
+         * Fonction pour afficher la liste des éditeurs
+         */
+
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+
+            $tab = ModelJeux::getAllJeux();
+            $cat = ModelCategorie::getAllCategorie();
+            $edit = ModelEditeur::getAllEditeurs();
+
+
+
+            if (empty($tab)) {
+                $controller = 'Jeux';
+                $view = 'listVide';
+                $pagetitle = 'Liste des jeux';
+                require File::build_path(array("view", "view.php"));
+            } else {
+
+                $controller = 'Jeux';
+                $view = 'list';
+                $pagetitle = 'Liste des jeux';
+                require File::build_path(array("view", "view.php"));
+            }
+        }
+    }
+
+    public function detailJeu() {
+
+        /*
+         * Fonction pour afficher la liste des éditeurs
+         */
+
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+
+            $num = $_GET['num'];
+            $tab = ModelJeux::getJeuByNum($num);
+            
+            $cat = ModelCategorie::getAllCategorie();
+            $edit = ModelEditeur::getAllEditeurs();
+
+            
+            $controller = 'Jeux';
+            $view = 'detail';
+            $pagetitle = 'Detail';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
+
+    public static function createJeu() {
+        if (!Session::is_connected()) {
+            Controller::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $action = 'createdJeu';
+
+
+            $titre = 'Ajout d\'un';
+
+            $nom = NULL;
+            $ville = NULL;
+            $rue = NULL;
+            $cp = NULL;
+
+
+
+            $controller = 'Jeux';
+            $view = 'create';
+            $pagetitle = 'Ajouter un jeu';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
+
+    public static function createdJeu() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+
+
+            $edit = new ModelEditeur(0, $_POST['nom'], $_POST['rue'], $_POST['ville'], $_POST['cp']);
+            if ($edit->save() == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Erreur lors de la creation';
+                require FILE::build_path(array("view", "view.php"));
+            } else {
+                Controller::listEditeur();
+            }
+        }
+    }
+
+    ###################Catégorie####################
+
+    public function listCategorie() {
+
+        /*
+         * Fonction pour afficher la liste des éditeurs
+         */
+
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+
+
+            $cat = ModelCategorie::getAllCategorie();
+            $games = ModelJeux::getAllJeux();
+
+
+            $controller = 'Categorie';
+            $view = 'list';
+            $pagetitle = 'Liste des Catégorie';
+            require File::build_path(array("view", "view.php"));
         }
     }
 
