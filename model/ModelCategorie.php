@@ -55,7 +55,7 @@ class ModelCategorie {
 
    
     public function updated($code) {
-        $sql = "UPDATE = categorie SET  codeCategorie =:read1, nomCategorie =:read2;
+        $sql = "UPDATE = categorie SET  codeCategorie =:read1, nomCategorie =:read2";
         $req = Model::$pdo->prepare($sql);
         $values = array(
             "read1" => $this->codeCategorie,
