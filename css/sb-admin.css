@@ -42,7 +42,12 @@ body.fixed-nav {
     font-weight: 800; }
 
 .smaller {
-  font-size: 1rem; }
+  font-size: 2rem; 
+  text-align: center;}
+.esp{
+  width: 100%;
+  text-align: center;
+}
 
 .o-hidden {
   overflow: hidden !important; }
