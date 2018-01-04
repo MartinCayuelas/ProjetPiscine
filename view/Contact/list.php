@@ -51,9 +51,28 @@ EOF;
     if (isset($_SESSION['login']) && Session::is_admin()) {
 
         echo <<< EOF
+        
+        <th class="text-center"> <a class="nav-link" data-toggle="modal" data-target="#exampleModalS{$num}">
+                           <button class="btn btn-danger" type="button"> <i class="fa fa-fw fa-trash"></i>Supprimer</button></a></th>   
+       
+       <div class="modal fade" id="exampleModalS{$num}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelS{$num}" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelS{$num}">Supprimer?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
+                        <a href="index.php?action=deleteContact&numEditeur={$numE}&numContact={$num}"><button class="btn btn-danger" type="button">Supprimer</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
                    
-                   <th class="text-center" ><a href="index.php?action=deleteContact&numEditeur={$numE}&numContact={$num}"><button class="btn btn-danger" type="button">Supprimer</button></a></th> 
-                             <form action="index.php?action=updateContact&numEditeur={$numE}" method = "POST">
+                            <form action="index.php?action=updateContact&numEditeur={$numE}" method = "POST">
                                 
                                 <input type="hidden" name="numContact" value="{$num}" />
                                 <input type="hidden" name="nomContact" value="{$nom}" />

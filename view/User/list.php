@@ -63,7 +63,7 @@ EOF;
          <th class="text-center"> <a class="nav-link" data-toggle="modal" data-target="#exampleModalS{$vLogin}">
                            <button class="btn btn-danger" type="button"> <i class="fa fa-fw fa-trash"></i>Supprimer</button></a></th>   
        
-       <div class="modal fade" id="exampleModalS{$vLogin}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelS{$vLogin} aria-hidden="true">
+       <div class="modal fade" id="exampleModalS{$vLogin}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelS{$vLogin}" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
