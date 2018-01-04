@@ -41,11 +41,6 @@ class ModelSuivi {
      }
     }
 
- 
-
-    
-
-    
     public static function getSuivisByEditeur($numE) {
         $sql = "SELECT * FROM suivi WHERE numEditeur =:read1";
         $req = Model::$pdo->prepare($sql);
@@ -92,6 +87,19 @@ class ModelSuivi {
         } catch (PDOException $e) {
             return false;
         }
+    }
+
+    public function updated($ref) {
+        $sql = "UPDATE suivi SET  premierContact =:read2, relance =:read3, reponse =:read4, numEditeur =:read6 WHERE refSuivi=:read5";
+        $req = Model::$pdo->prepare($sql);
+        $values = array(
+            "read2" => $this->premierContact,
+            "read3" => $this->relance,
+            "read4" => $this->reponse,
+            "read6" => $this->numEditeur,
+            "read5" => $ref,
+        );
+        return $req->execute($values);
     }
 
     
