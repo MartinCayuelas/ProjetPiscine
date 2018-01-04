@@ -11,10 +11,16 @@
 	  margin-left: 20%;
     width: 36%;
 }
+#logoConnec{ 
+    width: 75%;
+    display: inline-block;
+    margin-left: 5%;
+}
 .card-body{
 	background-color: #333333;
 	border-color :#333333;
 	color: white !important;
+  text-align: center;
 }
 .card-header{
 	color :#ffffff;
