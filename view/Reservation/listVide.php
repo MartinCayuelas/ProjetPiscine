@@ -8,14 +8,14 @@ EOF;
 
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
-            <a class="ajout" href="index.php?action=createReservation">Ajouter une réservation</a>
+            <a class="ajout" href="index.php?action=createReservation"><i class="fa fa-plus-circle" aria-hidden="true"></i>  réservation</a>
              
 EOF;
 }
 echo <<<EOF
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" width="100%" cellspacing="0">
                <thead>
                 <tr>
                   <th >Date</th>
@@ -29,7 +29,10 @@ echo <<<EOF
 EOF;
 
 
-    echo <<< EOF
+
+
+
+echo <<< EOF
 
         </tr>
       </tbody>
@@ -37,6 +40,7 @@ EOF;
               
                       
 EOF;
+
 
 
 echo "</div>";

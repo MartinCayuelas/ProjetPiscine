@@ -7,21 +7,28 @@
                 <div class="form-row">
                     <div class="col-md-6">
                         <label class="card-header" for="premierContact">Premier contact</label>
-                        <input type="text" value="<?php echo $premierContact ?>" name="premierContact" id="premierContact" required=""/>
+                        <input type="date" value="<?php echo $premierContact ?>" name="premierContact" id="premierContact" required=""/>
                     </div>
 
                     <div class="col-md-6">
 
                         <label class="card-header" for="relance">Relance</label>
-                        <input type="text" value="<?php echo $relance ?>" name="relance" id="relance"/>
-
-
-                        <label class="card-header" for="reponse">Reponse</label>
-                        <input type="checkbox" value="<?php echo $reponse ?>" name="reponse" id="reponse"/>
-
+                        <input type="date" value="<?php echo $relance ?>" name="relance" id="relance"/>
 
 
                     </div>
+
+                    
+                            <div class="col-md-12 text-center">
+                                
+                               <label class="card-header" for="reponse_id"> <i class="fa fa-wrench" aria-hidden="true"></i> Réponse</label><br>
+
+                            <input type="radio" name="reponse" value="1" required/> Oui
+                            <input type="radio" name="reponse" value="0" required/> Non<br>
+
+
+                            </div>
+                       
                 </div>
 
             </div>

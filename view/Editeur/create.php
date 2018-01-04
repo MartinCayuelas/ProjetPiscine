@@ -5,24 +5,27 @@
         <form method="post" action="index.php?action=<?php echo $action; ?>" >
             <div class="form-group">
                 <div class="form-row">
-                    <div class="col-md-6">
-                        <label class="card-header" for="nom_id">Nom</label>
+                    <div class="col-md-12">
+                        <label class="card-header" for="nom_id"> <i class="fa fa-user-o" aria-hidden="true"></i> Nom</label>
                         <input type="text" value="<?php echo $nom ?>"placeholder="Nom" name="nom" id="nom_id"required/>
                     </div>
+                    
+                    <br>
                  
-                      <div class="col-md-6">
-                            <label class="card-header" for="ville_id">Ville</label>
+                      <div class="col-md-12">
+                            <label class="card-header" for="ville_id"> <i class="fa fa-institution" aria-hidden="true"></i> Ville</label>
                             <input type="text" value="<?php echo $ville ?>"placeholder="Ville" name="ville" id="ville_id"/>
-                        
+                      </div>
+                            <div class="col-md-12">
                        
-                            <label class="card-header" for="rue_id">Rue</label>
+                            <label class="card-header" for="rue_id"><i class="fa fa-info-circle" aria-hidden="true"></i> Rue</label>
                             <input type="text" value="<?php echo $rue ?>"placeholder="Rue" name="rue" id="rue_id"/>
-                        
-                         
-                            <label class="card-header" for="cp_id">CodePostal</label>
+                            </div>
+                            <div class="col-md-12">
+                            <label class="card-header" for="cp_id"><i class="fa fa-tags" aria-hidden="true"></i> CodePostal</label>
                             <input type="number" value="<?php echo $cp ?>"placeholder="CodePostal" name="cp" id="cp_id"/>
-                        
-                    </div>
+                        </div>
+                   
                 </div>
                 
             </div>

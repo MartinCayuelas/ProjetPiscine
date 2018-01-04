@@ -7,7 +7,7 @@
             <!-- infos importantes-->
           <div class="card mb-3">
             <div class="card-header">
-              <i class="fa fa-bell-o"></i> Données inportantes</div>
+              <i class="fa fa-bell-o"></i> Données importantes Lol</div>
             <div class="list-group list-group-flush small">
               <a class="list-group-item list-group-item-action" href="#">
                 <div class="espace">

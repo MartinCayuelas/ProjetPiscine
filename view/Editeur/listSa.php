@@ -8,7 +8,7 @@ EOF;
 
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
-            <a class="ajout" href="index.php?action=createEditeur"><i class="fa fa-plus-circle" aria-hidden="true"></i> Editeur</a>
+            <a class="ajout" href="index.php?action=createEditeur">Ajouter un Editeur</a>
              
 EOF;
 }
@@ -50,30 +50,9 @@ EOF;
     if (isset($_SESSION['login']) && Session::is_admin()) {
 
         echo <<< EOF
-        
-           <th class="text-center"> <a class="nav-link" data-toggle="modal" data-target="#exampleModalS{$num}">
-                           <button class="btn btn-danger" type="button"> <i class="fa fa-fw fa-trash"></i>Supprimer</button></a></th>   
-       
-       <div class="modal fade" id="exampleModalS{$num}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelS{$num}" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabelS{$num}">Supprimer?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                        <a href="index.php?action=deleteEditeur&num={$num}"><button class="btn btn-danger" type="button">Supprimer</button></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-                      
-                        
                    
-                           <form action="index.php?action=updateEditeur" method = "POST">
+                   <th class="text-center" ><a href="index.php?action=deleteEditeur&num={$num}"><button class="btn btn-danger" type="button">Supprimer</button></a></th> 
+                             <form action="index.php?action=updateEditeur" method = "POST">
                                 
                                 <input type="hidden" name="numEditeur" value="{$num}" />
                                 <input type="hidden" name="nom" value="{$nom}" />

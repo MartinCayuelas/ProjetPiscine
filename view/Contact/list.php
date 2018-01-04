@@ -9,14 +9,14 @@ EOF;
 
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
-            <a class="ajout" href="index.php?action=createContact&numEditeur={$numE}">Ajouter un Contact</a>
+            <a class="ajout" href="index.php?action=createContact&numEditeur={$numE}"><i class="fa fa-plus-circle" aria-hidden="true"></i>  Contact</a>
              
 EOF;
 }
 echo <<<EOF
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered"  width="100%" cellspacing="0">
                <thead>
                 <tr>
                   <th>Nom</th>

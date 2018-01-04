@@ -6,7 +6,7 @@ echo <<< EOF
 EOF;
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
-            <a class="ajout" href="index.php?action=construct">Ajouter un Jeu</a>
+            <a class="ajout" href="index.php?action=construct"><i class="fa fa-plus-circle" aria-hidden="true"></i> Jeu</a>
              
 EOF;
 }

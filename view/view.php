@@ -76,7 +76,7 @@
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Festival">
                         <a class="nav-link" href="index.php?action=listFestival">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
-                            <span class="nav-link-text">Festival</span>
+                            <span class="nav-link-text">Festivals</span>
                         </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Utilisateurs">
@@ -171,18 +171,7 @@
                             <a class="dropdown-item small" href="#">View all alerts</a>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <form class="form-inline my-2 my-lg-0 mr-lg-2">
-                            <div class="input-group">
-                                <input class="form-control" type="text" placeholder="Search for...">
-                                <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
-                    </li>
+                  
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
                             <i class="fa fa-fw fa-sign-out"></i>Deconnexion</a>
@@ -216,7 +205,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Prêt à quitter?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Quitter?</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
@@ -229,6 +218,11 @@
                 </div>
             </div>
         </div>
+        
+        
+         
+        
+        
         <!-- Bootstrap core JavaScript-->
         <script src="./vendor/jquery/jquery.min.js"></script>
         <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
