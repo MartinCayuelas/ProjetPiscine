@@ -35,12 +35,25 @@ class Controller {
             $nbJ = ModelJeux::getNbreJeux(); //nombre de jeux presents au festival
             $tD1 = ModelFestival::getTablesDispo();
             $tD2 = $tD1 - $tr; //donne le nombres de tables disponibles 
+
             $c = ModelJeux::getJeuxConcern(); //affiche les jeux a recevoir 
+
+            
+
             $p = ModelReservation:: getPrixFacture(); //affiche les paiements a venir 
-            $controller = 'Accueil';
-            $view = 'index';
+
+            if (empty($p) and empty($c) or empty($p) or empty($c)) {
+                $controller = 'Accueil';
+                $view = 'indexVide';
+                $pagetitle = 'Accueil Festival du Jeu';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                $controller = 'Accueil';
+               $view = 'index';
             $pagetitle = 'Accueil Festival du Jeu';
             require File::build_path(array("view", "view.php"));
+            }
+           
         }
     }
 
@@ -507,7 +520,7 @@ class Controller {
             $prenom = $_POST['prenomContact'];
             $num = $_POST['numTelContact'];
             $mail = $_POST['mailContact'];
-            $numContact = $_GET['numContact'];
+            $numContact = $_POST['numContact'];
             $numEditeur = $_GET['numEditeur'];
 
             $controller = 'Contact';
@@ -739,8 +752,7 @@ class Controller {
 
             $tab = ModelFestival::getAllFestival();
            
-
-             if (empty($tab)) {
+            if (empty($tab)) {
                 $controller = 'Festival';
                 $view = 'listVide';
                 $pagetitle = 'Liste des Festivals';
