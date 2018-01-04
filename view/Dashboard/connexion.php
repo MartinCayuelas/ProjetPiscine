@@ -21,7 +21,7 @@
         <div class="container">
             <div class="card card-login mx-auto mt-5">
                 <div class="card card-login mx-auto mt-5">
-                    <div class="card-header"><img id="logoConnec" src="image/logoSite.png" alt="logo" width="100%" /></div>
+                    <div class="card-header"><img id="logoConnec" src="image/logoSiteConnex.png" alt="logo" width="100%" /></div>
                     <div class="card-body">
                         <form method="post" action="index.php?action=connectedFestival" enctype="multipart/form-data">
                             <div class="form-group">
