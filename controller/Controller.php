@@ -731,10 +731,20 @@ class Controller {
         } else {
 
             $tab = ModelReservation::getAllReservations();
-            $controller = 'Reservation';
-            $view = 'list';
-            $pagetitle = 'Liste des réservations';
-            require File::build_path(array("view", "view.php"));
+
+            if (empty($tab)) {
+                $controller = 'Reservation';
+                $view = 'listVide';
+                $pagetitle = 'Liste des réservations';
+                require File::build_path(array("view", "view.php"));
+            } else {
+               $controller = 'Reservation';
+                $view = 'list';
+                $pagetitle = 'Liste des réservations';
+                require File::build_path(array("view", "view.php"));
+            }
+
+            
         }
     }
 
