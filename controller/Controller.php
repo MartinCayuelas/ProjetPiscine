@@ -727,7 +727,7 @@ class Controller {
 
     ############Festival#############
 
-    public function listFestival() {
+     public function listFestival() {
 
         /*
          * Fonction pour afficher la liste des festivals
@@ -738,10 +738,19 @@ class Controller {
         } else {
 
             $tab = ModelFestival::getAllFestival();
-            $controller = 'Festival';
-            $view = 'list';
-            $pagetitle = 'Liste des festivals';
+           
+
+             if (empty($tab)) {
+                $controller = 'Festival';
+                $view = 'listVide';
+                $pagetitle = 'Liste des Festivals';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                $controller = 'Festival';
+               $view = 'list';
+            $pagetitle = 'Liste des Festivals';
             require File::build_path(array("view", "view.php"));
+            }
         }
     }
 
