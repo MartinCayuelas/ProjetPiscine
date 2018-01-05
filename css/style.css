@@ -124,6 +124,20 @@
 .retour:hover{
     background-color: #fd7e14;
 }
+
+
+/*alignement formulaire*/
+/*contact*/
+
+label.card-header{
+  width:30%;
+}
+/*suivi*/
+.col-md-6 label.card-header{
+  width:100%;
+}
+
+
 /*connexion*/
 
 .bg-connect{

@@ -42,11 +42,12 @@ body.fixed-nav {
     font-weight: 800; }
 
 .smaller {
-  font-size: 2rem; 
+  font-size: 1rem; 
   text-align: center;}
 .esp{
-  width: 100%;
-  text-align: center;
+    width: 1025px;
+    text-align: center !important;
+    display: inline-block;
 }
 
 .o-hidden {
@@ -109,7 +110,7 @@ body.fixed-nav {
 
 @media (min-width: 992px) {
   #mainNav .navbar-brand {
-    width: 13.05em;
+    width: 12.85em;
     right: -20px;
     background-color: #333333;
     display: inline-block;
