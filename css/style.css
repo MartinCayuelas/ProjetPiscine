@@ -109,16 +109,28 @@
 
 .thCategorie{
     width: 50%;
-    background-color:#f45b63;
-    color: #FFF;
+    background-color:#FFF;
+    color: black;
 }
 .tdHover{
+    background-color: #FFF;
+    color: #f45b63;
     width: 50%;
 }
 .tdHover:hover{
     width: 50%;
      background-color: #f45b63;
-    color: #FFF;
+    
+}
+.linkCate{
+    text-decoration: none;
+    color: #f45b63;
+    
+}
+.linkCate:hover{
+    text-decoration: none;
+    color: white;
+    
 }
 
 .retour:hover{
