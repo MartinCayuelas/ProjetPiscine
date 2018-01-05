@@ -213,7 +213,7 @@
                     <div class="modal-body">Cliquez sur "Deconnexion" pour quitter la session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                        <a class="btn btn-primary" href="index.php?action=deconnectFestival">Deconnexion</a>
+                        <a class="btn btn-success" href="index.php?action=deconnectFestival">Deconnexion</a>
                     </div>
                 </div>
             </div>
