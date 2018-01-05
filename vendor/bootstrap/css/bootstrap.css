@@ -4734,7 +4734,7 @@ tbody.collapse.show {
 .list-group-item-action:focus, .list-group-item-action:hover {
   color: #495057;
   text-decoration: none;
-  background-color: #f8f9fa;
+  background-color: #444444;
 }
 
 .list-group-item-action:active {
