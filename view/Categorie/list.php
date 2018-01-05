@@ -57,7 +57,7 @@ EOF;
             echo <<< EOF
                     <tr>
        
-                   <td class="tdHover text-center"><a class="nav-link linkCate" href="index.php?action=detailJeu&num={$nomJeu}">{$nomJeu}</a></td>
+                   <td class="tdHover text-center"><a class="nav-link linkCate" href="index.php?action=detailJeu&num={$nomJeu}"><h5>{$nomJeu}</h5></a></td>
                    
                    </tr>
 EOF;
