@@ -23,7 +23,7 @@ foreach ($cat as $v) {
             <table class="table table-bordered bordertable">
                <thead>
                 <tr>
-                  <th class="thCategorie text-center" >{$nom} 
+                  <th class="thCategorie text-center" ><h2>{$nom}
                       
  
 EOF;
@@ -39,6 +39,7 @@ EOF;
     }
    
     echo <<<EOF
+    </h2>
                   </th>
                   
                 </tr>
@@ -56,7 +57,7 @@ EOF;
             echo <<< EOF
                     <tr>
        
-                   <td class="tdHover text-center"><a class="nav-link" href="index.php?action=detailJeu&num={$nomJeu}">{$nomJeu}</a></td>
+                   <td class="tdHover text-center"><a class="nav-link linkCate" href="index.php?action=detailJeu&num={$nomJeu}">{$nomJeu}</a></td>
                    
                    </tr>
 EOF;
