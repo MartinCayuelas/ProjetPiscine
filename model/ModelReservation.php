@@ -81,6 +81,26 @@ class ModelReservation {
         return $res;
     }
 
+    public function save() {
+
+        try {
+            $sql = "INSERT INTO reservation (numResa,dateResa,commentaire, prixPlaceNego, statut,etatFacture) VALUES (:numResa, :dateResa, :commentaire, :prix, :statut, :etatFacture)";
+            $req = Model::$pdo->prepare($sql);
+            $values = array(
+                'numResa' => $this->numResa,
+                'dateResa' => CURRENT_DATE,
+                'commentaire' => $this->commentaire,
+                'prix' => $this->prixPlaceNego,
+                'statut' => $this->statut,
+                'etatFacture' => $this->etatFacture,
+                
+            );
+            return $req->execute($values);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
     /* permet affichage des paiment avenir de la page d'accueil*/
 
     public static function getPrixFacture(){
