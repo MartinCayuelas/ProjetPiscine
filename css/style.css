@@ -109,28 +109,16 @@
 
 .thCategorie{
     width: 50%;
-    background-color:#FFF;
-    color: black;
+    background-color:#f45b63;
+    color: #FFF;
 }
 .tdHover{
-    background-color: #FFF;
-    color: #f45b63;
     width: 50%;
 }
 .tdHover:hover{
     width: 50%;
      background-color: #f45b63;
-    
-}
-.linkCate{
-    text-decoration: none;
-    color: #f45b63;
-    
-}
-.linkCate:hover{
-    text-decoration: none;
-    color: white;
-    
+    color: #FFF;
 }
 
 .retour:hover{
@@ -140,6 +128,9 @@
 
 /*alignement formulaire*/
 /*contact*/
+.card-headerC{
+  width:100%;
+}
 
 label.card-header{
   width:30%;
