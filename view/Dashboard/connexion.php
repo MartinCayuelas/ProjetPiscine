@@ -25,12 +25,12 @@
                     <div class="card-body">
                         <form method="post" action="index.php?action=connectedFestival" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label class="card-header">Identifiant</label>
+                                <label class="card-headerC">Identifiant</label>
                                 <br>
                                 <input type="text" name="login" placeholder="identifiant" id="login_id"  required/>
                             </div>
                             <div class="form-group">
-                                <label class="card-header">Mot de passe</label>
+                                <label class="card-headerC">Mot de passe</label>
                                 <br>
                                 <input type="password" name="password" placeholder="******" id="password_id" required/>
                             </div>
