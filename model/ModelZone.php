@@ -32,6 +32,54 @@ class ModelZone {
         }
     }
 
+    public function getAllZone() {
+        $sql = "SELECT * FROM zones";
+        $req = Model::$pdo->query($sql);
+        $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelZone');
+        if (empty($tab_prod)) {
+            return false;
+        }
+        return $tab_prod;
+    }
+    public function getNbZone() {
+        $sql = "SELECT COUNT(*) FROM zones";
+        $req = Model::$pdo->query($sql);
+        $tab_prod = $req->FETCH();
+        if (empty($tab_prod)) {
+            return false;
+        }
+        return $tab_prod;
+    }
+    
+    public function save() {
+        try {
+            $sql = "INSERT INTO zones (numZone,nomZone,anneeFestival) VALUES (:num, :nom, :annee)";
+            $req = Model::$pdo->prepare($sql);
+            $values = array(
+                'num' => $this->numZone,
+                'nom' => $this->nomZone,
+                'annee'=> $this->anneeFestival,
+            
+            );
+            return $req->execute($values);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+   
+    public function updated($num) {
+        $sql = "UPDATE zones SET  numZone =:read1, nomZone =:read2, anneeFestival=:read3";
+        $req = Model::$pdo->prepare($sql);
+        $values = array(
+            "read1" => $this->numZone,
+            "read2" => $this->nomZone,
+            "read3"=> $this->anneeFestival,
+        );
+        return $req->execute($values);
+    }
+    
+
 
    
 }
