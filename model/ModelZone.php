@@ -79,6 +79,19 @@ class ModelZone {
         return $req->execute($values);
     }
     
+    public function deleteByNum($num) {
+        try {
+            $sql = "DELETE FROM zones WHERE numZone =:read1";
+            $req = Model::$pdo->prepare($sql);
+            $values = array(
+                'read1' => $num,
+            );
+            $req->execute($values);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
 
 
    
