@@ -39,7 +39,7 @@ class ModelConcerner {
         $this->nbJeux = $nbJeux;
     }
 
-    function setRecuo($recu) {
+    function setRecu($recu) {
         $this->recu = $recu;
     }
 
