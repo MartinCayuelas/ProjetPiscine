@@ -64,4 +64,18 @@ class ModelCategorie {
         return $req->execute($values);
     }
     
+    public function deleteByCode($code) {
+        try {
+            $sql = "DELETE FROM categorie WHERE codeCategorie =:read1";
+            $req = Model::$pdo->prepare($sql);
+            $values = array(
+                'read1' => $code,
+            );
+            $req->execute($values);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+    
 }
