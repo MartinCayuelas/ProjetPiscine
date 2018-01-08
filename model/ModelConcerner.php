@@ -62,6 +62,67 @@ class ModelConcerner {
         }
     }
 
+    public function save() {
+
+        try {
+            $sql = "INSERT INTO concerner (numResa,numJeux,nbJeux, recu, retour, don) VALUES (:num, :numJ, :nbJ, :recu, :retour, :don)";
+            $req = Model::$pdo->prepare($sql);
+            $values = array(
+                'num' => $this->numResa,
+                'numJ' => $this->numJeux,
+                'nbJ' => $this->nbJeux,
+                'recu' => $this->recu,
+                'retour' => $this->retour,
+                'don' => $this->don,
+                
+            );
+            return $req->execute($values);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function deleteByNumResa($numResa) {
+        try {
+            $sql = "DELETE FROM concerner WHERE numResa =:read1";
+            $req = Model::$pdo->prepare($sql);
+            $values = array(
+                'read1' => $numResa,
+            );
+            $req->execute($values);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+     public function deleteByNumJeux($numJ) {
+        try {
+            $sql = "DELETE FROM concerner WHERE numJeux =:read1";
+            $req = Model::$pdo->prepare($sql);
+            $values = array(
+                'read1' => $numJ,
+            );
+            $req->execute($values);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function updated($num) {
+        $sql = "UPDATE concerner SET  numJeux =:read2, nbJeux =:read3, recu =:read4, retour =:read6, don= :read7 WHERE numResa=:read5";
+        $req = Model::$pdo->prepare($sql);
+        $values = array(
+            "read2" => $this->numJeux,
+            "read3" => $this->nbJeux,
+            "read4" => $this->recu,
+            "read6" => $this->retour,
+            "read7" => $this->don,
+            "read5" => $num,
+        );
+        return $req->execute($values);
+    }
 
    
 }
