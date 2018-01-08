@@ -31,7 +31,7 @@ EOF;
                    if (isset($_SESSION['login']) && Session::is_admin()) {
         echo <<< EOF
                    
-                  <a href="index.php?action=deleteCategorie={$code}"><button class="btn btn-danger" type="button"> <i class="fa fa-trash" aria-hidden="true"></i></button></a> 
+                  <a href="index.php?action=deleteCategorie&code={$code}"><button class="btn btn-danger" type="button"> <i class="fa fa-trash" aria-hidden="true"></i></button></a> 
                             
                        
                        
