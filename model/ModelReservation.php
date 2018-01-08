@@ -79,6 +79,21 @@ class ModelReservation {
             return false;
         }
     }
+
+    public function delete($numResa) {
+        try {
+            $sql = "DELETE FROM reservation WHERE numResa =:read1";
+            $req = Model::$pdo->prepare($sql);
+            $values = array(
+                'read1' => $numResa,
+            );
+            $req->execute($values);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
     /* permet affichage des paiment avenir de la page d'accueil*/
     public static function getPrixFacture(){
         $sql=" SELECT prixPlaceNego, numResa FROM reservation WHERE etatFacture= 'editee' LIMIT 0,5";
