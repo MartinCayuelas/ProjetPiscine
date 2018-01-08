@@ -721,6 +721,7 @@ class Controller {
     ####################Reservations############"
 
     public function listResa() {
+       
 
         /*
          * Fonction pour afficher la liste des réservations
@@ -745,6 +746,60 @@ class Controller {
             }
 
             
+        }
+    }
+    
+    public static function createReservation() {
+        if (!Session::is_connected()) {
+            Controller::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $action = 'createdReservation';
+
+
+            $titre = 'Ajout d\'une';
+            $commentaire = NULL;
+            $prixPlacesNego = NULL;
+            $etatFact = NULL;
+            $nomJeu = NULL;
+            $nomEditeur = NULL;
+            $nomZone = NULL;
+            $rue = NULL;
+            $ville = NULL;
+
+
+            $controller = 'Reservation';
+            $view = 'create';
+            $pagetitle = 'Ajouter une reservation';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
+
+    public static function createdReservation() {
+       if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+
+
+            $resa = new ModelReservation(0,0, $_POST['commentaire'], $_POST['prix'],0, $_POST['etatFact']);
+            print_r($resa);
+            if ($resa->save() == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Erreur lors de la creation';
+                require FILE::build_path(array("view", "view.php"));
+            } else {
+                Controller::listResa();
+            }
         }
     }
 
@@ -1028,5 +1083,82 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
+    
+     public static function createCategorie() {
+        if (!Session::is_connected()) {
+            Controller::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $action = 'createdCategorie';
+
+
+            $titre = 'Ajout d\'une';
+
+            $nom = NULL;
+            $code = NULL;
+            
+
+
+
+            $controller = 'Categorie';
+            $view = 'create';
+            $pagetitle = 'Ajouter une catégorie';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
+
+    public static function createdCategorie() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+
+
+            $cate = new ModelCategorie(0, $_POST['nomCategorie']);
+            if ($cate->save() == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Erreur lors de la creation';
+                require FILE::build_path(array("view", "view.php"));
+            } else {
+                Controller::listCategorie();
+            }
+        }
+    }
+    
+    public function deleteCategorie() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $code = $_GET['code'];
+
+            $d = ModelCategorie::deleteByCode($code);
+            if ($d == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Impossible à supprimer';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                Controller::listCategorie();
+            }
+        }
+    }
+
+    
+    
+    
 
 }
