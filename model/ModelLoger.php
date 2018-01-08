@@ -42,6 +42,62 @@ class ModelLoger {
         }
     }
 
+     public function save() {
 
+        try {
+            $sql = "INSERT INTO loger (numResa,numLogement,places, frais) VALUES (:num, :numL, :places, :frais)";
+            $req = Model::$pdo->prepare($sql);
+            $values = array(
+                'num' => $this->numResa,
+                'numL' => $this->numLogement,
+                'places' => $this->places,
+                'frais' => $this->recu,
+                
+            );
+            return $req->execute($values);
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function deleteByNumResa($numResa) {
+        try {
+            $sql = "DELETE FROM loger WHERE numResa =:read1";
+            $req = Model::$pdo->prepare($sql);
+            $values = array(
+                'read1' => $numResa,
+            );
+            $req->execute($values);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+     public function deleteByNumLog($numL) {
+        try {
+            $sql = "DELETE FROM loger WHERE numLogement =:read1";
+            $req = Model::$pdo->prepare($sql);
+            $values = array(
+                'read1' => $numL,
+            );
+            $req->execute($values);
+            return true;
+        } catch (PDOException $e) {
+            return false;
+        }
+    }
+
+    public function updated($num) {
+        $sql = "UPDATE loger SET  numLogement =:read2, places =:read3, frais =:read4 WHERE numResa=:read5";
+        $req = Model::$pdo->prepare($sql);
+        $values = array(
+            "read2" => $this->numLogement,
+            "read3" => $this->places,
+            "read4" => $this->frais,
+            "read5" => $num,
+        );
+        return $req->execute($values);
+    }
    
 }
