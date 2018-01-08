@@ -7,7 +7,7 @@ class ModelLoger {
     private $numResa;
     private $numLogement;
     private $places;
-    private $frais;;
+    private $frais;
 
     function getNumResa() {
         return $this->numResa;
