@@ -649,7 +649,6 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         } else {
             $resa = new ModelReservation(0,0, $_POST['commentaire'], $_POST['prix'],0, $_POST['etatFact']);
-            print_r($resa);
             if ($resa->save() == false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
@@ -660,6 +659,29 @@ public function listResa() {
             }
         }
     }
+
+    public function deleteResa() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $numResa = $_GET['num'];
+            $d = ModelReservation::delete($numResa);
+            if ($d == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Impossible à supprimer';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                Controller::listResa();
+            }
+        }
+    }
+
     ############Festival#############
      public function listFestival() {
         /*
