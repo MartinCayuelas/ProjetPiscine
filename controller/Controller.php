@@ -1033,7 +1033,7 @@ public function listResa() {
         }
     }
     
-     public static function createCategorie() {
+     public static function createZone() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
         } elseif (!Session::is_admin()) {
