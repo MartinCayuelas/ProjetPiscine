@@ -94,6 +94,20 @@ class ModelReservation {
         }
     }
 
+    public function updated($num) {
+        $sql = "UPDATE reservation SET  dateResa =:read2, commentaire =:read3, prixPlaceNego =:read4, statut =:read6, etatFacture=:read7 WHERE numResa=:read5";
+        $req = Model::$pdo->prepare($sql);
+        $values = array(
+            "read2" => $this->dateResa,
+            "read3" => $this->commentaire,
+            "read4" => $this->prixPlacenego,
+            "read6" => $this->statut,
+            "read7" => $this->etatFacture,
+            "read5" => $num,
+        );
+        return $req->execute($values);
+    }
+
     /* permet affichage des paiment avenir de la page d'accueil*/
     public static function getPrixFacture(){
         $sql=" SELECT prixPlaceNego, numResa FROM reservation WHERE etatFacture= 'editee' LIMIT 0,5";
