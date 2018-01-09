@@ -795,7 +795,7 @@ public function listResa() {
             $action = 'updatedFestival';
             $titre = 'Modification';
             $date = $_POST['date'];
-            $nbplaces = $_POST['nbplaces'];
+            $nbplaces = $_POST['nbtables'];
             $prixplacestd = $_POST['prixplacestd'];
             $controller = 'Festival';
             $view = 'create';
@@ -812,8 +812,8 @@ public function listResa() {
             $pagetitle = 'Error Accès';
             requireFile::build_path(array("view", "view.php"));
         } else {
-            $edit = new ModelFestival(0, $_POST['date'], $_POST['nbplaces'], $_POST['prixplacestd']);
-            if ($edit->updated($_POST['anneeFestival']) == false) {
+            $edit = new ModelFestival(0, $_POST['date'], $_POST['nbtables'], $_POST['prixplacestd']);
+            if ($edit->updated($_POST['annee']) == false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
                 $pagetitle = 'Erreur lors de la creation';
