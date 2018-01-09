@@ -63,7 +63,7 @@ EOF;
     if (isset($_SESSION['login']) && Session::is_admin()) {
         echo <<< EOF
                    
-                   <th class="text-center" ><a href="index.php?action=deleteByNum&num={$num}"><button class="btn btn-danger" type="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Supprimer</button></a></th> 
+                   <th class="text-center" ><a href="index.php?action=deleteByNum&num={$num}"><button class="btn btn-danger" type="button"><i class="fa fa-trash" aria-hidden="true"></i> Supprimer</button></a></th> 
                              <form action="index.php?action=updated" method = "POST">
                                 
                                 <input type="hidden" name="numJeux" value="{$num}" />
