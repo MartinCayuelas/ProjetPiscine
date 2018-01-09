@@ -1025,7 +1025,7 @@ public function listResa() {
         if (!Session::is_connected()) {
             Controller::FestivalConnect();
         } else {
-            $numZone = ModelZone::getAllZone();
+            $tabZ = ModelZone::getAllZone();
             $games = ModelJeux::getAllJeux();
             $controller = 'Zones';
             $view = 'list';
@@ -1046,9 +1046,9 @@ public function listResa() {
             $action = 'createdZone';
             $titre = 'Ajout d\'une';
             $nom = NULL;
-            $code = NULL;
+            $numZone = NULL;
             
-            $controller = 'Zone';
+            $controller = 'Zones';
             $view = 'create';
             $pagetitle = 'Ajouter une zone';
             require File::build_path(array("view", "view.php"));
@@ -1063,8 +1063,8 @@ public function listResa() {
             $pagetitle = 'Error Accès';
             require File::build_path(array("view", "view.php"));
         } else {
-            $zone = new ModelZone(0, $_POST['nomZone']);
-            if ($cate->save() == false) {
+            $zone = new ModelZone(0, $_POST['nomZone'],2018);
+            if ($zone->save() == false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
                 $pagetitle = 'Erreur lors de la creation';
