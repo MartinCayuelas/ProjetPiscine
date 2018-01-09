@@ -55,6 +55,21 @@ class ModelEditeur {
         return $tab_prod;
     }
 
+    public function getAllEditeursSort(){
+        $sql = "SELECT * 
+                FROM editeur
+                ORDER BY nomEditeur ASC ";
+                $req = Model::$pdo->query($sql);
+        $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelEditeur');
+
+
+        if (empty($tab_prod)) {
+            return false;
+        }
+        return $tab_prod;
+
+
+    }
     public function getNbEditeurs() {
 
         $sql = "SELECT COUNT(*) AS totalEditeurs FROM editeur";
