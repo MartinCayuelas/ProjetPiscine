@@ -13,7 +13,7 @@ EOF;
 }
 
 
-foreach ($cat as $v) {
+foreach ($zon as $v) {
     $num= htmlspecialchars($v->getNumZone());
     $nom = htmlspecialchars($v->getNomZone());
 
@@ -23,7 +23,7 @@ foreach ($cat as $v) {
             <table class="table table-bordered bordertable">
                <thead>
                 <tr>
-                  <th class="thCategorie text-center" ><h2>{$nom}
+                  <th class="th Zone text-center" ><h2>{$nom}
                       
  
 EOF;
