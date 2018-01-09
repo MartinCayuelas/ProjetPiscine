@@ -102,7 +102,7 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         } else {
             $crypt = Security::chiffrer($_POST['password']);
-            $check = $_POST['admin'];
+            $check = isset($_POST['admin']);
             if ($check == NULL) {
                 $check = 0;
             } else {
