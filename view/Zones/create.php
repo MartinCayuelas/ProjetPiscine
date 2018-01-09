@@ -20,7 +20,7 @@
             <div class="form-row">
 
                 <div class="col-lg-12 text-center"> 
-                    <input type="hidden" name="numCategorie" value="<?php echo $code ?>" />
+                    <input type="hidden" name="numZone" value="<?php echo $code ?>" />
 
                     <input class="btn btn-success" type="submit" value="Enregistrer" />
                 </div>
