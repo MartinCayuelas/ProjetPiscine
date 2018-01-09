@@ -1024,7 +1024,7 @@ public function listResa() {
         if (!Session::is_connected()) {
             Controller::FestivalConnect();
         } else {
-            $zon = ModelZone::getAllZobe();
+            $zon = ModelZone::getAllZone();
             $games = ModelJeux::getAllJeux();
             $controller = 'Zones';
             $view = 'list';
