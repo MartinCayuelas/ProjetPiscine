@@ -20,7 +20,7 @@ echo <<<EOF
                 <tr>
                   <th >Nom <a href="index.php?action=listEditeurSort"><i class="tri fa fa-sort-alpha-asc" aria-hidden="true"></i></th>
                   
-                  <th>Ville</th>
+                  <th>Ville <a href="index.php?action=listEditeurSortVille"><i class="tri fa fa-sort-alpha-asc" aria-hidden="true"></i></th>
                   <th>Rue</th>
                    <th>CodePostal</th>
                 </tr>
