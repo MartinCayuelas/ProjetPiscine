@@ -68,7 +68,7 @@ class ModelZone {
     }
 
    
-    public function updated($num) {
+    public function updated($numZone) {
         $sql = "UPDATE zones SET  numZone =:read1, nomZone =:read2, anneeFestival=:read3";
         $req = Model::$pdo->prepare($sql);
         $values = array(
@@ -79,12 +79,12 @@ class ModelZone {
         return $req->execute($values);
     }
     
-    public function deleteByNum($num) {
+    public function deleteByNum($numZone) {
         try {
             $sql = "DELETE FROM zones WHERE numZone =:read1";
             $req = Model::$pdo->prepare($sql);
             $values = array(
-                'read1' => $num,
+                'read1' => $numZone,
             );
             $req->execute($values);
             return true;
