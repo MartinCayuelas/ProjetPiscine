@@ -13,7 +13,7 @@ EOF;
 }
 
 
-foreach ($numZone as $k) {
+foreach ($tabZ as $k) {
     $num= htmlspecialchars($k->getNumZone());
     $nom = htmlspecialchars($k->getNomZone());
 
