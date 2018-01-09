@@ -948,7 +948,7 @@ public function listResa() {
             $games = ModelJeux::getAllJeux();
             $controller = 'Categorie';
             $view = 'list';
-            $pagetitle = 'Liste des Catégorie';
+            $pagetitle = 'Liste des Catégories';
             require File::build_path(array("view", "view.php"));
         }
     }
@@ -1016,6 +1016,85 @@ public function listResa() {
         }
     }
     
+       ###################ZONE####################
+    public function listZone() {
+        /*
+         * Fonction pour afficher la liste des Zones
+         */
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+            $zon = ModelZone::getAllZobe();
+            $games = ModelJeux::getAllJeux();
+            $controller = 'Zones';
+            $view = 'list';
+            $pagetitle = 'Liste des zones';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
     
+     public static function createCategorie() {
+        if (!Session::is_connected()) {
+            Controller::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $action = 'createdZone';
+            $titre = 'Ajout d\'une';
+            $nom = NULL;
+            $code = NULL;
+            
+            $controller = 'Zone';
+            $view = 'create';
+            $pagetitle = 'Ajouter une zone';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
+    public static function createdZone() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $zone = new ModelZone(0, $_POST['nomZone']);
+            if ($cate->save() == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Erreur lors de la creation';
+                require FILE::build_path(array("view", "view.php"));
+            } else {
+                Controller::listZone();
+            }
+        }
+    }
+    
+    public function deleteZone() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $numZone = $_GET['numZone'];
+            $d = ModelCategorie::deleteByCode($numZone);
+            if ($d == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Impossible à supprimer';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                Controller::listZone();
+            }
+        }
+    }
+     
     
 }
