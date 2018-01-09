@@ -674,7 +674,7 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         }
     }
-    public static function createdReservation() {
+   public static function createdReservation() {
        if (!Session::is_connected()) {
             self::festivalConnect();
         } elseif (!Session::is_admin()) {
@@ -686,13 +686,32 @@ public function listResa() {
             $resa = new ModelReservation(0,0, $_POST['commentaire'], $_POST['prix'],0, $_POST['etatFact']);
             $numJ=ModelJeux::getNumJ($_POST['nomJeu']);
             $numR=ModelReservation::getDerResa();
-            $concern= new ModelConcerner($numR ,$numJ,$_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
-            print_r($concern);
+            $numE=ModelEditeur::getNumEditByNom($_POST['nomEditeur']);
+            $jeu=ModelJeux::getJeuxByNom();
 
-            if ($_POST['log']==1){
+            /*test pour savoir si le jeu existe*/
+            $exist=0;
+            foreach ($jeu as $j ) {
+                if ($j->getNomJeu()==$_POST['nomJeu']){
+                    $exist=1;
+                }
+            }
+            /*s'il n'existe pas on enregistre ce nouveau jeu*/
+            if ($exist==0){
+                //print_r($numE);
+                //print_r($_POST['nomJeu']);
+                $jeux= new ModelJeux(0,$_POST['nomJeu'],'','','','',$numE);
+                print_r($jeux);
+                $jeux->save();
+            }
+
+            if ($_POST['log']==1){  //si il faut un logement a l'éditeur 
                 $logem= new ModelLogement(0,$_POST['rue'],$_POST['ville'], $_POST['cp'], $_POST['nbChambre'],$_POST['coutNuit']);
                 $logem->save();
             }
+
+            $concern= new ModelConcerner($numR ,$numJ,$_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
+            print_r($concern);
 
             if ($resa->save() == false or $concern->save()==false) {
                 $controller = 'Accueil';
