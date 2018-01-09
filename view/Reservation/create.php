@@ -13,28 +13,43 @@
 
                     <div class="col-md-12 text-center">
 
+                        <label class="card-header" for="nbJeux">Nombre de jeu</label>
+                        <input type="number" value="<?php echo $nbJeux ?>" name="nbJeux" id="nbJeux"/>
+                         </br>
+                         
                         <label class="card-header" for="nomJeu">Nom Jeu</label>
                         <input type="text" value="<?php echo $nomJeu ?>" name="nomJeu" id="nomJeux" required=""/>
                          </br>
 
-                        <label class="card-header" for="nbJeux">Nombre de jeu</label>
-                        <input type="number" value="<?php echo $nbJeux ?>" name="nbJeux" id="nbJeux"/>
-                         </br>
-
                         <label class="card-header" for="nomZone">Zone du jeu</label>
                         <input type="text" value="<?php echo $nomZone ?>" name="nomZone" id="nomZone" required=""/>
+                    </br>
+                        <label class="card-header" for="recu">Jeu Reçu</label>
+                        <input type="radio" id="recu" name="recu" value="1">Oui
+                        <input type="radio" id="recu" name="recu" value="0">Non
+
+                         </br>
+                        <label class="card-header" for="don">Don</label>
+                        <input type="radio" id="don" name="don" value="1">Oui
+                        <input type="radio" id="don" name="don" value="0">Non
+
+                         </br>
+                        <label class="card-header" for="retour">Retour du jeu </label>
+                        <input type="radio" id="retour" name="retour" value="1">Oui
+                        <input type="radio" id="retour" name="retour" value="0">Non
+
 
 
                     </div>
 
                     <div class="col-md-12 text-center">
 
-                        <label class="card-header" for="prix">Prix réservation</label>
-                        <input type="number" value="<?php echo $prixPlaceNego ?>" name="prix" id="prix"/>
-                    </br>
-
                         <label class="card-header" for="nbPlace">Nombre d'espace</label>
                         <input type="number" value="<?php echo $nbPlace ?>" name="nbPlace" id="nbPlace" required=""/>
+                        </br>
+                        <label class="card-header" for="prix">Prix réservation</label>
+                        <input type="number" value="<?php echo $prixPlaceNego ?>" name="prix" id="prix"/>
+                    
 
                         </br>
                         <label class="card-header" for="commentaire">Informations spécifiques</label>
@@ -102,10 +117,6 @@
             <div class="form-row">
 
                 <div class="col-lg-12 text-center"> 
-                   <!-- <input type="hidden" name="numResa" value="<?php echo $numResa ?>" />
-                    <input type="hidden" name="numJeux" value="<?php echo $numJeux ?>" />
-                    <input type="hidden" name="numLogement" value="<?php echo $numLogement ?>" />
-                    <input type="hidden" name="numEditeur" value="<?php echo $numEditeur ?>" />-->
 
                     <input class="btn btn-success" type="submit" value="Enregistrer" />
                 </div>
