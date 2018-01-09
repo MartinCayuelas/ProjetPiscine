@@ -13,9 +13,9 @@ EOF;
 }
 
 
-foreach ($zon as $v) {
-    $num= htmlspecialchars($v->getNumZone());
-    $nom = htmlspecialchars($v->getNomZone());
+foreach ($numZone as $k) {
+    $num= htmlspecialchars($k->getNumZone());
+    $nom = htmlspecialchars($k->getNomZone());
 
     echo <<<EOF
         <div class="card-body">
@@ -27,6 +27,7 @@ foreach ($zon as $v) {
                       
  
 EOF;
+
                   
                    if (isset($_SESSION['login']) && Session::is_admin()) {
         echo <<< EOF
@@ -75,3 +76,5 @@ EOF;
 echo '  </table>  ';
 echo "</div>";
 echo "</div>";
+
+
