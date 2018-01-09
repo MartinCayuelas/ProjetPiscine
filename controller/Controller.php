@@ -637,7 +637,7 @@ public function listResa() {
         }
     }
     
-    public static function createReservation() {
+     public static function createReservation() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
         } elseif (!Session::is_admin()) {
@@ -652,6 +652,9 @@ public function listResa() {
             $commentaire = NULL;
             $prixPlaceNego  = NULL;
             $etatFact = NULL;
+            $retour=NULL;
+            $don=NULL;
+            $recu=NULL;
             $nomJeu = NULL;
             $nomEditeur = NULL;
             $nomZone = NULL;
@@ -680,7 +683,17 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         } else {
             $resa = new ModelReservation(0,0, $_POST['commentaire'], $_POST['prix'],0, $_POST['etatFact']);
-            if ($resa->save() == false) {
+            $numJ=ModelJeux::getNumJ($_POST['nomJeu']);
+            $numR=ModelReservation::getDerResa();
+            $concern= new ModelConcerner($numR ,$numJ,$_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
+            print_r($concern);
+
+            if ($_POST['log']==1){
+                $logem= new ModelLogement(0,$_POST['rue'],$_POST['ville'], $_POST['cp'], $_POST['nbChambre'],$_POST['coutNuit']);
+                $logem->save();
+            }
+
+            if ($resa->save() == false or $concern->save()==false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
                 $pagetitle = 'Erreur lors de la creation';
@@ -702,7 +715,8 @@ public function listResa() {
         } else {
             $numResa = $_GET['num'];
             $d = ModelReservation::delete($numResa);
-            if ($d == false) {
+            $d2=ModelConcerner::deleteByNumResa($numResa);
+            if ($d == false or $d2== false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
                 $pagetitle = 'Impossible à supprimer';
