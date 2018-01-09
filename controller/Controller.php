@@ -10,6 +10,7 @@ require_once File::build_path(array("model", "ModelFestival.php"));
 require_once File::build_path(array("model", "ModelLogement.php"));
 require_once File::build_path(array("model", "ModelJeux.php"));
 require_once File::build_path(array("model", "ModelCategorie.php"));
+require_once File::build_path(array("model", "ModelZone.php"));
 /* Lib */
 require_once File::build_path(array("lib", "Security.php"));
 require_once File::build_path(array("lib", "Session.php"));
