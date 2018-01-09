@@ -67,6 +67,7 @@ class ModelEditeur {
             return false;
         }
         return $tab_prod;
+    }
 
     public function getAllEditeursSortVille(){
         $sql = "SELECT * 
