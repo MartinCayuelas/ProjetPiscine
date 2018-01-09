@@ -101,12 +101,13 @@ class ModelFestival {
     }
 
     public function updated($num) {
-        $sql = "UPDATE = festival SET  dateFestival =:read2, nbPlacesFestival =:read3, prixPlaceStdFestival =:read4 WHERE anneeFestival=:read7";
+        $sql = "UPDATE festival SET  dateFestival =:read2, nbTablesFest =:read3, prixPlacesStandard =:read4 WHERE anneeFestival=:read7";
         $req = Model::$pdo->prepare($sql);
         $values = array(
             "read2" => $this->dateFestival,
-            "read3" => $this->nbPlacesFestival,
-            "read4" => $this->PrixPlaceStdFestival,
+            "read3" => $this->nbTablesFest,
+            "read4" => $this->prixPlacesStandard,
+            "read7"=>$num,
         );
         return $req->execute($values);
     }
