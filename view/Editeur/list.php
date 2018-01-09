@@ -18,7 +18,7 @@ echo <<<EOF
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                <thead>
                 <tr>
-                  <th >Nom</th>
+                  <th >Nom <a href="index.php?action=listEditeurSort"><i class="tri fa fa-sort-alpha-asc" aria-hidden="true"></i></th>
                   
                   <th>Ville</th>
                   <th>Rue</th>
