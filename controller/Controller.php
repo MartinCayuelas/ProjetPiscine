@@ -213,6 +213,22 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
+
+    public function listEditeurSort() {
+        /*
+         * Fonction pour afficher la liste des éditeurs
+         */
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+            $tab = ModelEditeur::getAllEditeursSort();
+            $controller = 'Editeur';
+            $view = 'list';
+            $pagetitle = 'Liste des editeurs';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
+
     public static function createEditeur() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
