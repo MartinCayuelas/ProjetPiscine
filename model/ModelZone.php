@@ -93,6 +93,17 @@ class ModelZone {
         }
     }
 
+    public function getZoneByNom() {
+        $sql = "SELECT nomZone FROM zones";
+        $req = Model::$pdo->query($sql);
+        $tab = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelZone');
+        if (empty($tab)) {
+            return false;
+        }
+        return $tab;
+    }
+
+
 
    
 }
