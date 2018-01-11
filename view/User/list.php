@@ -4,6 +4,7 @@ echo <<< EOF
  <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-table"></i> Liste des utilisateurs </div>
+            
 EOF;
 
             if (isset($_SESSION['login']) && Session::is_admin()) {
@@ -15,8 +16,18 @@ EOF;
 EOF;
 
 }
+if ($nb['total']== 1 ){
+    $s = "";
+}else{
+     $s = 's';
+}
 echo <<<EOF
         <div class="card-body">
+
+                  {$nb['total']} Utilisateur{$s} <i class="tri fa fa-user-o"></i>
+        </div>
+        <div class="card-body">
+       
           <div class="table-responsive">
             <table class="table table-bordered" width="100%" cellspacing="0">
                <thead>
