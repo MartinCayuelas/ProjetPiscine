@@ -103,7 +103,19 @@ class ModelZone {
         return $tab;
     }
 
+    public static function getDerZone(){
+        $sql="SELECT numZone FROM zones ORDER BY numzone DESC LIMIT 0,1";
+         $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
+    }
 
+     public static function getNumZoneByNom($nom){
+        $sql="SELECT numZone FROM zones WHERE nomZone='".$nom."'";
+         $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
+    }
 
    
 }
