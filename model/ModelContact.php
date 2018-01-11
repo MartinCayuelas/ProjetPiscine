@@ -112,6 +112,19 @@ class ModelContact {
     }
 
    
-   
+   public function getNbContactsByEditeur($e) {
+
+         $sql = "SELECT COUNT(*) FROM contact WHERE numEditeur=:read1";
+        $req = Model::$pdo->prepare($sql);
+        $value = array(
+            "read1" => $e,
+        );
+        $req->execute($value);
+        $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelContact');
+        if (empty($tab_prod)) {
+            return false;
+        }
+        return $tab_prod;
+    }
 
 }
