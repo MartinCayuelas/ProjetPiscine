@@ -127,6 +127,7 @@ class Controller {
         if (!Session::is_connected()) {
             Controller::FestivalConnect();
         } else {
+            $nb = ModelUtilisateur::getNbUsers();
             $tab = ModelUtilisateur::getAllUsers();
             $controller = 'User';
             $view = 'list';
@@ -210,6 +211,7 @@ class Controller {
         if (!Session::is_connected()) {
             Controller::FestivalConnect();
         } else {
+            $num = ModelEditeur::getNbEditeur();
             $tab = ModelEditeur::getAllEditeurs();
             $controller = 'Editeur';
             $view = 'list';
@@ -225,6 +227,7 @@ class Controller {
         if (!Session::is_connected()) {
             Controller::FestivalConnect();
         } else {
+            $num = ModelEditeur::getNbEditeur();
             $tab = ModelEditeur::getAllEditeursSort();
             $controller = 'Editeur';
             $view = 'list';
@@ -240,6 +243,7 @@ class Controller {
         if (!Session::is_connected()) {
             Controller::FestivalConnect();
         } else {
+            $num = ModelEditeur::getNbEditeur();
             $tab = ModelEditeur::getAllEditeursSortVille();
             $controller = 'Editeur';
             $view = 'list';
@@ -360,8 +364,10 @@ class Controller {
         if (!Session::is_connected()) {
             Controller::FestivalConnect();
         } else {
+          
             $numE = $_GET['numEditeur'];
             $tab = ModelContact::getAllContactsByNum($numE);
+            $num = ModelContact::getNbContactByEditeur($numE);
             if (empty($tab)) {
                 $controller = 'Contact';
                 $view = 'listVide';
