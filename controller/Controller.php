@@ -670,6 +670,7 @@ public function listResa() {
             $nbChambre=NULL;
             $frais=NULL;
             $place=NULL;
+            $catjeux=NULL;
             $controller = 'Reservation';
             $view = 'create';
             $pagetitle = 'Ajouter une reservation';
@@ -689,7 +690,10 @@ public function listResa() {
             $numJ=ModelJeux::getNumJ($_POST['nomJeu']);
             $numR=ModelReservation::getDerResa();
             $numE=ModelEditeur::getNumEditByNom($_POST['nomEditeur']);
+            $numF=ModelFestival::getFestEnCours();
+            $numCat=ModelCategorie::getNumCatByNom($_POST['catjeux']);
             $jeu=ModelJeux::getJeuxByNom();
+            $zone=ModelZone::getZoneByNom();
 
             /*test pour savoir si le jeu existe*/
             $exist=0;
@@ -701,10 +705,28 @@ public function listResa() {
             /*s'il n'existe pas on enregistre ce nouveau jeu*/
             if ($exist==0){
                 //print_r($numE);
+                //print_r($numCat);
                 //print_r($_POST['nomJeu']);
-                $jeux= new ModelJeux(0,$_POST['nomJeu'],0,'','','',$numE);
+                $jeux= new ModelJeux(0,$_POST['nomJeu'],0,0,0,$numCat,$numE);
                 print_r($jeux);
                 $jeux->save();
+            }
+
+
+            /*test pour savoir si la zone existe*/
+            $existZ=0;
+            foreach ($zone as $z) {
+                if ($z->getNomZone()==$_POST['nomZone']){
+                    $exist=1;
+                }
+            }
+            /*la zone n'existe pas alorson l'enregistre*/
+            if ($existZ==0){
+                //print_r($numE);
+                //print_r($_POST['nomJeu']);
+                $zon= new ModelZone(0, $_POST['nomZone'],$numF);
+                //print_r($zon);
+                $zon->save();
             }
 
             if ($_POST['log']==1){  //si il faut un logement a l'éditeur 
@@ -716,7 +738,7 @@ public function listResa() {
             }
 
             $concern= new ModelConcerner($numR ,$numJ,$_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
-            print_r($concern);
+            //print_r($concern);
 
             if ($resa->save() == false or $concern->save()==false) {
                 $controller = 'Accueil';
@@ -728,7 +750,8 @@ public function listResa() {
             }
         }
     }
-    public function deleteResa() {
+    
+     public function deleteResa() {
         if (!Session::is_connected()) {
             self::festivalConnect();
         } elseif (!Session::is_admin()) {
@@ -740,7 +763,8 @@ public function listResa() {
             $numResa = $_GET['num'];
             $d = ModelReservation::delete($numResa);
             $d2=ModelConcerner::deleteByNumResa($numResa);
-            if ($d == false or $d2== false) {
+            $d3=ModelLoger::deleteByNumResa($numResa);
+            if ($d == false or $d2== false or $d3== false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
                 $pagetitle = 'Impossible à supprimer';
