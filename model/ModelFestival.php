@@ -119,4 +119,11 @@ class ModelFestival {
         $res=$req->fetchColumn();
         return $res;
     }
+
+    public static function getFestEnCours(){
+        $sql="SELECT anneeFestival FROM festival ORDER BY anneeFestival DESC LIMIT 0,1";
+         $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
+    }
 }

@@ -78,4 +78,10 @@ class ModelCategorie {
         }
     }
     
+    public static function getNumCatByNom($nom) {
+        $sq2 = "SELECT codeCategorie FROM categorie WHERE nomCategorie='".$nom."'";
+        $req2 = Model::$pdo->query($sq2);
+        $res = $req2->fetchColumn();
+        return $res;
+    }
 }
