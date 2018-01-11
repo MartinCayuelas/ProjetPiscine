@@ -13,6 +13,7 @@ require_once File::build_path(array("model", "ModelCategorie.php"));
 require_once File::build_path(array("model", "ModelZone.php"));
 require_once File::build_path(array("model", "ModelLoger.php"));
 require_once File::build_path(array("model", "ModelConcerner.php"));
+require_once File::build_path(array("model", "ModelLocaliser.php"));
 /* Lib */
 require_once File::build_path(array("lib", "Security.php"));
 require_once File::build_path(array("lib", "Session.php"));
@@ -677,6 +678,7 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         }
     }
+
      public static function createdReservation() {
        if (!Session::is_connected()) {
             self::festivalConnect();
@@ -694,6 +696,7 @@ public function listResa() {
             $numCat=ModelCategorie::getNumCatByNom($_POST['catjeux']);
             $jeu=ModelJeux::getJeuxByNom();
             $zone=ModelZone::getZoneByNom();
+            $cat=ModelCategorie::getCatByNom();
 
             /*test pour savoir si le jeu existe*/
             $exist=0;
@@ -713,32 +716,54 @@ public function listResa() {
             }
 
 
+            /*test pour savoir si la catégorie existe*/
+            $existCat=0;
+            foreach ($cat as $c ) {
+                if ($c->getNomCategorie()==$_POST['catjeux']){
+                    $existCat=1;
+                }
+            }
+            /*s'elle n'existe pas on enregistre la categorie*/
+            if ($existCat==0){
+                $cate= new ModelCategorie(0,$_POST['catjeux']);
+               // print_r($cate);
+                $cate->save();
+            }
+
+
             /*test pour savoir si la zone existe*/
             $existZ=0;
             foreach ($zone as $z) {
                 if ($z->getNomZone()==$_POST['nomZone']){
-                    $exist=1;
+                    $existZ=1;
                 }
             }
             /*la zone n'existe pas alorson l'enregistre*/
             if ($existZ==0){
-                //print_r($numE);
-                //print_r($_POST['nomJeu']);
                 $zon= new ModelZone(0, $_POST['nomZone'],$numF);
-                //print_r($zon);
+                $numZ=ModelZone::getDerZone();
+                $localis= new ModelLocaliser($numZ+1,$numR+1,$_POST['nbPlace']);
+                print_r($zon);
                 $zon->save();
+                $localis->save();
+            }
+            elseif($existZ==1){
+                $numZ=ModelZone::getNumZoneByNom($_POST['nomZone']);
+                $localis= new ModelLocaliser($numZ,$numR+1,$_POST['nbPlace']);
+                print_r($localis);
+                $localis->save();
             }
 
             if ($_POST['log']==1){  //si il faut un logement a l'éditeur 
                 $logem= new ModelLogement(0,$_POST['rue'],$_POST['ville'], $_POST['cp'], $_POST['nbChambre'],$_POST['coutNuit']);
                 $numL=ModelLogement::getDerLog();
-                $loger= new ModelLoger($numR,$numL,$_POST['place'],$_POST['frais']);
                 $logem->save();
+                $loger= new ModelLoger($numR+1,$numL+1,$_POST['place'],$_POST['frais']);
+                print_r($loger);
                 $loger->save();
             }
-
-            $concern= new ModelConcerner($numR ,$numJ,$_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
-            //print_r($concern);
+            $concern= new ModelConcerner($numR+1 ,$numJ,$_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
+            print_r($concern);
 
             if ($resa->save() == false or $concern->save()==false) {
                 $controller = 'Accueil';
