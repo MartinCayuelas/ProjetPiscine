@@ -232,9 +232,9 @@ class Controller {
         if (!Session::is_connected()) {
             Controller::FestivalConnect();
         } else {
-            $nb = ModelEditeur::getNbEditeur();
+            $nb = ModelEditeur::getNbEditeurs();
             $tab = ModelEditeur::getAllEditeurs();
-             $num = $nb['total'];
+            $num = $nb['totalEditeur'];
             if ($num == 1) {
                 $s = "";
             } else {
