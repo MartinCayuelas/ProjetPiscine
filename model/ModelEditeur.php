@@ -166,5 +166,12 @@ public static function getNbEditeur() {
         return $res;
     }
     
+     public static function getNumEditByNom($nom) {
+        $sql = "SELECT numEditeur FROM editeur WHERE nomEditeur='".$nom."'";
+        $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
+    }
+    
 
 }

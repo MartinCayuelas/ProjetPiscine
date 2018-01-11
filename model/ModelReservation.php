@@ -108,6 +108,14 @@ class ModelReservation {
         return $req->execute($values);
     }
 
+    public static function getDerResa() {
+        $sq2="SELECT numResa FROM reservation ORDER BY numResa DESC LIMIT 0, 1";
+        $req2 = Model::$pdo->query($sq2);
+        $res=$req2->fetchColumn();
+        return $res;
+    }
+
+
     /* permet affichage des paiment avenir de la page d'accueil*/
     public static function getPrixFacture(){
         $sql=" SELECT prixPlaceNego, numResa FROM reservation WHERE etatFacture= 'editee' LIMIT 0,5";

@@ -51,7 +51,7 @@ class ModelLoger {
                 'num' => $this->numResa,
                 'numL' => $this->numLogement,
                 'places' => $this->places,
-                'frais' => $this->recu,
+                'frais' => $this->frais,
                 
             );
             return $req->execute($values);

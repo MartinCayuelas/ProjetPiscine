@@ -1,4 +1,3 @@
-
 <?php
 require_once File::build_path(array('model', 'Model.php'));
 class ModelLogement {
@@ -6,8 +5,8 @@ class ModelLogement {
     private $rueLogement;
     private $villeLogement;
     private $CPLogement;
-    private $nbChambresLogement;
-    private $CPNLogement;
+    private $nbCHambresLogement;
+    private $coutNuitLogement;
 
     function getNumLogement() {
         return $this->numLogement;
@@ -23,23 +22,23 @@ class ModelLogement {
     }
 
     function getNbrsChambresLogement() {
-        return $this->nbchambresLogement;
+        return $this->nbCHambresLogement;
 
     }
     function getCoutParNuitLogement() {
-        return $this->CPNLogement;
+        return $this->coutNuitLogement;
 
     }
 
 
-    public function __construct($numl = NULL, $rl = NULL, $vl = NULL, $cpl = NULL, $cpnl = NULL ,$nbchambresl = NULL) {
-        if (!is_null($numl) && !is_null($rl) && !is_null($vl) && !is_null($cpl) && !is_null($cpnl) && !is_null($nbchambresl)) {
+    public function __construct($numl = NULL, $rl = NULL, $vl = NULL, $cpl = NULL ,$nbchambresl = NULL , $cpnl = NULL) {
+        if (!is_null($numl) && !is_null($rl) && !is_null($vl) && !is_null($cpl) && !is_null($nbchambresl) && !is_null($cpnl)) {
             $this->numLogement = $numl;
             $this->rueLogement = $rl;
             $this->villeLogement = $vl;
             $this->CPLogement = $cpl;
-            $this->nbChambresLogement = $nbchambresl;
-            $this->CPNLogement = $cpnl;
+            $this->nbCHambresLogement = $nbchambresl;
+            $this->coutNuitLogement = $cpnl;
              }
             }
     
@@ -77,16 +76,15 @@ class ModelLogement {
     }
     public function save() {
         try {
-            $sql = "INSERT INTO logement (numLogement,rueLogement, villeLogement, CPLogement,nbchambresLogement,CPNLogement) VALUES (:num, :rue, :ville, :cp, :nbchambres ,:cpn)";
+            $sql = "INSERT INTO logement (numLogement,rueLogement, villeLogement, CPLogement,nbchambresLogement,coutNuitLogement) VALUES (:num, :rue, :ville, :cp, :nbchambres ,:cpn)";
             $req = Model::$pdo->prepare($sql);
             $values = array(
                 'num' => $this->numLogement,
                 'rue' => $this->rueLogement,
                 'ville' => $this->villeLogement,
                 'cp' => $this->CPLogement,
-                'nbchambres' => $this->nbchambresLogement,
-                'cpn' => $this->CPNLogement,
-                
+                'nbchambres' => $this->nbCHambresLogement,
+                'cpn' => $this->coutNuitLogement,   
             );
             return $req->execute($values);
         } catch (PDOException $e) {
@@ -108,17 +106,24 @@ class ModelLogement {
     }
    
     public function updated($num) {
-        $sql = "UPDATE = logement SET  rueLogement =:read2, villeLogement =:read3, CPLogement =:read4 ,nbchambresLogement =:read5, CPNLogement =:read6 WHERE numLogement=:read7";
+        $sql = "UPDATE = logement SET  rueLogement =:read2, villeLogement =:read3, CPLogement =:read4 ,nbchambresLogement =:read5, coutNuitLogement =:read6 WHERE numLogement=:read7";
         $req = Model::$pdo->prepare($sql);
         $values = array(
             "read2" => $this->rueLogement,
             "read3" => $this->villeLogement,
             "read4" => $this->CPLogement,
-            "read5" => $this->NbreChambresLogement,
-            "read6" => $this->CPNLogement,
+            "read5" => $this->nbCHambresLogement,
+            "read6" => $this->coutNuitLogement,
 
         );
         return $req->execute($values);
+    }
+    
+     public static function getDerLog() {
+        $sq2="SELECT numLogement FROM logement ORDER BY numLogement DESC LIMIT 0, 1";
+        $req2 = Model::$pdo->query($sq2);
+        $res=$req2->fetchColumn();
+        return $res;
     }
     
 }

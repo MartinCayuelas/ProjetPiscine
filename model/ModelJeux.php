@@ -156,6 +156,23 @@ class ModelJeux {
         return $res;
     }
 
+    public static function getNumJ($nomJ) {
+        $sql = "SELECT numJeux FROM jeux WHERE'".$nomJ."'=nomJeu";
+        $req = Model::$pdo->query($sql);
+        $res = $req->fetchColumn();
+        return $res;
+    }
+
+     public function getJeuxByNom() {
+        $sql = "SELECT nomJeu FROM jeux";
+        $req = Model::$pdo->query($sql);
+        $tab = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelJeux');
+        if (empty($tab)) {
+            return false;
+        }
+        return $tab;
+    }
+
     /* permet affichage des jeux qui vont être recu sur la page d'accueil */
 
     public static function getJeuxConcern() {
