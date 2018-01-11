@@ -16,15 +16,11 @@ EOF;
 EOF;
 
 }
-if ($nb['total']== 1 ){
-    $s = "";
-}else{
-     $s = 's';
-}
+
 echo <<<EOF
         <div class="card-body">
 
-                  {$nb['total']} Utilisateur{$s} <i class="tri fa fa-user-o"></i>
+                  {$num} Utilisateur{$s} <i class=" fa fa-user-o"></i>
         </div>
         <div class="card-body">
        

@@ -13,17 +13,13 @@ if (isset($_SESSION['login']) && Session::is_admin()) {
 EOF;
 }
 
-if ($num['total']== 1 ){
-    $s = "";
-}else{
-     $s = 's';
-}
+
     
 echo <<<EOF
 
 <div class="card-body">
 
-                  {$num['total']} Editeur{$s} <i class="tri fa fa-user-o"></i>
+                  {$num} Editeur{$s} <i class=" fa fa-user-o"></i>
         </div>
         <div class="card-body">
           <div class="table-responsive">
