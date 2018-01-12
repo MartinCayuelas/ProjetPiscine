@@ -218,7 +218,7 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeurs();
-             $num = ModelEditeur::getNbEditeur();
+             $num = ModelEditeur::getNbEditeurs();
              $num = $num['total'];
             if ($num == 1) {
                 $s = "";
@@ -240,7 +240,7 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeursSort();
-             $num = ModelEditeur::getNbEditeur();
+             $num = ModelEditeur::getNbEditeurs();
              $num = $num['total'];
             if ($num == 1) {
                 $s = "";
@@ -262,7 +262,7 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeursSortVille();
-              $num = ModelEditeur::getNbEditeur();
+              $num = ModelEditeur::getNbEditeurs();
              $num = $num['total'];
             if ($num == 1) {
                 $s = "";
