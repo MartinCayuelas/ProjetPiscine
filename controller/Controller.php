@@ -510,7 +510,7 @@ class Controller {
         }
     }
     ####################Suivi##############
-    public function listSuivi() {
+    public function listSuiviB() {
         /*
          * Fonction pour afficher la liste des suivis
          */
@@ -519,6 +519,30 @@ class Controller {
         } else {
             $numEditeur = $_GET['numEditeur'];
             $tab = ModelSuivi::getSuivisByEditeur($numEditeur);
+            if (empty($tab)) {
+                $controller = 'Suivi';
+                $view = 'listVide';
+                $pagetitle = 'Liste des suivis';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                $controller = 'Suivi';
+                $view = 'list';
+                $pagetitle = 'Liste des suivis';
+                require File::build_path(array("view", "view.php"));
+            }
+        }
+    }
+    public function listSuivi() {
+        /*
+         * Fonction pour afficher la liste des suivis
+         */
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+            
+            $tab = ModelSuivi::getSuivis();
+            $tabEditeur = ModelEditeur::getAllEditeurs();
+             
             if (empty($tab)) {
                 $controller = 'Suivi';
                 $view = 'listVide';
@@ -546,7 +570,7 @@ class Controller {
             $premierContact = NULL;
             $relance = NULL;
             $reponse = NULL;
-            $numEditeur = $_GET['numEditeur'];
+            $nom = NULL;
             $controller = 'Suivi';
             $view = 'create';
             $pagetitle = 'Ajouter un suivi';
@@ -568,9 +592,11 @@ class Controller {
             } else {
                 $check = 1;
             }
+            $nomE = $_POST['nomE'];
+            $num = ModelEditeur::getNumEditByNom($nomE);
             $premier = $_POST['premierContact'];
             $relance = $_POST['relance'];
-            $suivi = new ModelSuivi(0, $premier, $relance, $check, $_GET['numEditeur']);
+            $suivi = new ModelSuivi(0, $premier, $relance, $check, $num);
             if ($suivi->save() == false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
@@ -965,6 +991,14 @@ public function listResa() {
             $tab = ModelJeux::getAllJeux();
             $cat = ModelCategorie::getAllCategorie();
             $edit = ModelEditeur::getAllEditeurs();
+            $nbJ = ModelJeux::getNbJeux();
+            $num = $nbJ['totalJeux'];
+            if ($num == 1) {
+                $s = "";
+            } else {
+                $s = 'x';
+            }
+            
             if (empty($tab)) {
                 $controller = 'Jeux';
                 $view = 'listVide';
