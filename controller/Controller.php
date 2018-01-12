@@ -128,6 +128,13 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelUtilisateur::getAllUsers();
+            $nb = ModelUtilisateur::getNbUsers();
+            $num = $nb['total'];
+            if ($num == 1) {
+                $s = "";
+            } else {
+                $s = 's';
+            }
             $controller = 'User';
             $view = 'list';
             $pagetitle = 'Liste des utilisateurs';
@@ -211,6 +218,13 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeurs();
+             $num = ModelEditeur::getNbEditeur();
+             $num = $num['total'];
+            if ($num == 1) {
+                $s = "";
+            } else {
+                $s = 's';
+            }
             $controller = 'Editeur';
             $view = 'list';
             $pagetitle = 'Liste des editeurs';
@@ -226,6 +240,13 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeursSort();
+             $num = ModelEditeur::getNbEditeur();
+             $num = $num['total'];
+            if ($num == 1) {
+                $s = "";
+            } else {
+                $s = 's';
+            }
             $controller = 'Editeur';
             $view = 'list';
             $pagetitle = 'Liste des editeurs';
@@ -241,6 +262,13 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeursSortVille();
+              $num = ModelEditeur::getNbEditeur();
+             $num = $num['total'];
+            if ($num == 1) {
+                $s = "";
+            } else {
+                $s = 's';
+            }
             $controller = 'Editeur';
             $view = 'list';
             $pagetitle = 'Liste des editeurs';
