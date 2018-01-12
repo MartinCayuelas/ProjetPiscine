@@ -55,6 +55,16 @@ class ModelSuivi {
         return $tab_prod;
         
     }
+    public static function getSuivis() {
+        $sql = "SELECT * FROM suivi";
+        $req = Model::$pdo->query($sql);
+        $tab = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelSuivi');
+        if (empty($tab)) {
+            return false;
+        }
+        return $tab;
+        
+    }
     
    public function save() {
 
