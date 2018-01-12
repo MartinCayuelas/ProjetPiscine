@@ -2,7 +2,7 @@
     <div class="card-body">
         <div class="card-header text-center"><?php echo $titre; ?> Suivi</div>
 
-        <form method="post" action="index.php?action=<?php echo $action; ?>&numEditeur=<?php echo $numEditeur ?>" >
+        <form method="post" action="index.php?action=<?php echo $action; ?>" >
             <div class="form-group">
                 <div class="form-row">
                     <div class="col-md-6">
@@ -17,6 +17,14 @@
 
 
                     </div>
+                    <div class="col-md-6">
+
+                        <label class="card-header" for="nomE">Nom Editeur</label>
+                        <input type="text" value="<?php echo $nom ?>" name="nomE" id="nomE"/>
+
+
+                    </div>
+
 
                     
                             <div class="col-md-12 text-center">

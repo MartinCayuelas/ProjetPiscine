@@ -3,12 +3,12 @@
 echo <<< EOF
  <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Suivi</div>
+          <i class="fa fa-table"></i> Liste des Suivis</div>
 EOF;
 
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
-            <a class="ajout" href="index.php?action=createSuivi&numEditeur={$numEditeur}"><i class="fa fa-plus-circle" aria-hidden="true"></i>  suivi</a>
+            <a class="ajout" href="index.php?action=createSuivi"><i class="fa fa-plus-circle" aria-hidden="true"></i>  suivi</a>
              
 EOF;
 }
@@ -18,19 +18,32 @@ echo <<<EOF
             <table class="table table-bordered"  width="100%" cellspacing="0">
                <thead>
                 <tr>
+                  <th>Nom Editeur</th>
                   <th>Premier Contact</th>
                   <th>Relance</th>
-                  <th>Réponse</th>   
+                  <th>Réponse</th>
+                  
                 </tr>
               </thead>
 EOF;
+
 foreach ($tab as $v) {
+        
+
 
     $ref = htmlspecialchars($v->getRefSuivi());
     $premier = htmlspecialchars($v->getPremierContact());
     $relance = htmlspecialchars($v->getRelance());
     $reponse = htmlspecialchars($v->getReponse());
+    
     $numEditeur = htmlspecialchars($v->getNumEditeur());
+    
+    foreach ($tabEditeur as $e){
+        if ($e->getNumEditeur() == $numEditeur){
+            $nomEditeur = htmlspecialchars($e->getNomEditeur());
+           
+        }
+    }
     
     if ($reponse == 0){
         $reponse = 'Non';
@@ -39,7 +52,7 @@ foreach ($tab as $v) {
     }
 
     if(empty($premier)){
-        echo 'VIDE prmeier';
+        echo 'VIDE premier';
     } else {
         echo '';
     }
@@ -50,12 +63,11 @@ foreach ($tab as $v) {
              <tbody>
                 <tr>
                   
-                  
+                  <th>{$nomEditeur}</th>
                    <th>{$premier}</th>
                    <th>{$relance}</th>
                    <th>{$reponse}</th>
-                   <!--<th>{$ref}</th>
-                   <th>{$numEditeur}</th>-->
+                   
                    
 EOF;
     if (isset($_SESSION['login']) && Session::is_admin()) {
@@ -63,7 +75,7 @@ EOF;
         echo <<< EOF
         
         <th class="text-center"> <a class="nav-link" data-toggle="modal" data-target="#exampleModalS{$ref}">
-                           <button class="btn btn-danger" type="button"> <i class="fa fa-fw fa-trash"></i>Supprimer</button></a></th>   
+                           <button class="btn btn-danger" type="button"> <i class="fa fa-fw fa-trash"></i></button></a></th>   
        
        <div class="modal fade" id="exampleModalS{$ref}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelS{$ref}" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -93,7 +105,7 @@ EOF;
 
 
                                 <br>
-                               <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
+                               <th class="text-center" > <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i></button></th>   
                             </form>
                                
                        

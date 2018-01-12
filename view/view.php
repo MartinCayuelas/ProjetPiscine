@@ -66,7 +66,7 @@
                         </a>
                         <ul class="sidenav-second-level collapse" id="collapseSuivis">
                             <li>
-                                <a href="navbar.html">Navbar</a>
+                                <a href="index.php?action=listSuivi">Editeurs</a>
                             </li>
                             <li>
                                 <a href="cards.html">Cards</a>
