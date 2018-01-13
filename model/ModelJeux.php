@@ -41,15 +41,15 @@ class ModelJeux {
         return $this->numEditeur;
     }
 
-    public function construct($num = NULL, $nom = NULL, $nbjoueurs = NULL, $dates = NULL, $duree = NULL, $categorie = NULL, $editeur = NULL) {
-        if (!is_null($num) && !is_null($nom) && !is_null($nbjoueurs) && !is_null($dates) && !is_null($duree) && !is_null($categorie) && !is_null($editeur)) {
-            $this->numJeux = $num;
-            $this->nomJeu = $nom;
-            $this->nbJoueurs= $nbjoueurs;
-            $this->dateSortie = $dates;
-            $this->dureePartie = $duree;
-            $this->codeCategorie = $categorie;
-            $this->numEditeur = $editeur;
+    public function __construct($numJeux = NULL, $nomJeu = NULL, $nbJoueurs = NULL, $dateSortie = NULL, $dureePartie = NULL, $codeCategorie = NULL, $numEditeur = NULL) {
+        if (!is_null($numJeux) && !is_null($nomJeu) && !is_null($nbJoueurs) && !is_null($dateSortie) && !is_null($dureePartie) && !is_null($codeCategorie) && !is_null($numEditeur)) {
+            $this->numJeux = $numJeux;
+            $this->nomJeu = $nomJeu;
+            $this->nbJoueurs = $nbJoueurs;
+            $this->dateSortie = $dateSortie;
+            $this->dureePartie = $dureePartie;
+            $this->codeCategorie = $codeCategorie;
+            $this->numEditeur = $numEditeur;
         }
     }
 
@@ -102,17 +102,18 @@ class ModelJeux {
     
 
     public function save() {
+
         try {
-            $sql = "INSERT INTO jeux (numJeux, nomJeu, NbreJoueurs, dateSortie, dureePartie, codeCategorie, numEditeur) VALUES (:num, :nom, :nbjoueurs, :dates, :duree, :categorie, :editeur) ";
+            $sql = "INSERT INTO jeux (numJeux,nomJeu,nbJoueurs, dateSortie, dureePartie, codeCategorie, numEditeur) VALUES (:num, :nom, :nbJ, :dateSortie, :dureePartie, :codeCat, :numE)";
             $req = Model::$pdo->prepare($sql);
             $values = array(
                 'num' => $this->numJeux,
                 'nom' => $this->nomJeu,
-                'nbjoueurs' => $this->NbreJoueurs,
-                'dates' => $this->dateSortie,
-                'duree' => $this->dureePartie,
-                'categorie' => $this->codeCategorie,
-                'editeur' => $this->numEditeur
+                'nbJ' => $this->nbJoueurs,
+                'dateSortie' => $this->dateSortie,
+                'dureePartie' => $this->dureePartie,
+                'codeCat' => $this->codeCategorie,
+                'numE' => $this->numEditeur,
             );
             return $req->execute($values);
         } catch (PDOException $e) {
@@ -139,7 +140,7 @@ class ModelJeux {
         $req = Model::$pdo->prepare($sql);
         $values = array(
             "read2" => $this->nomJeu,
-            "read3" => $this->NbreJoueurs,
+            "read3" => $this->nbJoueurs,
             "read4" => $this->dateSortie,
             "read6" => $this->dureePartie,
             "read7" => $this->codeCategorie,
@@ -163,7 +164,7 @@ class ModelJeux {
         return $res;
     }
 
-     public function getJeuxByNom() {
+    public function getJeuxByNom() {
         $sql = "SELECT nomJeu FROM jeux";
         $req = Model::$pdo->query($sql);
         $tab = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelJeux');
@@ -171,6 +172,13 @@ class ModelJeux {
             return false;
         }
         return $tab;
+    }
+
+     public static function getDerJeu(){
+        $sql="SELECT numJeux FROM jeux ORDER BY numJeux DESC LIMIT 0,1";
+        $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
     }
 
     /* permet affichage des jeux qui vont être recu sur la page d'accueil */
