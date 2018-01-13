@@ -1351,6 +1351,8 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         } else {
             $numZone = $_GET['num'];
+            $d3= ModelLocaliser::deleteByNumZ($numZone);
+            $d2 = ModelOrganiser::deleteByNumZone($numZone);
             $d = ModelZone::deleteByNum($numZone);
             if ($d == false) {
                 $controller = 'Accueil';
