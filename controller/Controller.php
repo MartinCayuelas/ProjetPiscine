@@ -231,7 +231,6 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
-
     public function listEditeurSort() {
         /*
          * Fonction pour afficher la liste des éditeurs
@@ -253,7 +252,6 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
-
         public function listEditeurSortVille() {
         /*
          * Fonction pour afficher la liste des éditeurs
@@ -275,7 +273,6 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
-
     public static function createEditeur() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
@@ -732,7 +729,6 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         }
     }
-
      public static function createdReservation() {
        if (!Session::is_connected()) {
             self::festivalConnect();
@@ -744,7 +740,6 @@ public function listResa() {
         } else {
             $resa = new ModelReservation(0,0, $_POST['commentaire'], $_POST['prix'],0, $_POST['etatFact']);
             $ex=$resa->save();
-            $numJ=ModelJeux::getNumJ($_POST['nomJeu']);
             $numR=ModelReservation::getDerResa();
             $numE=ModelEditeur::getNumEditByNom($_POST['nomEditeur']);
             $numF=ModelFestival::getFestEnCours();
@@ -753,11 +748,7 @@ public function listResa() {
             $zone=ModelZone::getAllZone();
             $cat=ModelCategorie::getAllCategorie();
             
-            $concerner = new ModelConcerner($numR,$numJ, $_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
-            $concerner->save();
             
-            
-            /*test pour savoir si le jeu existe*/
             $exist=0;
             foreach ($jeu as $j ) {
                 if ($j->getNomJeu()==$_POST['nomJeu']){
@@ -766,14 +757,19 @@ public function listResa() {
             }
             /*s'il n'existe pas on enregistre ce nouveau jeu*/
             if ($exist==0){
-                //print_r($numE);
-                //print_r($numCat);
-                //print_r($_POST['nomJeu']);
-                $jeux= new ModelJeux(0,$_POST['nomJeu'],NULL,NULL,NULL,$numCat,$numE);
-                print_r($jeux);
-                $jeux->save();
-            }
 
+                $jeu = new ModelJeux(0,$_POST['nomJeu'],0,'0000-00-00',0,$numCat,$numE);
+                print_r($jeu);
+                $jeu->save();
+                $numJ=ModelJeux::getDerJeu();
+                $concerner= new ModelConcerner($numR,$numJ, $_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
+                $concerner->save();
+            }
+            elseif($exist==1){
+                $numJ=ModelJeux::getNumJ($_POST['nomJeu']);
+                $concerner = new ModelConcerner($numR,$numJ, $_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
+                $concerner->save();
+            }
 
             /*test pour savoir si la catégorie existe*/
             $existCat=0;
@@ -788,8 +784,6 @@ public function listResa() {
                // print_r($cate);
                 $cate->save();
             }
-
-
             /*test pour savoir si la zone existe*/
             $existZ=0;
             foreach ($zone as $z) {
@@ -797,7 +791,7 @@ public function listResa() {
                     $existZ=1;
                 }
             }
-            /*la zone n'existe pas alorson l'enregistre*/
+            /*la zone n'existe pas alors on l'enregistre*/
             if ($existZ==0){
                 $zon= new ModelZone(0, $_POST['nomZone'],$numF);
                 print_r($zon);
@@ -812,7 +806,6 @@ public function listResa() {
                 print_r($localis);
                 $localis->save();
             }
-
             if ($_POST['log']==1){  //si il faut un logement a l'éditeur 
                 $logem= new ModelLogement(0,$_POST['rue'],$_POST['ville'], $_POST['cp'], $_POST['nbChambre'],$_POST['coutNuit']);
                 $logem->save();
@@ -822,8 +815,7 @@ public function listResa() {
                 $loger->save();
             }
             
-
-            if ( $ex== false or $concerne==false) {
+            if ( $ex== false or $concerner==false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
                 $pagetitle = 'Erreur lors de la creation';
@@ -844,10 +836,12 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         } else {
             $numResa = $_GET['num'];
-            $d = ModelReservation::delete($numResa);
+
             $d2=ModelConcerner::deleteByNumResa($numResa);
             $d3=ModelLoger::deleteByNumResa($numResa);
-            if ($d == false or $d2== false or $d3== false) {
+            $d4=ModelLocaliser::deleteByNumResa($numResa);
+            $d = ModelReservation::delete($numResa);
+            if ($d == false or $d2== false or $d3== false or $d4== false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
                 $pagetitle = 'Impossible à supprimer';
@@ -857,7 +851,6 @@ public function listResa() {
             }
         }
     }
-
     ############Festival#############
      public function listFestival() {
         /*
