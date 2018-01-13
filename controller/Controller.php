@@ -748,6 +748,20 @@ public function listResa() {
             $zone=ModelZone::getAllZone();
             $cat=ModelCategorie::getAllCategorie();
             
+            /*test pour savoir si la catégorie existe*/
+            $existCat=0;
+            foreach ($cat as $c ) {
+                if ($c->getNomCategorie()==$_POST['catJeu']){
+                    $existCat=1;
+                }
+            }
+            /*s'elle n'existe pas on enregistre la categorie*/
+            if ($existCat==0){
+                $cate= new ModelCategorie(0,$_POST['catJeu']);
+               // print_r($cate);
+                $cate->save();
+                $numCat=ModelCategorie::getDerCat();
+            }
             
             $exist=0;
             foreach ($jeu as $j ) {
@@ -771,19 +785,7 @@ public function listResa() {
                 $concerner->save();
             }
 
-            /*test pour savoir si la catégorie existe*/
-            $existCat=0;
-            foreach ($cat as $c ) {
-                if ($c->getNomCategorie()==$_POST['catJeu']){
-                    $existCat=1;
-                }
-            }
-            /*s'elle n'existe pas on enregistre la categorie*/
-            if ($existCat==0){
-                $cate= new ModelCategorie(0,$_POST['catJeu']);
-               // print_r($cate);
-                $cate->save();
-            }
+            
             /*test pour savoir si la zone existe*/
             $existZ=0;
             foreach ($zone as $z) {
