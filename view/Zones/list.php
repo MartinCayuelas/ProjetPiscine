@@ -51,19 +51,41 @@ EOF;
                 
 
 EOF;
-    foreach ($games as $v) {
-        if ($v->getNumZone() == $num) {
-            $nomJeu = htmlspecialchars($v->getNomJeu());
-            $numJ = htmlspecialchars($v->getnumJeu());
-            echo <<< EOF
+    foreach ($tabC as $c) {
+        if ($c->getNumZone() == $num) {
+            $numC = htmlspecialchars($c->getCodeCategorie());
+
+         foreach ($tabCat as $cat) {
+              if ($cat->getCodeCategorie() == $numC){
+                  $nomCa=  htmlspecialchars($cat->getNomCategorie());
+
+              echo <<< EOF
                     <tr>
-       
-                   <td class="tdHover text-center"><a class="nav-link linkCate" href="index.php?action=detailJeu&numJ={$nomJeu}"><h5>{$nomJeu}</h5></a></td>
+                    <th class="th Zone text-center" ><h3>{$nomCa}</h3></th>
+EOF;
+
+            foreach ($tabJ as $j) {
+              if ($j->getcodeCategorie() == $numC) {
+
+              $nomJeu = htmlspecialchars($j->getNomJeu());
+              $numJeu =  htmlspecialchars($j->getnumJeu());
+
+           
+            
+              echo <<< EOF
+                    <tr>
+                   <td class="tdHover text-center"><h5>{$nomJeu}</h5></td>
                    
                    </tr>
 EOF;
+          }
+
         }
+      }
     }
+
+  }
+}
 
     echo <<< EOF
         
