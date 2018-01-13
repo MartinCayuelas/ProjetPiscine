@@ -54,9 +54,10 @@ foreach ($tab as $v) {
                   <th>{$ville}</th>
                    <th>{$rue}</th>
                    <th>{$cp}</th>
-EOF;
-                    echo '<th><a class="nav-link" href="index.php?action=listContact&numEditeur={$num}"><button class="btn btn-warning">Contact</button></a></th>';
+                   <th><a class="nav-link" href="index.php?action=listContact&numEditeur={$num}"><button class="btn btn-warning">Contact</button></a></th>
 
+EOF;
+                  
     if (isset($_SESSION['login']) && Session::is_admin()) {
 
         echo <<< EOF
