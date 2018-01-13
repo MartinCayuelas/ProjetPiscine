@@ -1,6 +1,6 @@
 <div class="card card-register mx-auto mt-5">
     <div class="card-body">
-        <div class="card-header text-center"><?php echo $titre; ?> Jeux</div>
+        <div class="card-header text-center"><?php echo $titre; ?> Jeu</div>
 
         <form method="post" action="index.php?action=<?php echo $action; ?>" >
             <div class="form-group">
