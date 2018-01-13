@@ -21,7 +21,10 @@ echo <<<EOF
                   <th>Nom Editeur</th>
                   <th>Premier Contact</th>
                   <th>Relance</th>
-                  <th>Réponse</th>
+                  <th>Réponse <a href="index.php?action=listSuiviReponse"><i class="tri fa fa-sort-alpha-asc" aria-hidden="true"></i></th>
+                  <th>Facture</>
+                  <th>Paiement</>
+                  <th>Remarque</> 
                   
                 </tr>
               </thead>
