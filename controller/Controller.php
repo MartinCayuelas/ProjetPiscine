@@ -1,4 +1,5 @@
 <?php
+
 /* Model */
 require_once File::build_path(array("model", "Model.php"));
 require_once File::build_path(array("model", "ModelUtilisateur.php"));
@@ -18,7 +19,9 @@ require_once File::build_path(array("model", "ModelOrganiser.php"));
 /* Lib */
 require_once File::build_path(array("lib", "Security.php"));
 require_once File::build_path(array("lib", "Session.php"));
+
 class Controller {
+
 // Fonctions pour afficher les différentes pages du site
     public function festivalAccueil() {
         /*
@@ -33,7 +36,7 @@ class Controller {
             $tD1 = ModelFestival::getTablesDispo();
             $tD2 = $tD1 - $tr; //donne le nombres de tables disponibles 
             $c = ModelJeux::getJeuxConcern(); //affiche les jeux a recevoir 
-            
+
             $p = ModelReservation:: getPrixFacture(); //affiche les paiements a venir 
             if (empty($p) and empty($c) or empty($p) or empty($c)) {
                 $controller = 'Accueil';
@@ -42,20 +45,22 @@ class Controller {
                 require File::build_path(array("view", "view.php"));
             } else {
                 $controller = 'Accueil';
-               $view = 'index';
-            $pagetitle = 'Accueil Festival du Jeu';
-            require File::build_path(array("view", "view.php"));
+                $view = 'index';
+                $pagetitle = 'Accueil Festival du Jeu';
+                require File::build_path(array("view", "view.php"));
             }
-           
         }
     }
+
     /* Connexion */
+
     public function festivalConnect() {
         $controller = 'Dashboard';
         $view = 'connexion';
         $pagetitle = 'FestivalDuJeuMontpellier';
         require File::build_path(array("view", "Dashboard/connexion.php"));
     }
+
     public static function connectedFestival() {
         $crypt = Security::chiffrer($_POST['password']);
         $login = $_POST['login'];
@@ -68,6 +73,7 @@ class Controller {
             Controller::festivalConnect();
         }
     }
+
     public static function deconnectFestival() {
         /*
          * On "libere" la session
@@ -76,7 +82,9 @@ class Controller {
         unset($_SESSION['admin']);
         Controller::festivalConnect();
     }
+
     #############USER#########
+
     public static function createUser() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
@@ -97,6 +105,7 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
+
     public static function createdUser() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -124,6 +133,7 @@ class Controller {
             }
         }
     }
+
     public function listUser() {
         if (!Session::is_connected()) {
             Controller::FestivalConnect();
@@ -142,6 +152,7 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
+
     public function updateUser() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -162,6 +173,7 @@ class Controller {
             require FILE::build_path(array("view", "view.php"));
         }
     }
+
     public function updatedUser() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -189,6 +201,7 @@ class Controller {
             }
         }
     }
+
     public function deleteUser() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -210,7 +223,9 @@ class Controller {
             }
         }
     }
+
     ############Editeur#############
+
     public function listEditeur() {
         /*
          * Fonction pour afficher la liste des éditeurs
@@ -219,8 +234,8 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeurs();
-             $numE = ModelEditeur::getNbEditeurs();
-             $num = $numE['totalEditeurs'];
+            $numE = ModelEditeur::getNbEditeurs();
+            $num = $numE['totalEditeurs'];
             if ($num == 1) {
                 $s = "";
             } else {
@@ -232,6 +247,7 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
+
     public function listEditeurSort() {
         /*
          * Fonction pour afficher la liste des éditeurs
@@ -240,8 +256,8 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeursSort();
-             $numE = ModelEditeur::getNbEditeurs();
-             $num = $numE['totalEditeurs'];
+            $numE = ModelEditeur::getNbEditeurs();
+            $num = $numE['totalEditeurs'];
             if ($num == 1) {
                 $s = "";
             } else {
@@ -253,7 +269,8 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
-        public function listEditeurSortVille() {
+
+    public function listEditeurSortVille() {
         /*
          * Fonction pour afficher la liste des éditeurs
          */
@@ -261,8 +278,8 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeursSortVille();
-              $numE = ModelEditeur::getNbEditeurs();
-             $num = $numE['totalEditeurs'];
+            $numE = ModelEditeur::getNbEditeurs();
+            $num = $numE['totalEditeurs'];
             if ($num == 1) {
                 $s = "";
             } else {
@@ -274,6 +291,7 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
+
     public static function createEditeur() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
@@ -295,6 +313,7 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
+
     public static function createdEditeur() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -315,6 +334,7 @@ class Controller {
             }
         }
     }
+
     public function deleteEditeur() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -336,6 +356,7 @@ class Controller {
             }
         }
     }
+
     public function updateEditeur() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -358,6 +379,7 @@ class Controller {
             require FILE::build_path(array("view", "view.php"));
         }
     }
+
     public function updatedEditeur() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -378,7 +400,9 @@ class Controller {
             }
         }
     }
+
     #################Contact################
+
     public function listContact() {
         /*
          * Fonction pour afficher la liste des contacts
@@ -401,6 +425,7 @@ class Controller {
             }
         }
     }
+
     public static function createContact() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
@@ -423,6 +448,7 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
+
     public static function createdContact() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -443,6 +469,7 @@ class Controller {
             }
         }
     }
+
     public function deleteContact() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -464,6 +491,7 @@ class Controller {
             }
         }
     }
+
     public function updateContact() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -487,6 +515,7 @@ class Controller {
             require FILE::build_path(array("view", "view.php"));
         }
     }
+
     public function updatedContact() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -507,7 +536,9 @@ class Controller {
             }
         }
     }
+
     ####################Suivi##############
+
     public function listSuivi() {
         /*
          * Fonction pour afficher la liste des suivis
@@ -515,10 +546,10 @@ class Controller {
         if (!Session::is_connected()) {
             Controller::FestivalConnect();
         } else {
-            
+
             $tab = ModelSuivi::getSuivis();
             $tabEditeur = ModelEditeur::getAllEditeurs();
-             
+
             if (empty($tab)) {
                 $controller = 'Suivi';
                 $view = 'listVide';
@@ -532,7 +563,7 @@ class Controller {
             }
         }
     }
-    
+
     public function listSuiviReponse() {
         /*
          * Fonction pour afficher la liste des suivis
@@ -540,10 +571,10 @@ class Controller {
         if (!Session::is_connected()) {
             Controller::FestivalConnect();
         } else {
-            
+
             $tab = ModelSuivi::getSuivisByReponse();
             $tabEditeur = ModelEditeur::getAllEditeurs();
-             
+
             if (empty($tab)) {
                 $controller = 'Suivi';
                 $view = 'listVide';
@@ -557,7 +588,7 @@ class Controller {
             }
         }
     }
-    
+
     public static function createSuivi() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
@@ -579,6 +610,7 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         }
     }
+
     public static function createdSuivi() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -609,6 +641,7 @@ class Controller {
             }
         }
     }
+
     public function deleteSuivi() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -630,6 +663,7 @@ class Controller {
             }
         }
     }
+
     public function updateSuivi() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -652,6 +686,7 @@ class Controller {
             require FILE::build_path(array("view", "view.php"));
         }
     }
+
     public function updatedSuivi() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -672,9 +707,11 @@ class Controller {
             }
         }
     }
+
     ####################Reservations############"
-public function listResa() {
-       
+
+    public function listResa() {
+
         /*
          * Fonction pour afficher la liste des réservations
          */
@@ -682,25 +719,24 @@ public function listResa() {
             Controller::FestivalConnect();
         } else {
             $tab = ModelReservation::getAllReservations();
-            
-            
-   
+
+
+
             if (empty($tab)) {
                 $controller = 'Reservation';
                 $view = 'listVide';
                 $pagetitle = 'Liste des réservations';
                 require File::build_path(array("view", "view.php"));
             } else {
-               $controller = 'Reservation';
+                $controller = 'Reservation';
                 $view = 'list';
                 $pagetitle = 'Liste des réservations';
                 require File::build_path(array("view", "view.php"));
             }
-            
         }
     }
-    
-     public static function createReservation() {
+
+    public static function createReservation() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
         } elseif (!Session::is_admin()) {
@@ -711,34 +747,35 @@ public function listResa() {
         } else {
             $action = 'createdReservation';
             $titre = 'Ajout d\'une';
-            $numEditeur=NULL;
+            $numEditeur = NULL;
             $commentaire = NULL;
-            $prixPlaceNego  = NULL;
+            $prixPlaceNego = NULL;
             $etatFact = NULL;
-            $retour=NULL;
-            $don=NULL;
-            $recu=NULL;
+            $retour = NULL;
+            $don = NULL;
+            $recu = NULL;
             $nomJeu = NULL;
             $nomEditeur = NULL;
             $nomZone = NULL;
             $rue = NULL;
             $ville = NULL;
-            $nbPlace=NULL;
-            $cp=NULL;
-            $nbJeux =NULL;
-            $coutNuit=NULL;
-            $nbChambre=NULL;
-            $frais=NULL;
-            $place=NULL;
-            $catJeu=NULL;
+            $nbPlace = NULL;
+            $cp = NULL;
+            $nbJeux = NULL;
+            $coutNuit = NULL;
+            $nbChambre = NULL;
+            $frais = NULL;
+            $place = NULL;
+            $catJeu = NULL;
             $controller = 'Reservation';
             $view = 'create';
             $pagetitle = 'Ajouter une reservation';
             require File::build_path(array("view", "view.php"));
         }
     }
-     public static function createdReservation() {
-       if (!Session::is_connected()) {
+
+    public static function createdReservation() {
+        if (!Session::is_connected()) {
             self::festivalConnect();
         } elseif (!Session::is_admin()) {
             $controller = 'Accueil';
@@ -746,119 +783,114 @@ public function listResa() {
             $pagetitle = 'Error Accès';
             require File::build_path(array("view", "view.php"));
         } else {
-            $resa = new ModelReservation(0,0, $_POST['commentaire'], $_POST['prix'],0, $_POST['etatFact']);
-            $ex=$resa->save();
-            $numR=ModelReservation::getDerResa();
-            $numE=ModelEditeur::getNumEditByNom($_POST['nomEditeur']);
-            $numF=ModelFestival::getFestEnCours();
-            $numCat=ModelCategorie::getNumCatByNom($_POST['catJeu']);
-            $jeu=ModelJeux::getAllJeux();
-            $zone=ModelZone::getAllZone();
-            $cat=ModelCategorie::getAllCategorie();
-            $org=ModelOrganiser::getAllOrga();
-           
-            
-            
-            
-            /*test pour savoir si la catégorie existe*/
-            $existCat=0;
-            foreach ($cat as $c ) {
-                if ($c->getNomCategorie()==$_POST['catJeu']){
-                    $existCat=1;
+            $resa = new ModelReservation(0, 0, $_POST['commentaire'], $_POST['prix'], 0, $_POST['etatFact']);
+            $ex = $resa->save();
+            $numR = ModelReservation::getDerResa();
+            $numE = ModelEditeur::getNumEditByNom($_POST['nomEditeur']);
+            $numF = ModelFestival::getFestEnCours();
+            $numCat = ModelCategorie::getNumCatByNom($_POST['catJeu']);
+            $jeu = ModelJeux::getAllJeux();
+            $zone = ModelZone::getAllZone();
+            $cat = ModelCategorie::getAllCategorie();
+            $org = ModelOrganiser::getAllOrga();
+
+
+
+
+            /* test pour savoir si la catégorie existe */
+            $existCat = 0;
+            foreach ($cat as $c) {
+                if ($c->getNomCategorie() == $_POST['catJeu']) {
+                    $existCat = 1;
                 }
             }
-            /*s'elle n'existe pas on enregistre la categorie*/
-            if ($existCat==0){
-                $cate= new ModelCategorie(0,$_POST['catJeu']);
-               // print_r($cate);
+            /* s'elle n'existe pas on enregistre la categorie */
+            if ($existCat == 0) {
+                $cate = new ModelCategorie(0, $_POST['catJeu']);
+                // print_r($cate);
                 $cate->save();
-                $numCat=ModelCategorie::getDerCat();
+                $numCat = ModelCategorie::getDerCat();
             }
-            
-            $exist=0;
-            foreach ($jeu as $j ) {
-                if ($j->getNomJeu()==$_POST['nomJeu']){
-                    $exist=1;
+
+            $exist = 0;
+            foreach ($jeu as $j) {
+                if ($j->getNomJeu() == $_POST['nomJeu']) {
+                    $exist = 1;
                 }
             }
-            /*s'il n'existe pas on enregistre ce nouveau jeu*/
-            if ($exist==0){
+            /* s'il n'existe pas on enregistre ce nouveau jeu */
+            if ($exist == 0) {
 
-                $jeu = new ModelJeux(0,$_POST['nomJeu'],0,'0000-00-00',0,$numCat,$numE);
-               // print_r($jeu);
+                $jeu = new ModelJeux(0, $_POST['nomJeu'], 0, '0000-00-00', 0, $numCat, $numE);
+                // print_r($jeu);
                 $jeu->save();
-                $numJ=ModelJeux::getDerJeu();
-                $concerner= new ModelConcerner($numR,$numJ, $_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
+                $numJ = ModelJeux::getDerJeu();
+                $concerner = new ModelConcerner($numR, $numJ, $_POST['nbJeux'], $_POST['recu'], $_POST['retour'], $_POST['don']);
                 $concerner->save();
-            }
-            elseif($exist==1){
-                $numJ=ModelJeux::getNumJ($_POST['nomJeu']);
-                $concerner = new ModelConcerner($numR,$numJ, $_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
+            } elseif ($exist == 1) {
+                $numJ = ModelJeux::getNumJ($_POST['nomJeu']);
+                $concerner = new ModelConcerner($numR, $numJ, $_POST['nbJeux'], $_POST['recu'], $_POST['retour'], $_POST['don']);
                 $concerner->save();
             }
 
-            
-            /*test pour savoir si la zone existe*/
-            $existZ=0;
+
+            /* test pour savoir si la zone existe */
+            $existZ = 0;
             foreach ($zone as $z) {
-                if ($z->getNomZone()==$_POST['nomZone']){
-                    $existZ=1;
+                if ($z->getNomZone() == $_POST['nomZone']) {
+                    $existZ = 1;
                 }
             }
-            /*la zone n'existe pas alors on l'enregistre*/
-            if ($existZ==0){
-                $zon= new ModelZone(0, $_POST['nomZone'],$numF);
-               //print_r($zon);
+            /* la zone n'existe pas alors on l'enregistre */
+            if ($existZ == 0) {
+                $zon = new ModelZone(0, $_POST['nomZone'], $numF);
+                //print_r($zon);
                 $zon->save();
-                $numZ=ModelZone::getDerZone();
-                $localis= new ModelLocaliser($numZ,$numR,$_POST['nbPlace']);
+                $numZ = ModelZone::getDerZone();
+                $localis = new ModelLocaliser($numZ, $numR, $_POST['nbPlace']);
                 $localis->save();
-            }
-            elseif($existZ==1){
-                $numZ=ModelZone::getNumZoneByNom($_POST['nomZone']);
-                $localis= new ModelLocaliser($numZ,$numR,$_POST['nbPlace']);
+            } elseif ($existZ == 1) {
+                $numZ = ModelZone::getNumZoneByNom($_POST['nomZone']);
+                $localis = new ModelLocaliser($numZ, $numR, $_POST['nbPlace']);
                 //print_r($localis);
                 $localis->save();
             }
 
-            /*on enregistre la table organiser : lien entre zoe et catégorie si besoin*/
-            if ($existCat==0 or $existZ==0){
-                $orga =new ModelOrganiser($numCat,$numZ);
+            /* on enregistre la table organiser : lien entre zoe et catégorie si besoin */
+            if ($existCat == 0 or $existZ == 0) {
+                $orga = new ModelOrganiser($numCat, $numZ);
                 $orga->save();
-            }
-            elseif ($existCat==0 and $existZ==0){
-                 $orga =new ModelOrganiser($numCat,$numZ);
-                 $orga->save();
-            }
-            else{
-                $existO=0;
+            } elseif ($existCat == 0 and $existZ == 0) {
+                $orga = new ModelOrganiser($numCat, $numZ);
+                $orga->save();
+            } else {
+                $existO = 0;
                 foreach ($org as $o) {
-                    $c=ModelCategorie::getNumCatByNom($_POST['catJeu']);
-                    $z=ModelZone::getNumZoneByNom($_POST['nomZone']);
-                    if($o->getCodeCategorie()==$c and $o->getNumZone()==$z){
-                        $existO=0;
-                    }
-                    else{
-                        $existO=1;
+                    $c = ModelCategorie::getNumCatByNom($_POST['catJeu']);
+                    $z = ModelZone::getNumZoneByNom($_POST['nomZone']);
+                    if ($o->getCodeCategorie() == $c and $o->getNumZone() == $z) {
+                        $existO = 0;
+                    } else {
+                        $existO = 1;
                     }
                 }
-                if ($existO==0){
-                    $orga=new ModelOrganiser($numCat,$numZ);
+                if ($existO == 0) {
+                    $orga = new ModelOrganiser($numCat, $numZ);
                     $orga->save();
                 }
             }
 
 
-            if ($_POST['log']==1){  //si il faut un logement a l'éditeur 
-                $logem= new ModelLogement(0,$_POST['rue'],$_POST['ville'], $_POST['cp'], $_POST['nbChambre'],$_POST['coutNuit']);
+            if ($_POST['log'] == 1) {  //si il faut un logement a l'éditeur 
+                $logem = new ModelLogement(0, $_POST['rue'], $_POST['ville'], $_POST['cp'], $_POST['nbChambre'], $_POST['coutNuit']);
                 $logem->save();
-                $numL=ModelLogement::getDerLog();
-                $loger= new ModelLoger($numR,$numL,$_POST['place'],$_POST['frais']);
+                $numL = ModelLogement::getDerLog();
+                $loger = new ModelLoger($numR, $numL, $_POST['place'], $_POST['frais']);
                 //print_r($loger);
                 $loger->save();
             }
-            
-            if ( $ex== false or $concerner==false) {
+
+            if ($ex == false or $concerner == false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
                 $pagetitle = 'Erreur lors de la creation';
@@ -868,8 +900,8 @@ public function listResa() {
             }
         }
     }
-    
-     public function deleteResa() {
+
+    public function deleteResa() {
         if (!Session::is_connected()) {
             self::festivalConnect();
         } elseif (!Session::is_admin()) {
@@ -880,11 +912,11 @@ public function listResa() {
         } else {
             $numResa = $_GET['num'];
 
-            $d2=ModelConcerner::deleteByNumResa($numResa);
-            $d3=ModelLoger::deleteByNumResa($numResa);
-            $d4=ModelLocaliser::deleteByNumResa($numResa);
+            $d2 = ModelConcerner::deleteByNumResa($numResa);
+            $d3 = ModelLoger::deleteByNumResa($numResa);
+            $d4 = ModelLocaliser::deleteByNumResa($numResa);
             $d = ModelReservation::delete($numResa);
-            if ($d == false or $d2== false or $d3== false or $d4== false) {
+            if ($d == false or $d2 == false or $d3 == false or $d4 == false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
                 $pagetitle = 'Impossible à supprimer';
@@ -896,7 +928,8 @@ public function listResa() {
     }
 
     ############Festival#############
-     public function listFestival() {
+
+    public function listFestival() {
         /*
          * Fonction pour afficher la liste des festivals
          */
@@ -904,7 +937,7 @@ public function listResa() {
             Controller::FestivalConnect();
         } else {
             $tab = ModelFestival::getAllFestival();
-           
+
             if (empty($tab)) {
                 $controller = 'Festival';
                 $view = 'listVide';
@@ -912,12 +945,13 @@ public function listResa() {
                 require File::build_path(array("view", "view.php"));
             } else {
                 $controller = 'Festival';
-               $view = 'list';
-            $pagetitle = 'Liste des Festivals';
-            require File::build_path(array("view", "view.php"));
+                $view = 'list';
+                $pagetitle = 'Liste des Festivals';
+                require File::build_path(array("view", "view.php"));
             }
         }
     }
+
     public static function createFestival() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
@@ -939,6 +973,7 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         }
     }
+
     public static function createdFestival() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -959,6 +994,7 @@ public function listResa() {
             }
         }
     }
+
     public function deleteFestival() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -980,6 +1016,7 @@ public function listResa() {
             }
         }
     }
+
     public function updateFestival() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -1000,6 +1037,7 @@ public function listResa() {
             require FILE::build_path(array("view", "view.php"));
         }
     }
+
     public function updatedFestival() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -1020,7 +1058,9 @@ public function listResa() {
             }
         }
     }
+
     ###################Jeux#################""
+
     public function listJeux() {
         /*
          * Fonction pour afficher la liste des éditeurs
@@ -1038,7 +1078,7 @@ public function listResa() {
             } else {
                 $s = 'x';
             }
-            
+
             if (empty($tab)) {
                 $controller = 'Jeux';
                 $view = 'listVide';
@@ -1052,6 +1092,7 @@ public function listResa() {
             }
         }
     }
+
     public function detailJeu() {
         /*
          * Fonction pour afficher la liste des éditeurs
@@ -1061,16 +1102,17 @@ public function listResa() {
         } else {
             $num = $_GET['num'];
             $tab = ModelJeux::getJeuByNum($num);
-            
+
             $cat = ModelCategorie::getAllCategorie();
             $edit = ModelEditeur::getAllEditeurs();
-            
+
             $controller = 'Jeux';
             $view = 'detail';
             $pagetitle = 'Detail';
             require File::build_path(array("view", "view.php"));
         }
     }
+
     public static function createJeu() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
@@ -1082,7 +1124,7 @@ public function listResa() {
         } else {
             $action = 'createdJeu';
             $titre = 'Ajout d\'un';
-            $num=NULL;
+            $num = NULL;
             $nom = NULL;
             $nbjoueurs = NULL;
             $dates = NULL;
@@ -1095,6 +1137,7 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         }
     }
+
     public static function createdJeu() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -1104,26 +1147,25 @@ public function listResa() {
             $pagetitle = 'Error Accès';
             require File::build_path(array("view", "view.php"));
         } else {
-             $cat=ModelCategorie::getAllCategorie();
-            
-            /*test pour savoir si la catégorie existe*/
-            $existCat=0;
-            foreach ($cat as $c ) {
-                if ($c->getNomCategorie()==$_POST['categorie']){
-                    $existCat=1;
+            $cat = ModelCategorie::getAllCategorie();
+
+            /* test pour savoir si la catégorie existe */
+            $existCat = 0;
+            foreach ($cat as $c) {
+                if ($c->getNomCategorie() == $_POST['categorie']) {
+                    $existCat = 1;
                 }
             }
-            /*s'elle n'existe pas on enregistre la categorie*/
-            if ($existCat==0){
-                $cate= new ModelCategorie(0,$_POST['categorie']);
+            /* s'elle n'existe pas on enregistre la categorie */
+            if ($existCat == 0) {
+                $cate = new ModelCategorie(0, $_POST['categorie']);
                 $cate->save();
-                $numCat=ModelCategorie::getDerCat();
+                $numCat = ModelCategorie::getDerCat();
+            } elseif ($existCat == 1) {
+                $numCat = ModelCategorie::getNumCatByNom($_POST['categorie']);
             }
-            elseif($existCat==1){
-                $numCat=ModelCategorie::getNumCatByNom($_POST['categorie']);
-            }
-            
-            $numE=ModelEditeur::getNumEditByNom( $_POST['editeur']);
+
+            $numE = ModelEditeur::getNumEditByNom($_POST['editeur']);
             $jeux = new ModelJeux(0, $_POST['nom'], $_POST['nbjoueurs'], $_POST['dates'], $_POST['duree'], $numCat, $numE);
             if ($jeux->save() == false) {
                 $controller = 'Accueil';
@@ -1136,7 +1178,7 @@ public function listResa() {
         }
     }
 
-     public function deleteJeux() {
+    public function deleteJeux() {
         if (!Session::is_connected()) {
             self::festivalConnect();
         } elseif (!Session::is_admin()) {
@@ -1158,7 +1200,7 @@ public function listResa() {
         }
     }
 
-     public function updateJeux() {
+    public function updateJeux() {
         if (!Session::is_connected()) {
             self::festivalConnect();
         } elseif (!Session::is_admin()) {
@@ -1169,12 +1211,12 @@ public function listResa() {
         } else {
             $action = 'updatedJeux';
             $titre = 'Modification';
-            $num=$_POST['numJeux'];
+            $num = $_POST['numJeux'];
             $nom = $_POST['nomJeu'];
             $dates = $_POST['dateSortie'];
             $duree = $_POST['dureePartie'];
             $categorie = ModelCategorie::getNomCatByNum($_POST['codeCategorie']);
-            $editeur =ModelEditeur::getNomEditByNum($_POST['numEditeur']);
+            $editeur = ModelEditeur::getNomEditByNum($_POST['numEditeur']);
             $nbjoueurs = $_POST['NbreJoueurs'];
             $controller = 'Jeux';
             $view = 'create';
@@ -1182,7 +1224,8 @@ public function listResa() {
             require FILE::build_path(array("view", "view.php"));
         }
     }
-   public function updatedJeux() {
+
+    public function updatedJeux() {
         if (!Session::is_connected()) {
             self::festivalConnect();
         } elseif (!Session::is_admin()) {
@@ -1191,8 +1234,8 @@ public function listResa() {
             $pagetitle = 'Error Accès';
             requireFile::build_path(array("view", "view.php"));
         } else {
-            $numCat=ModelCategorie::getNumCatByNom($_POST['categorie']);
-            $numE=ModelEditeur::getNumEditByNom( $_POST['editeur']);
+            $numCat = ModelCategorie::getNumCatByNom($_POST['categorie']);
+            $numE = ModelEditeur::getNumEditByNom($_POST['editeur']);
             $edit = new ModelJeux(0, $_POST['nom'], $_POST['nbjoueurs'], $_POST['dates'], $_POST['duree'], $numCat, $numE);
             if ($edit->updated($_POST['numJeux']) == false) {
                 $controller = 'Accueil';
@@ -1206,6 +1249,7 @@ public function listResa() {
     }
 
     ###################Catégorie####################
+
     public function listCategorie() {
         /*
          * Fonction pour afficher la liste des éditeurs
@@ -1221,8 +1265,8 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         }
     }
-    
-     public static function createCategorie() {
+
+    public static function createCategorie() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
         } elseif (!Session::is_admin()) {
@@ -1235,13 +1279,14 @@ public function listResa() {
             $titre = 'Ajout d\'une';
             $nom = NULL;
             $code = NULL;
-            
+
             $controller = 'Categorie';
             $view = 'create';
             $pagetitle = 'Ajouter une catégorie';
             require File::build_path(array("view", "view.php"));
         }
     }
+
     public static function createdCategorie() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -1262,7 +1307,7 @@ public function listResa() {
             }
         }
     }
-    
+
     public function deleteCategorie() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -1284,8 +1329,9 @@ public function listResa() {
             }
         }
     }
-    
-       ###################ZONE####################
+
+    ###################ZONE####################
+
     public function listZone() {
         /*
          * Fonction pour afficher la liste des Zones
@@ -1294,21 +1340,21 @@ public function listResa() {
             Controller::FestivalConnect();
         } else {
             $tabZ = ModelZone::getAllZone();
-          
-            $tabC=ModelOrganiser::getAllOrga();
-               
-            $tabJ=ModelJeux::getAllJeux();
 
-            $tabCat=ModelCategorie::getAllCategorie();
-            
+            $tabC = ModelOrganiser::getAllOrga();
+
+            $tabJ = ModelJeux::getAllJeux();
+
+            $tabCat = ModelCategorie::getAllCategorie();
+
             $controller = 'Zones';
             $view = 'list';
             $pagetitle = 'Liste des zones';
             require File::build_path(array("view", "view.php"));
         }
     }
-    
-     public static function createZone() {
+
+    public static function createZone() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
         } elseif (!Session::is_admin()) {
@@ -1321,13 +1367,14 @@ public function listResa() {
             $titre = 'Ajout d\'une';
             $nom = NULL;
             $numZone = NULL;
-            
+
             $controller = 'Zones';
             $view = 'create';
             $pagetitle = 'Ajouter une zone';
             require File::build_path(array("view", "view.php"));
         }
     }
+
     public static function createdZone() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -1337,8 +1384,8 @@ public function listResa() {
             $pagetitle = 'Error Accès';
             require File::build_path(array("view", "view.php"));
         } else {
-            $anF=ModelFestival::getFestEnCours();
-            $zone = new ModelZone(0, $_POST['nomZone'],$anF);
+            $anF = ModelFestival::getFestEnCours();
+            $zone = new ModelZone(0, $_POST['nomZone'], $anF);
             if ($zone->save() == false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
@@ -1349,7 +1396,7 @@ public function listResa() {
             }
         }
     }
-    
+
     public function deleteZone() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -1360,7 +1407,7 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         } else {
             $numZone = $_GET['num'];
-            $d3= ModelLocaliser::deleteByNumZ($numZone);
+            $d3 = ModelLocaliser::deleteByNumZ($numZone);
             $d2 = ModelOrganiser::deleteByNumZone($numZone);
             $d = ModelZone::deleteByNum($numZone);
             if ($d == false) {
@@ -1373,6 +1420,29 @@ public function listResa() {
             }
         }
     }
-     
-    
+
+    ############Logement############
+
+    public function listLogement() {
+        /*
+         * Fonction pour afficher la liste des éditeurs
+         */
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+            $tab = ModelLogement::getAllLogements();
+            $numL = ModelLogement::getNbLogement();
+            $numLo = $numL['totalLogement'];
+            if ($numLo == 1) {
+                $s = "";
+            } else {
+                $s = 's';
+            }
+            $controller = 'Logement';
+            $view = 'list';
+            $pagetitle = 'Liste des logements';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
+
 }
