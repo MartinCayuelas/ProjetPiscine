@@ -6,6 +6,19 @@ echo <<< EOF
           <i class="fa fa-table"></i> Liste des réservations</div>
 EOF;
 
+foreach ($tab as $c){
+    
+    $chiffre = $chiffre + htmlspecialchars($c->getPrixPlaceNego());
+}
+
+echo <<< EOF
+     <div class="card-body">
+        Total des recettes : {$chiffre} €
+      </div>
+        
+EOF;
+
+
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
             <a class="ajout" href="index.php?action=createReservation"><i class="fa fa-plus-circle" aria-hidden="true"></i>  réservation</a>
