@@ -219,8 +219,8 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeurs();
-             $numB = ModelEditeur::getNbEditeurs();
-             $num = $numB['totalEditeurs'];
+             $num = ModelEditeur::getNbEditeurs();
+             $num = $num['total'];
             if ($num == 1) {
                 $s = "";
             } else {
@@ -240,8 +240,8 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeursSort();
-             $numB = ModelEditeur::getNbEditeurs();
-             $num = $numB['totalEditeurs'];
+             $num = ModelEditeur::getNbEditeurs();
+             $num = $num['total'];
             if ($num == 1) {
                 $s = "";
             } else {
@@ -261,8 +261,8 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeursSortVille();
-              $numN = ModelEditeur::getNbEditeurs();
-             $num = $numN['totalEditeurs'];
+              $num = ModelEditeur::getNbEditeurs();
+             $num = $num['total'];
             if ($num == 1) {
                 $s = "";
             } else {
@@ -1285,13 +1285,12 @@ public function listResa() {
             Controller::FestivalConnect();
         } else {
             $tabZ = ModelZone::getAllZone();
-            foreach ($tabZ as $z) {
-                $codeCat=ModelOrganiser::getCodeCatByNumZ($z->getNumZone());
-                foreach ($codeCat as $c) {
-                    $jeux=ModelJeux::getNomJByCCat($c->getCodeCategorie());
-                    print_r($jeux);
-                }
-            }
+          
+            $tabC=ModelOrganiser::getAllOrga();
+               
+            $tabJ=ModelJeux::getAllJeux();
+
+            $tabCat=ModelCategorie::getAllCategorie();
             
             $controller = 'Zones';
             $view = 'list';
