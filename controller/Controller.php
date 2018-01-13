@@ -725,7 +725,7 @@ public function listResa() {
             $nbChambre=NULL;
             $frais=NULL;
             $place=NULL;
-            $catjeux=NULL;
+            $catJeu=NULL;
             $controller = 'Reservation';
             $view = 'create';
             $pagetitle = 'Ajouter une reservation';
@@ -748,11 +748,15 @@ public function listResa() {
             $numR=ModelReservation::getDerResa();
             $numE=ModelEditeur::getNumEditByNom($_POST['nomEditeur']);
             $numF=ModelFestival::getFestEnCours();
-            $numCat=ModelCategorie::getNumCatByNom($_POST['catjeux']);
-            $jeu=ModelJeux::getJeuxByNom();
-            $zone=ModelZone::getZoneByNom();
-            $cat=ModelCategorie::getCatByNom();
-
+            $numCat=ModelCategorie::getNumCatByNom($_POST['catJeu']);
+            $jeu=ModelJeux::getAllJeux();
+            $zone=ModelZone::getAllZone();
+            $cat=ModelCategorie::getAllCategorie();
+            
+            $concerner = new ModelConcerner($numR,$numJ, $_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
+            $concerner->save();
+            
+            
             /*test pour savoir si le jeu existe*/
             $exist=0;
             foreach ($jeu as $j ) {
@@ -765,7 +769,7 @@ public function listResa() {
                 //print_r($numE);
                 //print_r($numCat);
                 //print_r($_POST['nomJeu']);
-                $jeux= new ModelJeux(0,$_POST['nomJeu'],0,0,0,$numCat,$numE);
+                $jeux= new ModelJeux(0,$_POST['nomJeu'],NULL,NULL,NULL,$numCat,$numE);
                 print_r($jeux);
                 $jeux->save();
             }
@@ -774,13 +778,13 @@ public function listResa() {
             /*test pour savoir si la catégorie existe*/
             $existCat=0;
             foreach ($cat as $c ) {
-                if ($c->getNomCategorie()==$_POST['catjeux']){
+                if ($c->getNomCategorie()==$_POST['catJeu']){
                     $existCat=1;
                 }
             }
             /*s'elle n'existe pas on enregistre la categorie*/
             if ($existCat==0){
-                $cate= new ModelCategorie(0,$_POST['catjeux']);
+                $cate= new ModelCategorie(0,$_POST['catJeu']);
                // print_r($cate);
                 $cate->save();
             }
@@ -817,10 +821,9 @@ public function listResa() {
                 print_r($loger);
                 $loger->save();
             }
-            $concern= new ModelConcerner($numR ,$numJ,$_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
-            print_r($concern);
+            
 
-            if ( $ex== false or $concern->save()==false) {
+            if ( $ex== false or $concerne==false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
                 $pagetitle = 'Erreur lors de la creation';
