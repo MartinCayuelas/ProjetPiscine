@@ -508,28 +508,6 @@ class Controller {
         }
     }
     ####################Suivi##############
-    public function listSuiviB() {
-        /*
-         * Fonction pour afficher la liste des suivis
-         */
-        if (!Session::is_connected()) {
-            Controller::FestivalConnect();
-        } else {
-            $numEditeur = $_GET['numEditeur'];
-            $tab = ModelSuivi::getSuivisByEditeur($numEditeur);
-            if (empty($tab)) {
-                $controller = 'Suivi';
-                $view = 'listVide';
-                $pagetitle = 'Liste des suivis';
-                require File::build_path(array("view", "view.php"));
-            } else {
-                $controller = 'Suivi';
-                $view = 'list';
-                $pagetitle = 'Liste des suivis';
-                require File::build_path(array("view", "view.php"));
-            }
-        }
-    }
     public function listSuivi() {
         /*
          * Fonction pour afficher la liste des suivis
@@ -554,6 +532,32 @@ class Controller {
             }
         }
     }
+    
+    public function listSuiviReponse() {
+        /*
+         * Fonction pour afficher la liste des suivis
+         */
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+            
+            $tab = ModelSuivi::getSuivisByReponse();
+            $tabEditeur = ModelEditeur::getAllEditeurs();
+             
+            if (empty($tab)) {
+                $controller = 'Suivi';
+                $view = 'listVide';
+                $pagetitle = 'Liste des suivis';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                $controller = 'Suivi';
+                $view = 'list';
+                $pagetitle = 'Liste des suivis';
+                require File::build_path(array("view", "view.php"));
+            }
+        }
+    }
+    
     public static function createSuivi() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
@@ -585,7 +589,7 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         } else {
             $check = $_POST['reponse'];
-            if ($check == NULL) {
+            if ($check == 0) {
                 $check = 0;
             } else {
                 $check = 1;
@@ -678,6 +682,8 @@ public function listResa() {
             Controller::FestivalConnect();
         } else {
             $tab = ModelReservation::getAllReservations();
+            
+            
    
             if (empty($tab)) {
                 $controller = 'Reservation';
@@ -750,6 +756,9 @@ public function listResa() {
             $zone=ModelZone::getAllZone();
             $cat=ModelCategorie::getAllCategorie();
             $org=ModelOrganiser::getAllOrga();
+           
+            
+            
             
             /*test pour savoir si la catégorie existe*/
             $existCat=0;
