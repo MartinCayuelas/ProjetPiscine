@@ -824,7 +824,9 @@ public function listResa() {
             else{
                 $existO=0;
                 foreach ($org as $o) {
-                    if($o->getCodeCategorie()==getNumCatByNom($_POST['catJeu']) and $o->getNumZone()==getNumZoneByNom($_POST['nomZone'])){
+                    $c=ModelCategorie::getNumCatByNom($_POST['catJeu']);
+                    $z=ModelZone::getNumZoneByNom($_POST['nomZone']);
+                    if($o->getCodeCategorie()==$c and $o->getNumZone()==$z){
                         $existO=0;
                     }
                     else{
@@ -1283,7 +1285,14 @@ public function listResa() {
             Controller::FestivalConnect();
         } else {
             $tabZ = ModelZone::getAllZone();
-            $games = ModelJeux::getAllJeux();
+            foreach ($tabZ as $z) {
+                $codeCat=ModelOrganiser::getCodeCatByNumZ($z->getNumZone());
+                foreach ($codeCat as $c) {
+                    $jeux=ModelJeux::getNomJByCCat($c->getCodeCategorie());
+                    print_r($jeux);
+                }
+            }
+            
             $controller = 'Zones';
             $view = 'list';
             $pagetitle = 'Liste des zones';
