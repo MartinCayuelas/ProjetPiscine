@@ -67,8 +67,18 @@ class ModelOrganiser {
         }
     }
 
-     public function getAllOrga() {
+    public function getAllOrga() {
         $sql = "SELECT * FROM organiser";
+        $req = Model::$pdo->query($sql);
+        $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelOrganiser');
+        if (empty($tab_prod)) {
+            return false;
+        }
+        return $tab_prod;
+    }
+
+    public function getCodeCatByNumZ($num) {
+        $sql = "SELECT codeCategorie FROM organiser WHERE numZone=".$num."";
         $req = Model::$pdo->query($sql);
         $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelOrganiser');
         if (empty($tab_prod)) {

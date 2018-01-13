@@ -182,6 +182,16 @@ class ModelJeux {
         return $res;
     }
 
+    public function getNomJByCCat($code) {
+        $sql = "SELECT nomJeu FROM jeux WHERE codeCategorie=".$code."";
+        $req = Model::$pdo->query($sql);
+        $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelJeux');
+        if (empty($tab_prod)) {
+            return false;
+        }
+        return $tab_prod;
+    }
+
     /* permet affichage des jeux qui vont être recu sur la page d'accueil */
 
     public static function getJeuxConcern() {
