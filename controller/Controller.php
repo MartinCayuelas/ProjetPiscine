@@ -14,6 +14,7 @@ require_once File::build_path(array("model", "ModelZone.php"));
 require_once File::build_path(array("model", "ModelLoger.php"));
 require_once File::build_path(array("model", "ModelConcerner.php"));
 require_once File::build_path(array("model", "ModelLocaliser.php"));
+require_once File::build_path(array("model", "ModelOrganiser.php"));
 /* Lib */
 require_once File::build_path(array("lib", "Security.php"));
 require_once File::build_path(array("lib", "Session.php"));
@@ -748,6 +749,7 @@ public function listResa() {
             $jeu=ModelJeux::getAllJeux();
             $zone=ModelZone::getAllZone();
             $cat=ModelCategorie::getAllCategorie();
+            $org=ModelOrganiser::getAllOrga();
             
             /*test pour savoir si la catégorie existe*/
             $existCat=0;
@@ -809,6 +811,33 @@ public function listResa() {
                 //print_r($localis);
                 $localis->save();
             }
+
+            /*on enregistre la table organiser : lien entre zoe et catégorie si besoin*/
+            if ($existCat==0 or $existZ==0){
+                $orga =new ModelOrganiser($numCat,$numZ);
+                $orga->save();
+            }
+            elseif ($existCat==0 and $existZ==0){
+                 $orga =new ModelOrganiser($numCat,$numZ);
+                 $orga->save();
+            }
+            else{
+                $existO=0;
+                foreach ($org as $o) {
+                    if($o->getCodeCategorie()==getNumCatByNom($_POST['catJeu']) and $o->getNumZone()==getNumZoneByNom($_POST['nomZone'])){
+                        $existO=0;
+                    }
+                    else{
+                        $existO=1;
+                    }
+                }
+                if ($existO==0){
+                    $orga=new ModelOrganiser($numCat,$numZ);
+                    $orga->save();
+                }
+            }
+
+
             if ($_POST['log']==1){  //si il faut un logement a l'éditeur 
                 $logem= new ModelLogement(0,$_POST['rue'],$_POST['ville'], $_POST['cp'], $_POST['nbChambre'],$_POST['coutNuit']);
                 $logem->save();
@@ -1291,7 +1320,8 @@ public function listResa() {
             $pagetitle = 'Error Accès';
             require File::build_path(array("view", "view.php"));
         } else {
-            $zone = new ModelZone(0, $_POST['nomZone'],2018);
+            $anF=ModelFestival::getFestEnCours();
+            $zone = new ModelZone(0, $_POST['nomZone'],$anF);
             if ($zone->save() == false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
@@ -1312,7 +1342,7 @@ public function listResa() {
             $pagetitle = 'Error Accès';
             require File::build_path(array("view", "view.php"));
         } else {
-            $numZone = $_GET['numZone'];
+            $numZone = $_GET['num'];
             $d = ModelZone::deleteByNum($numZone);
             if ($d == false) {
                 $controller = 'Accueil';
