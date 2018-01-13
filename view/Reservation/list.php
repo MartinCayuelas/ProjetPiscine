@@ -5,7 +5,7 @@ echo <<< EOF
         <div class="card-header">
           <i class="fa fa-table"></i> Liste des réservations</div>
 EOF;
-
+$chiffre = 0;
 foreach ($tab as $c){
     
     $chiffre = $chiffre + htmlspecialchars($c->getPrixPlaceNego());
