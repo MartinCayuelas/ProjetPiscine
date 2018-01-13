@@ -11,7 +11,7 @@
                     </div>
                  
                       <div class="col-md-6">
-                            <label class="card-header" for="nbjoueurs_id">Nombre de joueurs</label>
+                            <label class="card-header" for="Nbrejoueurs">Nombre de joueurs</label>
                             <input type="number" value="<?php echo $nbjoueurs ?>"placeholder="0" name="nbjoueurs" id="Nbrejoueurs"/>
                         
                        
@@ -23,12 +23,12 @@
                             <input type="number" value="<?php echo $duree ?>"placeholder="minutes" name="duree" id="dureePartie"/>
 
 
-                            <label class="card-header" for="codeCategorie">Catégorie</label>
-                            <input type="number" value="<?php echo $categorie ?>"placeholder="code" name="categorie" id="codeCategorie"/>
+                            <label class="card-header" for="codeCategorie">Catégorie du jeu</label>
+                            <input type="text" value="<?php echo $categorie ?>"placeholder="categorie" name="categorie" id="codeCategorie"/>
 
 
-                            <label class="card-header" for="editeur">Editeur</label>
-                            <input type="number" value="<?php echo $editeur ?>"placeholder="editeur" name="editeur" id="numEditeur"/>
+                            <label class="card-header" for="editeur">Editeur du jeu</label>
+                            <input type="text" value="<?php echo $editeur ?>"placeholder="editeur" name="editeur" id="numEditeur"/>
                         
                     </div>
                 </div>

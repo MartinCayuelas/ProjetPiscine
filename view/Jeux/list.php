@@ -6,15 +6,11 @@ echo <<< EOF
 EOF;
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
-            <a class="ajout" href="index.php?action=construct"><i class="fa fa-plus-circle" aria-hidden="true"></i> Jeu</a>
+            <a class="ajout" href="index.php?action=createJeu"><i class="fa fa-plus-circle" aria-hidden="true"></i> Jeu</a>
              
 EOF;
 }
 echo <<<EOF
-<div class="card-body">
-
-                  {$num} Jeu{$s} <i class=" fa fa-fort-awesome"></i>
-        </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -67,8 +63,8 @@ EOF;
     if (isset($_SESSION['login']) && Session::is_admin()) {
         echo <<< EOF
                    
-                   <th class="text-center" ><a href="index.php?action=deleteByNum&num={$num}"><button class="btn btn-danger" type="button"><i class="fa fa-trash" aria-hidden="true"></i> Supprimer</button></a></th> 
-                             <form action="index.php?action=updated" method = "POST">
+                   <th class="text-center" ><a href="index.php?action=deleteJeux&num={$num}"><button class="btn btn-danger" type="button"><i class="fa fa-trash" aria-hidden="true"></i> Supprimer</button></a></th> 
+                             <form action="index.php?action=updateJeux" method = "POST">
                                 
                                 <input type="hidden" name="numJeux" value="{$num}" />
                                 <input type="hidden" name="nomJeu" value="{$nom}" />
