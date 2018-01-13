@@ -46,7 +46,7 @@
                             <span class="nav-link-text">Catégories</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Categories">
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Zones">
                         <a class="nav-link" href="index.php?action=listZone">
                             <i class="fa fa-window-maximize" aria-hidden="true"></i>
                             <span class="nav-link-text">Zones</span>
