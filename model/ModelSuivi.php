@@ -65,6 +65,16 @@ class ModelSuivi {
         return $tab;
         
     }
+    public static function getSuivisByReponse() {
+        $sql = "SELECT * FROM suivi ORDER BY reponse";
+        $req = Model::$pdo->query($sql);
+        $tab = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelSuivi');
+        if (empty($tab)) {
+            return false;
+        }
+        return $tab;
+        
+    }
     
    public function save() {
 
