@@ -85,7 +85,7 @@ class ModelEditeur {
     }
     public function getNbEditeurs() {
 
-        $sql = "SELECT COUNT(*) AS totalEditeur FROM editeur";
+        $sql = "SELECT COUNT(*) AS totalEditeurs FROM editeur";
         $req = Model::$pdo->query($sql);
         $tab_prod = $req->FETCH();
 
@@ -159,10 +159,22 @@ class ModelEditeur {
         return $req->execute($values);
     }
 
-
+public static function getNbEditeur() {
+        $sql = "SELECT COUNT(numEditeur) FROM editeur ";
+        $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
+    }
     
-     public static function getNumEditByNom($nom) {
+    public static function getNumEditByNom($nom) {
         $sql = "SELECT numEditeur FROM editeur WHERE nomEditeur='".$nom."'";
+        $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
+    }
+    
+     public static function getNomEditByNum($num) {
+        $sql = "SELECT nomEditeur FROM editeur WHERE numEditeur='".$num."'";
         $req = Model::$pdo->query($sql);
         $res=$req->fetchColumn();
         return $res;

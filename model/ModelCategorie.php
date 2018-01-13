@@ -84,4 +84,30 @@ class ModelCategorie {
         $res = $req2->fetchColumn();
         return $res;
     }
+
+    public static function getNomCatByNum($num) {
+        $sq2 = "SELECT nomCategorie FROM categorie WHERE codeCategorie='".$num."'";
+        $req2 = Model::$pdo->query($sq2);
+        $res = $req2->fetchColumn();
+        return $res;
+    }
+
+    public function getCatByNom() {
+        $sql = "SELECT nomCategorie FROM categorie";
+        $req = Model::$pdo->query($sql);
+        $tab = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelCategorie');
+        if (empty($tab)) {
+            return false;
+        }
+        return $tab;
+    }
+
+    public static function getDerCat(){
+        $sql="SELECT codeCategorie FROM categorie ORDER BY codeCategorie DESC LIMIT 0,1";
+         $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
+    }
+
+
 }

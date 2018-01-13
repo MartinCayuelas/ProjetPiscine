@@ -123,7 +123,7 @@ class ModelJeux {
 
     public function deleteByNum($num) {
         try {
-            $sql = "DELETE FROM jeux WHERE numEditeur =:read1";
+            $sql = "DELETE FROM jeux WHERE numJeux =:read1";
             $req = Model::$pdo->prepare($sql);
             $values = array(
                 'read1' => $num,
@@ -136,7 +136,7 @@ class ModelJeux {
     }
 
     public function updated($num) {
-        $sql = "UPDATE jeux SET  nomJeu =:read2, nbjoueurs =:read3, dates =:read4, duree =:read6, categorie =:read7, editeur =:read8 WHERE numJeux=:read5";
+        $sql = "UPDATE jeux SET  nomJeu =:read2, nbjoueurs =:read3, dateSortie =:read4, dureePartie =:read6, codeCategorie =:read7, numEditeur =:read8 WHERE numJeux=:read5";
         $req = Model::$pdo->prepare($sql);
         $values = array(
             "read2" => $this->nomJeu,
@@ -147,6 +147,7 @@ class ModelJeux {
             "read8" => $this->numEditeur,
             "read5" => $num,
         );
+        print_r($values);
         return $req->execute($values);
     }
 
