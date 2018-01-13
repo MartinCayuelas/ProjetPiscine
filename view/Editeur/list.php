@@ -50,11 +50,13 @@ foreach ($tab as $v) {
 
              <tbody>
                 <tr>
-                  <th><a class="nav-link" href="index.php?action=listContact&numEditeur={$num}">{$nom}</a></th>
+                  <th>{$nom}</th>
                   <th>{$ville}</th>
                    <th>{$rue}</th>
                    <th>{$cp}</th>
 EOF;
+                    echo '<th><a class="nav-link" href="index.php?action=listContact&numEditeur={$num}"><button class="btn btn-warning">Contact</button></a></th>';
+
     if (isset($_SESSION['login']) && Session::is_admin()) {
 
         echo <<< EOF
@@ -99,11 +101,8 @@ EOF;
                        
 EOF;
     }
-echo <<< EOF
-    <th><a href="index.php?action=listSuivi&numEditeur={$num}"><button class="btn btn-warning" type="button">Suivi</button></a></th>
-EOF;
-    
 
+   
     echo <<< EOF
 
         </tr>
