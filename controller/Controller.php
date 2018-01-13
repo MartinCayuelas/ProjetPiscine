@@ -677,6 +677,7 @@ public function listResa() {
             Controller::FestivalConnect();
         } else {
             $tab = ModelReservation::getAllReservations();
+   
             if (empty($tab)) {
                 $controller = 'Reservation';
                 $view = 'listVide';
@@ -773,7 +774,7 @@ public function listResa() {
             if ($exist==0){
 
                 $jeu = new ModelJeux(0,$_POST['nomJeu'],0,'0000-00-00',0,$numCat,$numE);
-                print_r($jeu);
+               // print_r($jeu);
                 $jeu->save();
                 $numJ=ModelJeux::getDerJeu();
                 $concerner= new ModelConcerner($numR,$numJ, $_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
@@ -796,7 +797,7 @@ public function listResa() {
             /*la zone n'existe pas alors on l'enregistre*/
             if ($existZ==0){
                 $zon= new ModelZone(0, $_POST['nomZone'],$numF);
-                print_r($zon);
+               //print_r($zon);
                 $zon->save();
                 $numZ=ModelZone::getDerZone();
                 $localis= new ModelLocaliser($numZ,$numR,$_POST['nbPlace']);
@@ -805,7 +806,7 @@ public function listResa() {
             elseif($existZ==1){
                 $numZ=ModelZone::getNumZoneByNom($_POST['nomZone']);
                 $localis= new ModelLocaliser($numZ,$numR,$_POST['nbPlace']);
-                print_r($localis);
+                //print_r($localis);
                 $localis->save();
             }
             if ($_POST['log']==1){  //si il faut un logement a l'éditeur 
@@ -813,7 +814,7 @@ public function listResa() {
                 $logem->save();
                 $numL=ModelLogement::getDerLog();
                 $loger= new ModelLoger($numR,$numL,$_POST['place'],$_POST['frais']);
-                print_r($loger);
+                //print_r($loger);
                 $loger->save();
             }
             
@@ -853,6 +854,7 @@ public function listResa() {
             }
         }
     }
+
     ############Festival#############
      public function listFestival() {
         /*
@@ -1040,10 +1042,13 @@ public function listResa() {
         } else {
             $action = 'createdJeu';
             $titre = 'Ajout d\'un';
+            $num=NULL;
             $nom = NULL;
-            $ville = NULL;
-            $rue = NULL;
-            $cp = NULL;
+            $nbjoueurs = NULL;
+            $dates = NULL;
+            $duree = NULL;
+            $editeur = NULL;
+            $categorie = NULL;
             $controller = 'Jeux';
             $view = 'create';
             $pagetitle = 'Ajouter un jeu';
@@ -1059,17 +1064,107 @@ public function listResa() {
             $pagetitle = 'Error Accès';
             require File::build_path(array("view", "view.php"));
         } else {
-            $edit = new ModelEditeur(0, $_POST['nom'], $_POST['rue'], $_POST['ville'], $_POST['cp']);
-            if ($edit->save() == false) {
+             $cat=ModelCategorie::getAllCategorie();
+            
+            /*test pour savoir si la catégorie existe*/
+            $existCat=0;
+            foreach ($cat as $c ) {
+                if ($c->getNomCategorie()==$_POST['categorie']){
+                    $existCat=1;
+                }
+            }
+            /*s'elle n'existe pas on enregistre la categorie*/
+            if ($existCat==0){
+                $cate= new ModelCategorie(0,$_POST['categorie']);
+                $cate->save();
+                $numCat=ModelCategorie::getDerCat();
+            }
+            elseif($existCat==1){
+                $numCat=ModelCategorie::getNumCatByNom($_POST['categorie']);
+            }
+            
+            $numE=ModelEditeur::getNumEditByNom( $_POST['editeur']);
+            $jeux = new ModelJeux(0, $_POST['nom'], $_POST['nbjoueurs'], $_POST['dates'], $_POST['duree'], $numCat, $numE);
+            if ($jeux->save() == false) {
                 $controller = 'Accueil';
                 $view = 'listVide';
                 $pagetitle = 'Erreur lors de la creation';
                 require FILE::build_path(array("view", "view.php"));
             } else {
-                Controller::listEditeur();
+                Controller::listJeux();
             }
         }
     }
+
+     public function deleteJeux() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $num = $_GET['num'];
+            $d = ModelJeux::deleteByNum($num);
+            if ($d == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Impossible à supprimer';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                Controller::listJeux();
+            }
+        }
+    }
+
+     public function updateJeux() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $action = 'updatedJeux';
+            $titre = 'Modification';
+            $num=$_POST['numJeux'];
+            $nom = $_POST['nomJeu'];
+            $dates = $_POST['dateSortie'];
+            $duree = $_POST['dureePartie'];
+            $categorie = ModelCategorie::getNomCatByNum($_POST['codeCategorie']);
+            $editeur =ModelEditeur::getNomEditByNum($_POST['numEditeur']);
+            $nbjoueurs = $_POST['NbreJoueurs'];
+            $controller = 'Jeux';
+            $view = 'create';
+            $pagetitle = 'Mise à jour Jeux';
+            require FILE::build_path(array("view", "view.php"));
+        }
+    }
+   public function updatedJeux() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            requireFile::build_path(array("view", "view.php"));
+        } else {
+            $numCat=ModelCategorie::getNumCatByNom($_POST['categorie']);
+            $numE=ModelEditeur::getNumEditByNom( $_POST['editeur']);
+            $edit = new ModelJeux(0, $_POST['nom'], $_POST['nbjoueurs'], $_POST['dates'], $_POST['duree'], $numCat, $numE);
+            if ($edit->updated($_POST['numJeux']) == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Erreur lors de la creation';
+                require FILE::build_path(array("view", "view.php"));
+            } else {
+                Controller::listJeux();
+            }
+        }
+    }
+
     ###################Catégorie####################
     public function listCategorie() {
         /*
