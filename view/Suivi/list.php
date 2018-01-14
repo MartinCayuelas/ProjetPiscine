@@ -108,7 +108,6 @@ EOF;
                                 
 
 
-                                <br>
                                <th class="text-center" > <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i></button></th>   
                             </form>
                                
