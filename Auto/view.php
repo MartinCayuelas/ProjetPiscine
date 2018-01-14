@@ -159,19 +159,34 @@
         <!-- Custom scripts for all pages-->
         <script src="./js/sb-admin.min.js"></script>
         <!-- Custom scripts for this page-->
-        <script src="./js/sb-admin-datatables.min.js"></script>
-        <script src="./js/sb-admin-charts.min.js"></script>
+        <!--<script src="./js/sb-admin-datatables.min.js"></script>
+        <script src="./js/sb-admin-charts.min.js"></script>-->
 
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-        <link rel="stylesheet" href="/resources/demos/style.css">
-        
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+
+
+
         <script>
+
+            try {
             $('#rechercheE').autocomplete({
-                source: '/view/autocompleteE.php'
+                source: '/ProjetPiscineAuto/view/autocompleteE.php',
+                minLength: 1
 
             });
+              } catch (error) {
+                     console.log(error);
+            }
+
+            /*$(function(){ 
+                $("#rechercheE").on('input', function() {
+                    $("#rechercheE").autocomplete({source: '/ProjetPiscineAuto/view/autocompleteE.php?term='+$("#rechercheE").val()});
+                });
+
+
+            });*/
         </script>
 
         <script>
