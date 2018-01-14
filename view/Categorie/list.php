@@ -4,6 +4,7 @@ echo <<< EOF
  <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-table"></i> Liste des jeux par Catégorie</div>
+
 EOF;
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
@@ -12,7 +13,11 @@ if (isset($_SESSION['login']) && Session::is_admin()) {
 EOF;
 }
 
-
+echo <<<EOF
+<div class="card-body">
+{$num} Catégorie{$s} <i class=" fa fa-server"></i>
+</div>
+EOF;
 foreach ($cat as $v) {
     $code = htmlspecialchars($v->getCodeCategorie());
     $nom = htmlspecialchars($v->getNomCategorie());
