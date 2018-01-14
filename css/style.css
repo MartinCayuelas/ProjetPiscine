@@ -51,6 +51,12 @@
 .editeur{
 	color :#f45b63;
 }
+
+
+.copy{
+    color: #FFF;
+}
+
 .jeu{
 	color :#f45b63;
 }
@@ -107,6 +113,7 @@
 
 
 
+
 .thCategorie{
     width: 50%;
     background-color:#FFF;
@@ -123,14 +130,22 @@
     color: #091707;
 }
 .linkCate{
-    color:#000000;
+    color: #f45b63;
+}
+.linkCateC{
+    color: #000000;
+}
+.linkCateC:hover{
+    color: #FFF;
 }
 .linkCate:hover{
     color: #FFF;
 }
-
 .retour:hover{
     background-color: #fd7e14;
+}
+.tri{
+    margin-left:10%;
 }
 
 
@@ -146,6 +161,9 @@ label.card-header{
 /*suivi*/
 .col-md-6 label.card-header{
   width:100%;
+}
+label .card-headerCat{
+    width:100%;
 }
 
 
