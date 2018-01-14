@@ -26,7 +26,7 @@ class Controller {
          */
         if (!Session::is_connected()) {
             Controller::festivalConnect();
-        } else {
+       } else {
             $tr = ModelLocaliser:: getPlaceLocaliser();
             $nbE = ModelEditeur::getNbEditeur(); //nombre d'éditeur dans la bdd
             $nbJ = ModelJeux::getNbreJeux(); //nombre de jeux presents au festival
@@ -507,8 +507,35 @@ class Controller {
         }
     }
     ####################Suivi##############
-
-    
+    public function listSuiviB() {
+        /*
+         * Fonction pour afficher la liste des suivis
+         */
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+            $numEditeur = $_GET['numEditeur'];          
+            $num = ModelSuivi::getNbSuivis();
+            $num = $num['totalSuivis'];
+            if ($num == 1) {
+                $s = "";
+            } else {
+                $s = 's';
+            }
+            $tab = ModelSuivi::getSuivisByEditeur($numEditeur);
+            if (empty($tab)) {
+                $controller = 'Suivi';
+                $view = 'listVide';
+                $pagetitle = 'Liste des suivis';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                $controller = 'Suivi';
+                $view = 'list';
+                $pagetitle = 'Liste des suivis';
+                require File::build_path(array("view", "view.php"));
+            }
+        }
+    }
     public function listSuivi() {
         /*
          * Fonction pour afficher la liste des suivis
@@ -524,36 +551,6 @@ class Controller {
                 $s = 's';
             }
             $tab = ModelSuivi::getSuivis();
-            $tabEditeur = ModelEditeur::getAllEditeurs();
-             
-            if (empty($tab)) {
-                $controller = 'Suivi';
-                $view = 'listVide';
-                $pagetitle = 'Liste des suivis';
-                require File::build_path(array("view", "view.php"));
-            } else {
-                $controller = 'Suivi';
-                $view = 'list';
-                $pagetitle = 'Liste des suivis';
-                require File::build_path(array("view", "view.php"));
-            }
-        }
-    }
-    public function listSuiviReponse() {
-        /*
-         * Fonction pour afficher la liste des suivis
-         */
-        if (!Session::is_connected()) {
-            Controller::FestivalConnect();
-        } else {
-            $num = ModelSuivi::getNbSuivis();
-            $num = $num['totalSuivis'];
-            if ($num == 1) {
-                $s = "";
-            } else {
-                $s = 's';
-            }
-            $tab = ModelSuivi::getSuivisByReponse();
             $tabEditeur = ModelEditeur::getAllEditeurs();
              
             if (empty($tab)) {
@@ -600,7 +597,7 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         } else {
             $check = $_POST['reponse'];
-            if ($check == 0) {
+            if ($check == NULL) {
                 $check = 0;
             } else {
                 $check = 1;
@@ -912,8 +909,7 @@ public function listResa() {
             Controller::FestivalConnect();
         } else {
             $num = $_GET['num'];
-            $tabE=ModelEditeur::getEditeurById($num);
-            $tabR = ModelReservation::getAllReservations();
+            $tabR = ModelReservation::getResaByNum($num);
             $tabC= ModelConcerner::getAllConcerner();
             $tabJ= ModelJeux::getAllJeux();
             $tabCat= ModelCategorie::getAllCategorie();
@@ -929,6 +925,7 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         }
     }
+
     ############Festival#############
      public function listFestival() {
         /*
@@ -1346,6 +1343,15 @@ public function listResa() {
             $tabConcern=ModelConcerner::getAllConcerner();
 
             $tabLoc=ModelLocaliser::getAllLocaliser();
+
+            $nbZ = ModelZone::getNbZone();
+            $num = $nbZ['totalZone'];
+            if ($num == 1) {
+                $s = "";
+            } else {
+                $s = 's';
+            }
+
             $controller = 'Zones';
             $view = 'list';
             $pagetitle = 'Liste des zones';
