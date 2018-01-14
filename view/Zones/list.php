@@ -53,16 +53,12 @@ EOF;
 EOF;
     foreach ($tabC as $c) {
         if ($c->getNumZone() == $num) {
+            $numZ=htmlspecialchars($c->getNumZone());
             $numC = htmlspecialchars($c->getCodeCategorie());
 
          foreach ($tabCat as $cat) {
               if ($cat->getCodeCategorie() == $numC){
                   $nomCa=  htmlspecialchars($cat->getNomCategorie());
-
-              echo <<< EOF
-                    <tr>
-                    <th class="th Zone text-center" ><h3>{$nomCa}</h3></th>
-EOF;
 
             foreach ($tabJ as $j) {
               if ($j->getcodeCategorie() == $numC) {
@@ -70,15 +66,34 @@ EOF;
               $nomJeu = htmlspecialchars($j->getNomJeu());
               $numJeu =  htmlspecialchars($j->getnumJeu());
 
-           
-            
-              echo <<< EOF
+              foreach ($tabConcern as $co) {
+               if ($co->getNumJeux() == $numJeu) {
+                $numRes=  htmlspecialchars($co->getNumResa());
+
+                foreach ($tabLoc as $lo) {
+                    if ($lo->getNumResa() == $numRes) {
+                    $numZone=  htmlspecialchars($lo->getNumZone());
+                      if ($numZone== $numZ) {
+
+                         echo <<< EOF
                     <tr>
-                   <td class="tdHover text-center"><h5>{$nomJeu}</h5></td>
-                   
-                   </tr>
+                    <th class="th Zone text-center" ><h3>{$nomCa}</h3></th>
 EOF;
-          }
+
+
+
+
+               echo <<< EOF
+                        <tr>
+                       <td class="tdHover text-center"><h5>{$nomJeu}</h5></td>
+                       
+                       </tr>
+EOF;
+
+}}}
+             }
+           }
+         }
 
         }
       }
