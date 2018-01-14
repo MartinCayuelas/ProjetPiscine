@@ -15,7 +15,7 @@ EOF;
 }
 echo <<<EOF
           <div class="card-body">
-                      {$num} Nombre de suivi{$s} <i class=" fa fa-folder"></i>
+                      {$num} suivi{$s} <i class=" fa fa-folder"></i>
           <div class="table-responsive">
             <table class="table table-bordered"  width="100%" cellspacing="0">
                <thead>
