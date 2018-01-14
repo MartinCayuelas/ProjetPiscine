@@ -26,12 +26,11 @@ class Controller {
          */
         if (!Session::is_connected()) {
             Controller::festivalConnect();
-        } else {
-            $tr = ModelReservation:: getTablesReservees(); //nombre de tables reservées
+       } else {
+            $tr = ModelLocaliser:: getPlaceLocaliser();
             $nbE = ModelEditeur::getNbEditeur(); //nombre d'éditeur dans la bdd
             $nbJ = ModelJeux::getNbreJeux(); //nombre de jeux presents au festival
             $tD1 = ModelFestival::getTablesDispo();
-            $tD2 = $tD1 - $tr; //donne le nombres de tables disponibles 
             $c = ModelJeux::getJeuxConcern(); //affiche les jeux a recevoir 
             
             $p = ModelReservation:: getPrixFacture(); //affiche les paiements a venir 
