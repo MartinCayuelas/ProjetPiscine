@@ -179,9 +179,35 @@
               } catch (error) {
                      console.log(error);
             }
-
-           
         </script>
+        
+        
+         <script>
+
+            try {
+            $('.rechercheJ').autocomplete({
+                source: '/view/autocompleteJ.php',
+                minLength: 1
+
+            });
+              } catch (error) {
+                     console.log(error);
+            }
+        </script>
+
+         <script>
+
+            try {
+            $('.rechercheC').autocomplete({
+                source: '/view/autocompleteC.php',
+                minLength: 1
+
+            });
+              } catch (error) {
+                     console.log(error);
+            }
+        </script>
+
 
         <script>
             $('#toggleNavPosition').click(function () {
