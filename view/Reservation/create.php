@@ -18,11 +18,11 @@
                          </br>
                          
                         <label class="card-header" for="nomJeu">Nom Jeu</label>
-                        <input type="text" value="<?php echo $nomJeu ?>" name="nomJeu" id="nomJeux" required=""/>
+                        <input type="text" value="<?php echo $nomJeu ?>" name="nomJeu" class="rechercheJ" id="nomJeux" required=""/>
                          </br>
 
                          <label class="card-header" for="catJeu">Catégorie du Jeu</label>
-                        <input type="text" value="<?php echo $catJeu ?>" name="catJeu" id="catJeu" required=""/>
+                        <input type="text" value="<?php echo $catJeu ?>" name="catJeu" class="rechercheC" id="catJeu" required=""/>
                          </br>
 
                         <label class="card-header" for="nomZone">Zone du jeu</label>
