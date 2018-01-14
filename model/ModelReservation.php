@@ -144,4 +144,26 @@ class ModelReservation {
         $res=$req2->fetchColumn();
         return $res;
     }
+
+     public function getResaByNum($n) {
+        $sql = "SELECT * FROM reservation WHERE numResa=:read1";
+        $req = Model::$pdo->prepare($sql);
+        $values = array(
+            "read1" => $n,
+        );
+        $req->execute($values);
+        $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelReservation');
+        if (empty($tab_prod)) {
+            return false;
+        }
+        return $tab_prod;
+    }
+    public static function CA(){
+         $sql = "SELECT SUM(prixPlaceNego) FROM reservation";
+        $req = Model::$pdo->query($sql);
+        $res=$req->fetchColumn();
+        return $res;
+        
+    }
+    
    }
