@@ -59,20 +59,13 @@
                             <span class="nav-link-text">Reservations</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Suivis">
-                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSuivis" data-parent="#exampleAccordion">
-                            <i class="fa fa-fw fa-folder"></i>
-                            <span class="nav-link-text">Suivis</span>
+                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reservations">
+                        <a class="nav-link" href="index.php?action=listSuivi">
+                            <i class="fa fa-comments-o" aria-hidden="true"></i>
+                            <span class="nav-link-text">Suivis Editeurs</span>
                         </a>
-                        <ul class="sidenav-second-level collapse" id="collapseSuivis">
-                            <li>
-                                <a href="index.php?action=listSuivi">Editeurs</a>
-                            </li>
-                            <li>
-                                <a href="cards.html">Cards</a>
-                            </li>
-                        </ul>
                     </li>
+                   
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Festival">
                         <a class="nav-link" href="index.php?action=listFestival">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -179,6 +172,7 @@
               } catch (error) {
                      console.log(error);
             }
+
         </script>
         
         
@@ -193,6 +187,7 @@
               } catch (error) {
                      console.log(error);
             }
+
         </script>
 
          <script>
@@ -206,6 +201,7 @@
               } catch (error) {
                      console.log(error);
             }
+
         </script>
 
 
