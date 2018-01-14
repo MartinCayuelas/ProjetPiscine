@@ -901,6 +901,30 @@ public function listResa() {
             }
         }
     }
+    public function detailResa() {
+        /*
+         * Fonction pour afficher la liste des éditeurs
+         */
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+            $num = $_GET['num'];
+            $tabR = ModelReservation::getResaByNum($num);
+            $tabC= ModelConcerner::getAllConcerner();
+            $tabJ= ModelJeux::getAllJeux();
+            $tabCat= ModelCategorie::getAllCategorie();
+            $tabL=ModelLocaliser::getAllLocaliser();
+            $tabZ=ModelZone::getAllZone();
+            
+            //$cat = ModelCategorie::getAllCategorie();
+            //$edit = ModelEditeur::getAllEditeurs();
+            
+            $controller = 'Reservation';
+            $view = 'detail';
+            $pagetitle = 'Detail';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
 
     ############Festival#############
      public function listFestival() {
