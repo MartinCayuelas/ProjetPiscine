@@ -1,4 +1,5 @@
 <?php
+<?php
 /* Model */
 require_once File::build_path(array("model", "Model.php"));
 require_once File::build_path(array("model", "ModelUtilisateur.php"));
@@ -774,7 +775,6 @@ public function listResa() {
             }
             /*s'il n'existe pas on enregistre ce nouveau jeu*/
             if ($exist==0){
-
                 $jeu = new ModelJeux(0,$_POST['nomJeu'],0,'0000-00-00',0,$numCat,$numE);
                // print_r($jeu);
                 $jeu->save();
@@ -787,7 +787,6 @@ public function listResa() {
                 $concerner = new ModelConcerner($numR,$numJ, $_POST['nbJeux'],$_POST['recu'],$_POST['retour'],$_POST['don']);
                 $concerner->save();
             }
-
             
             /*test pour savoir si la zone existe*/
             $existZ=0;
@@ -812,7 +811,6 @@ public function listResa() {
                 //print_r($localis);
                 $localis->save();
             }
-
             /*on enregistre la table organiser : lien entre zoe et catégorie si besoin*/
             if ($existCat==0 or $existZ==0){
                 $orga =new ModelOrganiser($numCat,$numZ);
@@ -839,8 +837,6 @@ public function listResa() {
                     $orga->save();
                 }
             }
-
-
             if ($_POST['log']==1){  //si il faut un logement a l'éditeur 
                 $logem= new ModelLogement(0,$_POST['rue'],$_POST['ville'], $_POST['cp'], $_POST['nbChambre'],$_POST['coutNuit']);
                 $logem->save();
@@ -871,7 +867,6 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         } else {
             $numResa = $_GET['num'];
-
             $d2=ModelConcerner::deleteByNumResa($numResa);
             $d3=ModelLoger::deleteByNumResa($numResa);
             $d4=ModelLocaliser::deleteByNumResa($numResa);
@@ -886,7 +881,6 @@ public function listResa() {
             }
         }
     }
-
     ############Festival#############
      public function listFestival() {
         /*
@@ -1063,6 +1057,28 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         }
     }
+
+        public function listJeuxSort() {
+        /*
+         * Fonction pour trier la liste des jeux
+         */
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+            $tab = ModelJeux::getAllJeuxSort();
+             $num = ModelJeux::getNbJeux();
+             $num = $num['total'];
+            if ($num == 1) {
+                $s = "";
+            } else {
+                $s = 's';
+            }
+            $controller = 'Jeux';
+            $view = 'list';
+            $pagetitle = 'Liste des jeux';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
     public static function createJeu() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
@@ -1127,7 +1143,6 @@ public function listResa() {
             }
         }
     }
-
      public function deleteJeux() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -1149,7 +1164,6 @@ public function listResa() {
             }
         }
     }
-
      public function updateJeux() {
         if (!Session::is_connected()) {
             self::festivalConnect();
@@ -1196,7 +1210,6 @@ public function listResa() {
             }
         }
     }
-
     ###################Catégorie####################
     public function listCategorie() {
         /*
@@ -1207,14 +1220,6 @@ public function listResa() {
         } else {
             $cat = ModelCategorie::getAllCategorie();
             $games = ModelJeux::getAllJeux();
-            $num = ModelCategorie::getNbCategorie();
-            $num = $num['totalCategorie'];
-            if ($num == 1) {
-                $s = "";
-            } else {
-                $s = 's';
-            }
-
             $controller = 'Categorie';
             $view = 'list';
             $pagetitle = 'Liste des Catégories';
@@ -1235,7 +1240,7 @@ public function listResa() {
             $titre = 'Ajout d\'une';
             $nom = NULL;
             $code = NULL;
-    
+            
             $controller = 'Categorie';
             $view = 'create';
             $pagetitle = 'Ajouter une catégorie';
@@ -1298,11 +1303,8 @@ public function listResa() {
             $tabC=ModelOrganiser::getAllOrga();
                
             $tabJ=ModelJeux::getAllJeux();
-
             $tabCat=ModelCategorie::getAllCategorie();
-
             $tabConcern=ModelConcerner::getAllConcerner();
-
             $tabLoc=ModelLocaliser::getAllLocaliser();
             $controller = 'Zones';
             $view = 'list';
