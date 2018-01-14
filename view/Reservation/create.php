@@ -2,19 +2,19 @@
     <div class="card-body">
         <div class="card-header text-center"><?php echo $titre; ?> Reservation</div>
 
-        <form method="post" action="index.php?action=<?php echo $action; ?>&numEditeur=<?php echo $numEditeur ?>" >
+        <form method="post" action="index.php?action=<?php echo $action; ?>&numEditeur=<?php echo $numEditeur ?>" name="res" id="res">
             <div class="form-group">
                 <div class="form-row">
 
                     <div class="col-md-12 text-center">
                         <label class="card-header" for="nomEditeur">Nom Editeur</label>
-                        <input type="text" value="<?php echo $nomEditeur ?>" name="nomEditeur" id="nomEditeur" required=""/>
+                        <input type="text" value="<?php echo $nomEditeur ?>" name="nomEditeur" class="rechercheE" id="nomEditeur" required=""/>
                     </div>
 
                     <div class="col-md-12 text-center">
 
-                        <label class="card-header" for="nbJeux">Nombre de jeu</label>
-                        <input type="number" value="<?php echo $nbJeux ?>" name="nbJeux" id="nbJeux"/>
+                        <label class="card-header" for="nbJeux">Nombre d'exemplaires</label>
+                        <input type="number" value="<?php echo $nbJeux ?>" min="1" name="nbJeux" id="nbJeux"/>
                          </br>
                          
                         <label class="card-header" for="nomJeu">Nom Jeu</label>
@@ -48,12 +48,18 @@
 
                     <div class="col-md-12 text-center">
 
-                        <label class="card-header" for="nbPlace">Nombre d'espace</label>
-                        <input type="number" value="<?php echo $nbPlace ?>" name="nbPlace" id="nbPlace" required=""/>
+                        <label class="card-header" for="nbPlace">Nombre d'espaces</label>
+                        <input type="number" value="<?php echo $nbPlace ?>" min="1" name="nbPlace" id="nbPlace" required=""/>
+                        <button class="btn  btn-secondary " onclick="calcul();">Calculer Prix
+                        </button>
                         </br>
+                        
+                        
+                        
                         <label class="card-header" for="prix">Prix réservation</label>
-                        <input type="number" value="<?php echo $prixPlaceNego ?>" name="prix" id="prix"/>
-                    
+                        <input type="number" value="<?php echo $prixPlaceNego ?>"  min="0" name="prix" id="prix" />
+                        
+                        
 
                         </br>
                         <label class="card-header" for="commentaire">Informations spécifiques</label>
@@ -129,6 +135,21 @@
 </form>
 </div>
 
+<!-- Le JS -->
+<!-- Le JS -->
+                        <script type="text/javascript">
+                             
+                            function calcul() { // La fonction
+                            var prixB = 15;
+                              var place = element = document.getElementById("nbPlace").value;
+                             
+                              prix = prixB * place;
+                                 document.getElementById("prix").value = prix;
+                            }
+                        
+                               
+                         
 
+                        </script>
 
 
