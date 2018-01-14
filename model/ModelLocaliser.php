@@ -45,6 +45,7 @@ class ModelLocaliser {
                 'place' => $this->nbPlace,
                 
             );
+            print_r($values);
             return $req->execute($values);
         } catch (PDOException $e) {
             return false;
@@ -88,6 +89,26 @@ class ModelLocaliser {
             "read5" => $num,
         );
         return $req->execute($values);
+    }
+
+    public function getAllLocaliser() {
+        $sql = "SELECT * FROM localiser";
+        $req = Model::$pdo->query($sql);
+        $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelLocaliser');
+        if (empty($tab_prod)) {
+            return false;
+        }
+        return $tab_prod;
+    }
+
+      public function getPlaceLocaliser() {
+        $sql = "SELECT nbPlace FROM localiser";
+        $req = Model::$pdo->query($sql);
+        $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelLocaliser');
+        if (empty($tab_prod)) {
+            return false;
+        }
+        return $tab_prod;
     }
    
 }
