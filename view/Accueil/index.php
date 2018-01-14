@@ -20,7 +20,8 @@
                       $nb=$r->getNbPlace();
                       $totalnb=$totalnb+$nb;
                     }
-                    echo $tD1-$totalnb
+                    $totalTab=$totalnb/2;
+                    echo $tD1-$totalTab
 
                      ?></div>
                   </div>
@@ -44,7 +45,7 @@
                       $nb=$r->getNbPlace();
                       $totalnb=$totalnb+$nb;
                     }
-                    echo $totalnb
+                    echo $totalnb/2
 
                      ?></div>
                   </div>
