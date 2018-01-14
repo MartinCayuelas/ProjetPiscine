@@ -219,8 +219,8 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeurs();
-             $numE = ModelEditeur::getNbEditeurs();
-             $num = $numE['totalEditeur'];
+             $num = ModelEditeur::getNbEditeurs();
+             $num = $num['total'];
             if ($num == 1) {
                 $s = "";
             } else {
@@ -240,8 +240,8 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeursSort();
-             $numE = ModelEditeur::getNbEditeurs();
-             $num = $numE['totalEditeur'];
+             $num = ModelEditeur::getNbEditeurs();
+             $num = $num['total'];
             if ($num == 1) {
                 $s = "";
             } else {
@@ -261,8 +261,8 @@ class Controller {
             Controller::FestivalConnect();
         } else {
             $tab = ModelEditeur::getAllEditeursSortVille();
-              $numE = ModelEditeur::getNbEditeurs();
-             $num = $numE['totalEditeur'];
+              $num = ModelEditeur::getNbEditeurs();
+             $num = $num['total'];
             if ($num == 1) {
                 $s = "";
             } else {
@@ -803,6 +803,7 @@ public function listResa() {
                 $zon->save();
                 $numZ=ModelZone::getDerZone();
                 $localis= new ModelLocaliser($numZ,$numR,$_POST['nbPlace']);
+                //print_r($localis);
                 $localis->save();
             }
             elseif($existZ==1){
