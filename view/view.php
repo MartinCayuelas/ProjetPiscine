@@ -203,6 +203,22 @@
             }
 
         </script>
+        
+        <script>
+
+            try {
+            $('.rechercheZ').autocomplete({
+                source: '/ProjetPiscineAuto/view/autocompleteZ.php',
+                minLength: 1
+
+            });
+              } catch (error) {
+                     console.log(error);
+            }
+
+        </script>
+
+         <script>
 
 
         <script>
