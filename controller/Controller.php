@@ -1207,6 +1207,14 @@ public function listResa() {
         } else {
             $cat = ModelCategorie::getAllCategorie();
             $games = ModelJeux::getAllJeux();
+            $num = ModelCategorie::getNbCategorie();
+            $num = $num['totalCategorie'];
+            if ($num == 1) {
+                $s = "";
+            } else {
+                $s = 's';
+            }
+
             $controller = 'Categorie';
             $view = 'list';
             $pagetitle = 'Liste des Catégories';
@@ -1227,7 +1235,7 @@ public function listResa() {
             $titre = 'Ajout d\'une';
             $nom = NULL;
             $code = NULL;
-            
+    
             $controller = 'Categorie';
             $view = 'create';
             $pagetitle = 'Ajouter une catégorie';
