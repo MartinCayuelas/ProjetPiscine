@@ -105,7 +105,7 @@ EOF;
                                 <input type="hidden" name="codeCategorie" value="" />
                                 <input type="hidden" name="numEditeur" value="" />
                                 
-                                <br>
+                              
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
                                
