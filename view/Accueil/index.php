@@ -7,7 +7,7 @@
             <!-- infos importantes-->
           <div class="card mb-3">
             <div class="card-header">
-              <i class="fa fa-bell-o"></i> Données importantes Lol</div>
+              <i class="fa fa-bell-o"></i> Données importantes </div>
             <div class="list-group list-group-flush small">
               <a class="list-group-item list-group-item-action" href="#">
                 <div class="espace">
@@ -85,12 +85,12 @@
          
           
                echo <<< EOF
-               <div class="list-group list-group-flush small">
+               <div class="list-group list-group-flush">
               <a class="list-group-item list-group-item-action" href="#">
                 <div class="media">
                   <div class="media-body">
                     <strong>{$Ed}</strong>
-                    <div class="text-muted smaller">Somme : {$pV}</div>
+                    <div class="text-muted ">Somme : {$pV} €</div>
                   </div>
                 </div>
               </a>
@@ -126,12 +126,12 @@ echo '<div>';?>
          
           
                echo <<< EOF
-               <div class="list-group list-group-flush small">
+               <div class="list-group list-group-flush">
               <a class="list-group-item list-group-item-action" href="#">
                 <div class="media">
                   <div class="media-body">
                     <strong>{$eR1}</strong> 
-                    <div class="text-muted smaller">Jeu : {$jR1}</div>
+                    <div class="text-muted ">Jeu : {$jR1}</div>
                   </div>
                 </div>
               </a>
