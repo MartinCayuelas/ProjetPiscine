@@ -73,7 +73,7 @@ EOF;
                                 <input type="hidden" name="codeCategorie" value="{$categorie}" />
                                 <input type="hidden" name="numEditeur" value="{$editeur}" />
                                 
-                                <br>
+                              
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
                                
