@@ -2,16 +2,25 @@
           <canvas id="myAreaChart" width="0%" height="0"></canvas>
       </div>
 
-            <!-- infos importantes-->
+          <!-- infos importantes-->
           <div class="card mb-3">
             <div class="card-header">
-              <i class="fa fa-bell-o"></i> Données inportantes</div>
+              <i class="fa fa-bell-o"></i> Données importantes Lol</div>
             <div class="list-group list-group-flush small">
               <a class="list-group-item list-group-item-action" href="#">
                 <div class="espace">
                   <div class="media-body">
                    <span class="esp"> <strong>Tables disponibles : </strong></span>
-                    <div class="text-muted smaller"><?php echo $tD2 ?></div>
+                    <div class="text-muted smaller"><?php 
+
+                    $totalnb=0;
+                    foreach ($tr as $r) {
+                      $nb=$r->getNbPlace();
+                      $totalnb=$totalnb+$nb;
+                    }
+                    echo $tD1-$totalnb
+
+                     ?></div>
                   </div>
                 </div>
               </a>
@@ -27,7 +36,15 @@
                 <div class="espace">
                   <div class="media-body">
                     <span class="esp"><strong>Tables réservées :</strong></span>
-                    <div class="text-muted smaller"><?php echo $tr ?></div>
+                    <div class="text-muted smaller"><?php 
+                    $totalnb=0;
+                    foreach ($tr as $r) {
+                      $nb=$r->getNbPlace();
+                      $totalnb=$totalnb+$nb;
+                    }
+                    echo $totalnb
+
+                     ?></div>
                   </div>
                 </div>
               </a>

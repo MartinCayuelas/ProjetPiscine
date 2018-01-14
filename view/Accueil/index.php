@@ -13,7 +13,16 @@
                 <div class="espace">
                   <div class="media-body">
                    <span class="esp"> <strong>Tables disponibles : </strong></span>
-                    <div class="text-muted smaller"><?php echo $tD2 ?></div>
+                    <div class="text-muted smaller"><?php 
+
+                    $totalnb=0;
+                    foreach ($tr as $r) {
+                      $nb=$r->getNbPlace();
+                      $totalnb=$totalnb+$nb;
+                    }
+                    echo $tD1-$totalnb
+
+                     ?></div>
                   </div>
                 </div>
               </a>
@@ -29,7 +38,15 @@
                 <div class="espace">
                   <div class="media-body">
                     <span class="esp"><strong>Tables réservées :</strong></span>
-                    <div class="text-muted smaller"><?php echo $tr ?></div>
+                    <div class="text-muted smaller"><?php 
+                    $totalnb=0;
+                    foreach ($tr as $r) {
+                      $nb=$r->getNbPlace();
+                      $totalnb=$totalnb+$nb;
+                    }
+                    echo $totalnb
+
+                     ?></div>
                   </div>
                 </div>
               </a>
@@ -86,6 +103,7 @@ echo '<div>';?>
       </div>
       </div>
       </div>
+    </div>
 
             <!-- Example Social Card-->
             <div class="card mb-3 f"> 
