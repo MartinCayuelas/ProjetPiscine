@@ -287,7 +287,7 @@ class Controller {
             $nom = NULL;
             $ville = NULL;
             $rue = NULL;
-            $cp = NULL;
+            $cp = 00000;
             $controller = 'Editeur';
             $view = 'create';
             $pagetitle = 'Ajouter un editeur';
@@ -566,6 +566,36 @@ class Controller {
             }
         }
     }
+    public function listSuiviReponse() {
+        /*
+         * Fonction pour afficher la liste des suivis
+         */
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+            $num = ModelSuivi::getNbSuivis();
+            $num = $num['totalSuivis'];
+            if ($num == 1) {
+                $s = "";
+            } else {
+                $s = 's';
+            }
+            $tab = ModelSuivi::getSuivisByReponse();
+            $tabEditeur = ModelEditeur::getAllEditeurs();
+             
+            if (empty($tab)) {
+                $controller = 'Suivi';
+                $view = 'listVide';
+                $pagetitle = 'Liste des suivis';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                $controller = 'Suivi';
+                $view = 'list';
+                $pagetitle = 'Liste des suivis';
+                require File::build_path(array("view", "view.php"));
+            }
+        }
+    }
     public static function createSuivi() {
         if (!Session::is_connected()) {
             Controller::festivalConnect();
@@ -725,7 +755,7 @@ public function listResa() {
             $titre = 'Ajout d\'une';
             $numEditeur=NULL;
             $commentaire = NULL;
-            $prixPlaceNego  = NULL;
+            $prixPlaceNego  = 15;
             $etatFact = NULL;
             $retour=NULL;
             $don=NULL;
@@ -735,9 +765,9 @@ public function listResa() {
             $nomZone = NULL;
             $rue = NULL;
             $ville = NULL;
-            $nbPlace=NULL;
+            $nbPlace=1;
             $cp=NULL;
-            $nbJeux =NULL;
+            $nbJeux =1;
             $coutNuit=NULL;
             $nbChambre=NULL;
             $frais=NULL;
@@ -1118,7 +1148,7 @@ public function listResa() {
             $titre = 'Ajout d\'un';
             $num=NULL;
             $nom = NULL;
-            $nbjoueurs = NULL;
+            $nbjoueurs = 1;
             $dates = NULL;
             $duree = NULL;
             $editeur = NULL;
