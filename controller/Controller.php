@@ -693,6 +693,8 @@ public function listResa() {
             $tabC =ModelConcerner::getAllConcerner();
             $tabJ= ModelJeux::getAllJeux();
             $tabE =ModelEditeur::getAllEditeurs();
+            $chiffre = ModelReservation::CA();
+            
    
             if (empty($tab)) {
                 $controller = 'Reservation';
@@ -909,7 +911,8 @@ public function listResa() {
             Controller::FestivalConnect();
         } else {
             $num = $_GET['num'];
-            $tabR = ModelReservation::getResaByNum($num);
+            $tabE=ModelEditeur::getEditeurById($num);
+            $tabR = ModelReservation::getAllReservations();
             $tabC= ModelConcerner::getAllConcerner();
             $tabJ= ModelJeux::getAllJeux();
             $tabCat= ModelCategorie::getAllCategorie();
@@ -925,7 +928,6 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         }
     }
-
     ############Festival#############
      public function listFestival() {
         /*
