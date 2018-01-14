@@ -21,13 +21,22 @@ foreach ($tabZ as $k) {
     $num= htmlspecialchars($k->getNumZone());
     $nom = htmlspecialchars($k->getNomZone());
 
+    $nbJ=0;
+    foreach($tabLoc as $lo) {
+      if ($lo->getNumZone() == $num){
+        $nbJ = $nbJ+1;
+      }
+    }
+  
+   
+
     echo <<<EOF
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered bordertable">
                <thead>
                 <tr>
-                  <th class="th Zone text-center" ><h2>{$nom}
+                  <th class="th Zone text-center" ><h2>{$nom}  <h5 class="fa fa-fort-awesome"> ( {$nbJ} ) </h5>
                       
  
 EOF;
