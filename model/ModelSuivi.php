@@ -122,7 +122,18 @@ class ModelSuivi {
         return $req->execute($values);
     }
 
-    
+    public function getNbSuivis() {
+
+        $sql = "SELECT COUNT(*) AS totalSuivis FROM suivi";
+        $req = Model::$pdo->query($sql);
+        $tab_prod = $req->FETCH();
+
+
+        if (empty($tab_prod)) {
+            return false;
+        }
+        return $tab_prod;
+    }
     
     
 }
