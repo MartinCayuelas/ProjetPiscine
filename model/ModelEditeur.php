@@ -85,7 +85,7 @@ class ModelEditeur {
     }
     public function getNbEditeurs() {
 
-        $sql = "SELECT COUNT(*) AS totalEditeurs FROM editeur";
+        $sql = "SELECT COUNT(*) AS total FROM editeur";
         $req = Model::$pdo->query($sql);
         $tab_prod = $req->FETCH();
 
