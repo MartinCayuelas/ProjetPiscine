@@ -172,7 +172,7 @@
 
             try {
             $('.rechercheE').autocomplete({
-                source: '/ProjetPiscineAuto/view/autocompleteE.php',
+                source: '/view/autocompleteE.php',
                 minLength: 1
 
             });
@@ -180,13 +180,7 @@
                      console.log(error);
             }
 
-            /*$(function(){ 
-                $("#rechercheE").on('input', function() {
-                    $("#rechercheE").autocomplete({source: '/ProjetPiscineAuto/view/autocompleteE.php?term='+$("#rechercheE").val()});
-                });
-
-
-            });*/
+           
         </script>
 
         <script>
