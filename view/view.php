@@ -30,7 +30,7 @@
                 <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Editeur">
                         <a class="nav-link" href="index.php?action=listEditeur">
-                            <i class="fa fa-user-o" aria-hidden="true"></i>
+                            <i class="fa fa fa-address-book-o" aria-hidden="true"></i>
                             <span class="nav-link-text">Editeurs</span>
                         </a>
                     </li>
@@ -46,7 +46,7 @@
                             <span class="nav-link-text">Catégories</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Zones">
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Categories">
                         <a class="nav-link" href="index.php?action=listZone">
                             <i class="fa fa-window-maximize" aria-hidden="true"></i>
                             <span class="nav-link-text">Zones</span>
@@ -59,20 +59,13 @@
                             <span class="nav-link-text">Reservations</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Suivis">
-                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSuivis" data-parent="#exampleAccordion">
-                            <i class="fa fa-fw fa-folder"></i>
-                            <span class="nav-link-text">Suivis</span>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reservations">
+                        <a class="nav-link" href="index.php?action=listSuivi">
+                            <i class="fa fa-comments-o" aria-hidden="true"></i>
+                            <span class="nav-link-text">Suivis Editeurs</span>
                         </a>
-                        <ul class="sidenav-second-level collapse" id="collapseSuivis">
-                            <li>
-                                <a href="index.php?action=listSuivi">Editeurs</a>
-                            </li>
-                            <li>
-                                <a href="cards.html">Cards</a>
-                            </li>
-                        </ul>
                     </li>
+                    
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Festival">
                         <a class="nav-link" href="index.php?action=listFestival">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -85,6 +78,9 @@
                             <span class="nav-link-text">Administration</span>
                         </a>
                     </li>
+                    
+                    
+                     
                 </ul>
                 <ul class="navbar-nav sidenav-toggler">
                     <li class="nav-item">
@@ -102,6 +98,7 @@
                     </li>
                 </ul>
             </div>
+            
         </nav>
         <div class="content-wrapper">
             <div class="container-fluid">
@@ -116,10 +113,7 @@
         </div>
 
 
-        <footer>
-
-
-        </footer>
+        
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fa fa-angle-up"></i>
@@ -181,5 +175,6 @@
         </script>
     </div>
 </body>
+       
 
 </html>
