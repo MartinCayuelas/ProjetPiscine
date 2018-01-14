@@ -12,6 +12,13 @@ if (isset($_SESSION['login']) && Session::is_admin()) {
              
 EOF;
 }
+
+echo <<< EOF
+     <div class="card-body">
+        Total des recettes : {$chiffre} €
+      </div>
+        
+EOF;
 echo <<<EOF
         <div class="card-body">
           <div class="table-responsive">
@@ -82,6 +89,7 @@ EOF;
                                 <input type="hidden" name="nomEditeur" value="{$nomE}" />
                                 <input type="hidden" name="nomJeu" value="{$nomJ}" />
                                 
+
 
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
