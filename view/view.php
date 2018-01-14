@@ -30,7 +30,7 @@
                 <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Editeur">
                         <a class="nav-link" href="index.php?action=listEditeur">
-                            <i class="fa fa fa-address-book-o" aria-hidden="true"></i>
+                            <i class="fa fa-user-o" aria-hidden="true"></i>
                             <span class="nav-link-text">Editeurs</span>
                         </a>
                     </li>
@@ -46,26 +46,33 @@
                             <span class="nav-link-text">Catégories</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Categories">
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Zones">
                         <a class="nav-link" href="index.php?action=listZone">
                             <i class="fa fa-window-maximize" aria-hidden="true"></i>
                             <span class="nav-link-text">Zones</span>
                         </a>
                     </li>
-                    
+
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reservations">
                         <a class="nav-link" href="index.php?action=listResa">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                             <span class="nav-link-text">Reservations</span>
                         </a>
                     </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Reservations">
-                        <a class="nav-link" href="index.php?action=listSuivi">
-                            <i class="fa fa-comments-o" aria-hidden="true"></i>
-                            <span class="nav-link-text">Suivis Editeurs</span>
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Suivis">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseSuivis" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-folder"></i>
+                            <span class="nav-link-text">Suivis</span>
                         </a>
+                        <ul class="sidenav-second-level collapse" id="collapseSuivis">
+                            <li>
+                                <a href="index.php?action=listSuivi">Editeurs</a>
+                            </li>
+                            <li>
+                                <a href="cards.html">Cards</a>
+                            </li>
+                        </ul>
                     </li>
-                    
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Festival">
                         <a class="nav-link" href="index.php?action=listFestival">
                             <i class="fa fa-info-circle" aria-hidden="true"></i>
@@ -78,9 +85,6 @@
                             <span class="nav-link-text">Administration</span>
                         </a>
                     </li>
-                    
-                    
-                     
                 </ul>
                 <ul class="navbar-nav sidenav-toggler">
                     <li class="nav-item">
@@ -90,15 +94,14 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ml-auto">
-                
-                  
+
+
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
                             <i class="fa fa-fw fa-sign-out"></i>Deconnexion</a>
                     </li>
                 </ul>
             </div>
-            
         </nav>
         <div class="content-wrapper">
             <div class="container-fluid">
@@ -113,7 +116,10 @@
         </div>
 
 
-        
+        <footer>
+
+
+        </footer>
         <!-- Scroll to Top Button-->
         <a class="scroll-to-top rounded" href="#page-top">
             <i class="fa fa-angle-up"></i>
@@ -136,11 +142,11 @@
                 </div>
             </div>
         </div>
-        
-        
-         
-        
-        
+
+
+
+
+
         <!-- Bootstrap core JavaScript-->
         <script src="./vendor/jquery/jquery.min.js"></script>
         <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -153,9 +159,35 @@
         <!-- Custom scripts for all pages-->
         <script src="./js/sb-admin.min.js"></script>
         <!-- Custom scripts for this page-->
-        <script src="./js/sb-admin-datatables.min.js"></script>
-        <script src="./js/sb-admin-charts.min.js"></script>
+        <!--<script src="./js/sb-admin-datatables.min.js"></script>
+        <script src="./js/sb-admin-charts.min.js"></script>-->
 
+        <link rel="stylesheet" href="./jquery/jquery-ui.css" />
+        <script src="./jquery/jquery-1.9.1.js"></script>
+        <script src="./jquery/jquery-ui.js"></script>
+
+
+
+        <script>
+
+            try {
+            $('.rechercheE').autocomplete({
+                source: '/ProjetPiscineAuto/view/autocompleteE.php',
+                minLength: 1
+
+            });
+              } catch (error) {
+                     console.log(error);
+            }
+
+            /*$(function(){ 
+                $("#rechercheE").on('input', function() {
+                    $("#rechercheE").autocomplete({source: '/ProjetPiscineAuto/view/autocompleteE.php?term='+$("#rechercheE").val()});
+                });
+
+
+            });*/
+        </script>
 
         <script>
             $('#toggleNavPosition').click(function () {
@@ -173,8 +205,9 @@
             });
 
         </script>
+
+
     </div>
 </body>
-       
 
 </html>
