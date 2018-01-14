@@ -12,7 +12,6 @@ EOF;
 }
 echo <<<EOF
 <div class="card-body">
-
                   {$num} Jeu{$s} <i class=" fa fa-fort-awesome"></i>
         </div>
         <div class="card-body">
@@ -20,7 +19,7 @@ echo <<<EOF
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                <thead>
                 <tr>
-                  <th >Nom du jeu</th>
+                  <th >Nom du jeu <a href="index.php?action=listJeuxSort"><i class="tri fa fa-sort-alpha-asc" aria-hidden="true"></i></th>
                   <th>Joueurs</th>
                   <th>Date de sortie</th>
                   <th>Durée</th>
@@ -28,7 +27,6 @@ echo <<<EOF
                   <th>Editeur</th>
                 </tr>
               </thead>
-
 EOF;
 foreach ($tab as $v) {
     $num = htmlspecialchars($v->getnumJeu());
@@ -50,9 +48,7 @@ foreach ($tab as $v) {
             $editeurNom = htmlspecialchars($c->getNomEditeur());   
         }
     }
-
     
-
     echo <<< EOF
              <tbody>
                 <tr>
@@ -62,7 +58,6 @@ foreach ($tab as $v) {
                   <th>{$duree} min</th>
                   <th>{$categorieNom}</th>
                   <th>{$editeurNom}</th>
-
 EOF;
     if (isset($_SESSION['login']) && Session::is_admin()) {
         echo <<< EOF
