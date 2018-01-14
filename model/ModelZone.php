@@ -42,7 +42,7 @@ class ModelZone {
         return $tab_prod;
     }
     public function getNbZone() {
-        $sql = "SELECT COUNT(*) FROM zones";
+        $sql = "SELECT COUNT(*) AS totalZone FROM zones";
         $req = Model::$pdo->query($sql);
         $tab_prod = $req->FETCH();
         if (empty($tab_prod)) {
@@ -116,6 +116,8 @@ class ModelZone {
         $res=$req->fetchColumn();
         return $res;
     }
+
+
 
    
 }
