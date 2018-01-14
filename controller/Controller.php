@@ -686,10 +686,13 @@ public function listResa() {
         /*
          * Fonction pour afficher la liste des réservations
          */
-        if (!Session::is_connected()) {
+       if (!Session::is_connected()) {
             Controller::FestivalConnect();
         } else {
             $tab = ModelReservation::getAllReservations();
+            $tabC =ModelConcerner::getAllConcerner();
+            $tabJ= ModelJeux::getAllJeux();
+            $tabE =ModelEditeur::getAllEditeurs();
    
             if (empty($tab)) {
                 $controller = 'Reservation';
