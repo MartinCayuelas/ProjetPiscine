@@ -26,7 +26,7 @@
                          </br>
 
                         <label class="card-header" for="nomZone">Zone du jeu</label>
-                        <input type="text" value="<?php echo $nomZone ?>" name="nomZone" id="nomZone" required=""/>
+                        <input type="text" value="<?php echo $nomZone ?>" name="nomZone" class="rechercheZ" id="nomZone" required=""/>
                     </br>
                         <label class="card-header" for="recu">Jeu Reçu</label>
                         <input type="radio" id="recu" name="recu" value="1">Oui
