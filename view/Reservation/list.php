@@ -5,19 +5,6 @@ echo <<< EOF
         <div class="card-header">
           <i class="fa fa-table"></i> Liste des réservations</div>
 EOF;
-$chiffre = 0;
-foreach ($tab as $c){
-    
-    $chiffre = $chiffre + htmlspecialchars($c->getPrixPlaceNego());
-}
-
-echo <<< EOF
-     <div class="card-body">
-        Total des recettes : {$chiffre} €
-      </div>
-        
-EOF;
-
 
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
@@ -31,8 +18,9 @@ echo <<<EOF
             <table class="table table-bordered" width="100%" cellspacing="0">
                <thead>
                 <tr>
+                
+                  <th>Editeur</th>
                   <th >Date</th>
-                  
                   <th>Prix</th>
                   <th>Statut</th>
                    <th>Facture</th>
@@ -49,7 +37,19 @@ foreach ($tab as $v) {
     $facture = htmlspecialchars($v->getEtatFacture());
     $com = htmlspecialchars($v->getCommentaire());
 
+    foreach ($tabC as $c) {
+      if ($num==$c->getNumResa()){
+        $numJ=htmlspecialchars($c->getNumJeux());
 
+        foreach ($tabJ as $j) {
+          if ($numJ==$j->getnumJeu()){
+            $numE=htmlspecialchars($j->getNumEditeur());
+
+          foreach ($tabE as $e) {
+            if ($numE==$e->getnumEditeur()){
+              $nomE=htmlspecialchars($e->getNomEditeur());
+
+        
 
 
 
@@ -57,6 +57,7 @@ foreach ($tab as $v) {
 
              <tbody>
                 <tr>
+                  <th>{$nomE}</th>
                   <th>{$date}</th>
                   <th>{$prix}</th>
                    <th>{$statut}</th>
@@ -87,7 +88,13 @@ EOF;
                        
                        
 EOF;
+            }
+          }
+        }
+      }
     }
+  }
+}
 
     echo <<< EOF
 
