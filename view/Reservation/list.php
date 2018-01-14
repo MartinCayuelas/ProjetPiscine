@@ -58,7 +58,7 @@ foreach ($tab as $v) {
 
              <tbody>
                 <tr>
-                  <th><a class="nav-link linkCate" href="index.php?action=detailResa&num={$num}">{$nomE}</a></th>
+                  <th><a class="nav-link linkCate" href="index.php?action=detailResa&num={$numE}">{$nomE}</a></th>
                   <th>{$nomJ}</th>
                   <th>{$date}</th>
                   <th>{$prix}</th>

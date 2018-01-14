@@ -31,48 +31,52 @@ echo <<<EOF
 
 EOF;
 
-  foreach ($tabR as $v) {
-    $et=htmlspecialchars($v-> getEtatFacture());
-    $pP=htmlspecialchars($v-> getPrixPlaceNego());
-    $numR=htmlspecialchars($v-> getNumResa());
+  foreach ($tabE as $v) {
+    $numE=$v->getNumEditeur();
+    
+    foreach ($tabJ as $j) {
+      if ($numE== $j->getNumEditeur()){
+        $nomJ=htmlspecialchars($j-> getNomJeu());
+        $cat=htmlspecialchars($j-> getcodeCategorie());
+        $numJ=htmlspecialchars($j-> getNumJeu());
+        
+        foreach ($tabCat as $tc) {
+          if ($cat== $tc->getCodeCategorie()){
+            $nomCat=htmlspecialchars($tc-> getNomCategorie());
 
-    foreach ($tabC as $c) {
-      if ($numR== $c->getNumResa()){
-          $recu=htmlspecialchars($c-> getRecu());
-          if ($recu==1){
-            $rec="oui";
-          }
-          else{
-            $rec="non";
-          }
-          $retour=htmlspecialchars($c-> getRetour());
-          if ($retour==1){
-            $ret="oui";
-          }
-          else{
-            $ret="non";
-          }
-          $numJ=htmlspecialchars($c-> getNumJeux());
+            foreach ($tabC as $c) {
+              if ($numJ== $c-> getNumJeux()){
+              $recu=htmlspecialchars($c-> getRecu());
+              if ($recu==1){
+                $rec="oui";
+              }
+              else{
+                $rec="non";
+              }
+            $retour=htmlspecialchars($c-> getRetour());
+            if ($retour==1){
+              $ret="oui";
+            }
+            else{
+              $ret="non";
+            }
+            $numR=htmlspecialchars($c->getNumResa());
 
-         foreach ($tabJ as $j) {
-            if ($numJ== $j->getNumJeu()){
-              $nomJ=htmlspecialchars($j-> getNomJeu());
-              $cat=htmlspecialchars($j-> getcodeCategorie());
-
-            foreach ($tabCat as $tc) {
-              if ($cat== $tc->getCodeCategorie()){
-                $nomCat=htmlspecialchars($tc-> getNomCategorie());
-
-              foreach ($tabL as $l) {
-              if ($numR== $l->getNumResa()){
+            foreach ($tabL as $l) {
+              if($numR== $l->getNumResa()){
                 $numZ=htmlspecialchars($l-> getNumZone());
                 $nbP=htmlspecialchars($l-> getNbPlace());
 
                 foreach ($tabZ as $z) {
-              if ($numZ== $z->getNumZone()){
-                $nomZ=htmlspecialchars($z-> getNomZone());
+                  if ($numZ== $z->getNumZone()){
+                    $nomZ=htmlspecialchars($z-> getNomZone());
 
-    
+                    foreach ($tabR as $r) {
+                      if ($numR== $r->getNumResa()){
+                        $et=htmlspecialchars($r-> getEtatFacture());
+                        $pP=htmlspecialchars($r-> getPrixPlaceNego());
+                        $numR=htmlspecialchars($r-> getNumResa());
+                     
 
     echo <<< EOF
              <tbody>
@@ -118,7 +122,8 @@ EOF;
                       
 EOF;
   }
-}}}}}}}}}}
+}}}}}}}}}} }  }
+                  
 
    
 echo "</div>";
