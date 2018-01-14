@@ -83,8 +83,6 @@ EOF;
                                 <input type="hidden" name="nomJeu" value="{$nomJ}" />
                                 
 
-
-                                <br>
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
                                
