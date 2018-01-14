@@ -11,7 +11,11 @@ if (isset($_SESSION['login']) && Session::is_admin()) {
              
 EOF;
 }
-
+echo <<<EOF
+<div class="card-body">
+                  {$num} Zone{$s} <i class=" fa fa-window-maximize"></i>
+        </div>
+EOF;
 
 foreach ($tabZ as $k) {
     $num= htmlspecialchars($k->getNumZone());
