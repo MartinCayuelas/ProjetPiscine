@@ -12,6 +12,18 @@ if (isset($_SESSION['login']) && Session::is_admin()) {
              
 EOF;
 }
+
+$chiffre = 0;
+foreach ($tab as $c){
+    
+    $chiffre = $chiffre + htmlspecialchars($c->getPrixPlaceNego());
+}
+echo <<< EOF
+     <div class="card-body">
+        Total des recettes : {$chiffre} €
+      </div>
+        
+EOF;
 echo <<<EOF
         <div class="card-body">
           <div class="table-responsive">
