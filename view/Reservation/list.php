@@ -18,11 +18,11 @@ echo <<<EOF
             <table class="table table-bordered" width="100%" cellspacing="0">
                <thead>
                 <tr>
-                
+
                   <th>Editeur</th>
+                  <th>Jeux</th>
                   <th >Date</th>
                   <th>Prix</th>
-                  <th>Statut</th>
                    <th>Facture</th>
                     <th>Commentaire</th>
                 </tr>
@@ -44,6 +44,7 @@ foreach ($tab as $v) {
         foreach ($tabJ as $j) {
           if ($numJ==$j->getnumJeu()){
             $numE=htmlspecialchars($j->getNumEditeur());
+            $nomJ=htmlspecialchars($j->getNomJeu());
 
           foreach ($tabE as $e) {
             if ($numE==$e->getnumEditeur()){
@@ -58,9 +59,9 @@ foreach ($tab as $v) {
              <tbody>
                 <tr>
                   <th>{$nomE}</th>
+                  <th>{$nomJ}</th>
                   <th>{$date}</th>
                   <th>{$prix}</th>
-                   <th>{$statut}</th>
                    <th>{$facture}</th>
                    <th>{$com}</th>
                    
@@ -78,6 +79,8 @@ EOF;
                                 <input type="hidden" name="prixPlaceNego" value="{$prix}" />
                                 <input type="hidden" name="statut" value="{$statut}" />
                                 <input type="hidden" name="etatFacture" value="{$facture}" />
+                                <input type="hidden" name="nomEditeur" value="{$nomE}" />
+                                <input type="hidden" name="nomJeu" value="{$nomJ}" />
                                 
 
 
