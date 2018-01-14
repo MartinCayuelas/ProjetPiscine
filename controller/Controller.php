@@ -653,6 +653,7 @@ class Controller {
             $relance = $_POST['relance'];
             $reponse = $_POST['reponse'];
             $numEditeur = $_POST['numEditeur'];
+            $nom=ModelEditeur::getNomEditByNum($_POST['numEditeur']);
             $ref = $_POST['ref'];
             $controller = 'Suivi';
             $view = 'create';
