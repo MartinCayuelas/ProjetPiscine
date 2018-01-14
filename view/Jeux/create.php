@@ -24,7 +24,7 @@
 
 
                             <label class="card-header" for="codeCategorie">Catégorie du jeu</label>
-                            <input type="text" value="<?php echo $categorie ?>"placeholder="categorie" name="categorie" id="codeCategorie"/>
+                            <input type="text" value="<?php echo $categorie ?>"placeholder="categorie" class="rechercheC" name="categorie" id="codeCategorie"/>
 
 
                             <label class="card-header" for="editeur">Editeur du jeu</label>
