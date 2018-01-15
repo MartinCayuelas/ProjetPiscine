@@ -36,6 +36,7 @@ echo <<<EOF
                 </tr>
               </thead>
 EOF;
+//on recupere les infos de l'utilisateur
 foreach ($tab as $v) {
 
     $vLogin = htmlspecialchars($v->getLogin());
