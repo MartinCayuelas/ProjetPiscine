@@ -82,6 +82,8 @@ EOF;
                                 <input type="hidden" name="numEditeur" value="{$numE}" />
                                 
 
+
+                              
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
                                
