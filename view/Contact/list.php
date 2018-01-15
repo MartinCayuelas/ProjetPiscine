@@ -26,7 +26,7 @@ echo <<<EOF
                 </tr>
               </thead>
 EOF;
-
+//on récupere les donnéesdes contacts qui sont dans $tab
 foreach ($tab as $v) {
 
     $num = htmlspecialchars($v->getNumContact());
