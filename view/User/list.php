@@ -96,6 +96,7 @@ EOF;
                                 
 
 
+                                
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
                                
