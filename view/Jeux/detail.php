@@ -27,7 +27,7 @@ echo <<<EOF
               </thead>
 
 EOF;
-
+//on recupere les données des jeux
    foreach ($tab as $v) {
     $num = htmlspecialchars($v->getnumJeu());
     $nom = htmlspecialchars($v->getNomJeu());
@@ -37,12 +37,14 @@ EOF;
     $categorie = htmlspecialchars($v->getcodeCategorie());
     $editeur = htmlspecialchars($v->getnumEditeur());
     
+    //on récupére le nom de la catégorie du jeu dans $cat (contient les catégories)
     foreach ($cat as $c){
         if ($c->getCodeCategorie() == $categorie){
             $categorieNom = htmlspecialchars($c->getNomCategorie());   
         }
     }
     
+    //on récupére le nom de l'editeur du jeu dans $edit (contient les editeurs) 
     foreach ($edit as $c){
         if ($c->getNumEditeur() == $editeur){
             $editeurNom = htmlspecialchars($c->getNomEditeur());   
