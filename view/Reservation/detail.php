@@ -79,14 +79,17 @@ EOF;
                         $pP=htmlspecialchars($r-> getPrixPlaceNego());
                         $numR=htmlspecialchars($r-> getNumResa());
 
+                        $o=0;
                         foreach ($tabLog as $tl) {
                           $numL=htmlspecialchars($tl-> getNumLogement());
                           if ($numR== $tl->getNumResa()){
+                            $o=1;
+                          }
+                          }
+                          if ($o==1){
                             $loger="oui";
                           }
-                          else{
-                            $loger="non";
-                          }
+                          else{$loger="non";}
 
     echo <<< EOF
              <tbody>
@@ -145,7 +148,7 @@ EOF;
                       
 EOF;
   }
-}}}}}}}}}} }  }}
+}}}}}}}}}} }  }
                   
 
    
