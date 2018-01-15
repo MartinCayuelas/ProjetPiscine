@@ -1,5 +1,3 @@
-
-
 <div class="card mb-3 v">
           <canvas id="myAreaChart" width="0%" height="0"></canvas>
       </div>
@@ -101,10 +99,11 @@
 EOF;
 }
 echo '<div>';?>
+
       </div>
       </div>
       </div>
-    </div>
+      </div>
 
             <!-- Example Social Card-->
             <div class="card mb-3 f"> 
@@ -141,9 +140,8 @@ echo '<div>';?>
                 
 EOF;
 }
-echo '<div>';?>         
+echo '<div>';?>      
            
       </div>
     </div>
   </div>
-</div>
