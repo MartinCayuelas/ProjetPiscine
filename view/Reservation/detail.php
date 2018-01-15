@@ -2,7 +2,7 @@
 echo <<< EOF
  <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-th"></i> Détail du jeu </div>
+          <i class="fa fa-th"></i> Détail de la reservation </div>
 
 <div class="card-header">
    
@@ -26,6 +26,7 @@ echo <<<EOF
                   <th>Prix réservation</th>
                   <th>Reçu</th>
                   <th>Retour</th>
+                  <th>Logement</th>
                 </tr>
               </thead>
 
@@ -66,6 +67,7 @@ EOF;
               if($numR== $l->getNumResa()){
                 $numZ=htmlspecialchars($l-> getNumZone());
                 $nbP=htmlspecialchars($l-> getNbPlace());
+                $nbP=$nbP/2;
 
                 foreach ($tabZ as $z) {
                   if ($numZ== $z->getNumZone()){
@@ -76,7 +78,15 @@ EOF;
                         $et=htmlspecialchars($r-> getEtatFacture());
                         $pP=htmlspecialchars($r-> getPrixPlaceNego());
                         $numR=htmlspecialchars($r-> getNumResa());
-                     
+
+                        foreach ($tabLog as $tl) {
+                          $numL=htmlspecialchars($tl-> getNumLogement());
+                          if ($numR== $tl->getNumResa()){
+                            $loger="oui";
+                          }
+                          else{
+                            $loger="non";
+                          }
 
     echo <<< EOF
              <tbody>
@@ -89,8 +99,21 @@ EOF;
                   <th>{$pP}</th>
                   <th>{$rec}</th>
                   <th>{$ret}</th>
+EOF;
+          if ($loger=="oui"){ 
+       echo <<< EOF
+                  <th><a class="nav-link linkCate" href="index.php?action=detailLogement&num={$numL}">{$loger}</a></th>
 
 EOF;
+
+    }else{ 
+
+ echo <<< EOF
+                  <th>{$loger}</th>
+
+EOF;
+}
+
     if (isset($_SESSION['login']) && Session::is_admin()) {
         echo <<< EOF
                    
@@ -105,7 +128,7 @@ EOF;
                                 <input type="hidden" name="codeCategorie" value="" />
                                 <input type="hidden" name="numEditeur" value="" />
                                 
-                              
+                                <br>
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
                                
@@ -122,7 +145,7 @@ EOF;
                       
 EOF;
   }
-}}}}}}}}}} }  }
+}}}}}}}}}} }  }}
                   
 
    
