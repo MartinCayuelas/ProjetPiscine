@@ -29,6 +29,7 @@ echo <<<EOF
                 </tr>
               </thead>
 EOF;
+//on recupere les infos des resas
 foreach ($tab as $v) {
 
     $num = htmlspecialchars($v->getNumResa());
@@ -38,17 +39,17 @@ foreach ($tab as $v) {
     $facture = htmlspecialchars($v->getEtatFacture());
     $com = htmlspecialchars($v->getCommentaire());
     
-    
+    //on recupere le numjeux pour une resa
     foreach ($tabC as $c) {
       if ($num==$c->getNumResa()){
         $numJ=htmlspecialchars($c->getNumJeux());
       
-
+//on recupere le nom du jeu et le num editeur pour un jeu donné ($tabj tableau des jeux)
         foreach ($tabJ as $j) {
           if ($numJ==$j->getnumJeu()){
             $numE=htmlspecialchars($j->getNumEditeur());
             $nomJ=htmlspecialchars($j->getNomJeu());
-
+//on recupere le nom de l'éditeur ($tabE : tableau des editeurs)
           foreach ($tabE as $e) {
             if ($numE==$e->getnumEditeur()){
               $nomE=htmlspecialchars($e->getNomEditeur());
