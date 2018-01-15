@@ -12,14 +12,14 @@
                   <div class="media-body">
                    <span class="esp"> <strong>Tables disponibles : </strong></span>
                     <div class="text-muted smaller"><?php 
-
+                   //calcul des tables réservées
                     $totalnb=0;
                     foreach ($tr as $r) {
                       $nb=$r->getNbPlace();
                       $totalnb=$totalnb+$nb;
                     }
                     $totalTab=$totalnb/2;
-                    echo $tD1-$totalTab
+                    echo $tD1-$totalTab //affichage des tables dispos
 
                      ?></div>
                   </div>
@@ -38,6 +38,7 @@
                   <div class="media-body">
                     <span class="esp"><strong>Tables réservées :</strong></span>
                     <div class="text-muted smaller"><?php 
+                             //calcul des tables réservées
                     $totalnb=0;
                     foreach ($tr as $r) {
                       $nb=$r->getNbPlace();
@@ -72,6 +73,7 @@
 
 
  <?php 
+           
             foreach ($p as $s) {
 
               $pV = htmlspecialchars($s->getprixPlaceNego()); //cherche prix de la facture 
@@ -105,7 +107,6 @@ echo '<div>';?>
       </div>
       </div>
 
-            <!-- Example Social Card-->
             <div class="card mb-3 f"> 
             </div>
             <!-- jeux a recevoir-->
