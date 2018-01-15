@@ -28,7 +28,7 @@ echo <<<EOF
                 </tr>
               </thead>
 EOF;
-
+//on recupere les infos des suivis
 foreach ($tab as $v) {
         
 
@@ -39,7 +39,7 @@ foreach ($tab as $v) {
     $reponse = htmlspecialchars($v->getReponse());
     
     $numEditeur = htmlspecialchars($v->getNumEditeur());
-    
+ //on recupere le nom d'editeur en fonction num editeur recupere precedemment   
     foreach ($tabEditeur as $e){
         if ($e->getNumEditeur() == $numEditeur){
             $nomEditeur = htmlspecialchars($e->getNomEditeur());
