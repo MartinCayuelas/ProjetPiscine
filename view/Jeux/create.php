@@ -12,7 +12,7 @@
                  
                       <div class="col-md-6">
                             <label class="card-header" for="Nbrejoueurs">Nombre de joueurs</label>
-                            <input type="number" value="<?php echo $nbjoueurs ?>"placeholder="0" name="nbjoueurs" id="Nbrejoueurs"/>
+                            <input type="number" value="<?php echo $nbjoueurs ?>"  min="1" name="nbjoueurs" id="Nbrejoueurs"/>
                         
                        
                             <label class="card-header" for="dateSortie">Date de sortie</label>
@@ -24,11 +24,11 @@
 
 
                             <label class="card-header" for="codeCategorie">Catégorie du jeu</label>
-                            <input type="text" value="<?php echo $categorie ?>"placeholder="categorie" class="rechercheC" name="categorie" id="codeCategorie"/>
+                            <input type="text" value="<?php echo $categorie ?>"placeholder="categorie" class="rechercheC" name="categorie" id="codeCategorie" required/>
 
 
                             <label class="card-header" for="editeur">Editeur du jeu</label>
-                            <input type="text" value="<?php echo $editeur ?>"placeholder="editeur" name="editeur" id="numEditeur"/>
+                            <input type="text" value="<?php echo $editeur ?>"placeholder="editeur" class="rechercheE" name="editeur" id="numEditeur" required/>
                         
                     </div>
                 </div>

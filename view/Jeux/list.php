@@ -2,7 +2,8 @@
 echo <<< EOF
  <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Liste des jeux</div>
+          <i class="fa fa-table"></i> Liste des jeux: {$num} Jeu{$s} <i class=" fa fa-fort-awesome"></i></div> 
+
 EOF;
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
@@ -11,9 +12,6 @@ if (isset($_SESSION['login']) && Session::is_admin()) {
 EOF;
 }
 echo <<<EOF
-<div class="card-body">
-                  {$num} Jeu{$s} <i class=" fa fa-fort-awesome"></i>
-        </div>
         <div class="card-body">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -27,6 +25,7 @@ echo <<<EOF
                   <th>Editeur</th>
                 </tr>
               </thead>
+
 EOF;
 foreach ($tab as $v) {
     $num = htmlspecialchars($v->getnumJeu());
@@ -48,7 +47,9 @@ foreach ($tab as $v) {
             $editeurNom = htmlspecialchars($c->getNomEditeur());   
         }
     }
+
     
+
     echo <<< EOF
              <tbody>
                 <tr>
@@ -58,6 +59,7 @@ foreach ($tab as $v) {
                   <th>{$duree} min</th>
                   <th>{$categorieNom}</th>
                   <th>{$editeurNom}</th>
+
 EOF;
     if (isset($_SESSION['login']) && Session::is_admin()) {
         echo <<< EOF
@@ -73,7 +75,6 @@ EOF;
                                 <input type="hidden" name="codeCategorie" value="{$categorie}" />
                                 <input type="hidden" name="numEditeur" value="{$editeur}" />
                                 
-                              
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
                                
@@ -89,5 +90,10 @@ EOF;
                       
 EOF;
 }
+
+
 echo "</div>";
+echo "</div>";
+echo "</div>";
+
 echo "</div>";
