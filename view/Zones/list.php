@@ -36,7 +36,7 @@ foreach ($tabZ as $k) {
             <table class="table table-bordered bordertable">
                <thead>
                 <tr>
-                  <th class="th Zone text-center" ><h2>{$nom}  <h5 class="fa fa-fort-awesome"> ( {$nbJ} ) </h5>
+                  <th class="th Zone text-center" ><h2>Zone : {$nom}  <h5 class="fa fa-fort-awesome"> ( {$nbJ} ) </h5>
                       
  
 EOF;
@@ -90,7 +90,7 @@ EOF;
 
                          echo <<< EOF
                     <tr>
-                    <th class="th Zone text-center" ><h3>{$nomCa}</h3></th>
+                    <th class="th Zone text-center cateZone" ><h4>Catégorie : {$nomCa}</h4></th>
 EOF;
 
 
@@ -98,7 +98,7 @@ EOF;
 
                echo <<< EOF
                         <tr>
-                       <td class="tdHover text-center"><h5>{$nomJeu}</h5></td>
+                       <td class=" text-center jeuZone"><h5>{$nomJeu}</h5></td>
                        
                        </tr>
 EOF;
