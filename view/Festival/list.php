@@ -50,7 +50,7 @@ EOF;
                                 <input type="hidden" name="nbtables" value="{$nbtables}" />
                                 <input type="hidden" name="prixplacestd" value="{$prixplacestd}" />
                                 
-                             
+                                
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
                                
