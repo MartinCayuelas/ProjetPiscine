@@ -93,6 +93,8 @@ EOF;
                                 <input type="hidden" name="cp" value="{$cp}" />
                                 
 
+
+                             
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
                                

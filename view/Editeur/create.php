@@ -23,7 +23,7 @@
                             </div>
                             <div class="col-md-12">
                             <label class="card-header" for="cp_id"><i class="fa fa-tags" aria-hidden="true"></i> CodePostal</label>
-                            <input type="number" value="<?php echo $cp ?>"placeholder="CodePostal" name="cp" id="cp_id"/>
+                            <input type="number" value="<?php echo $cp ?>" min="1000" name="cp" id="cp_id"/>
                         </div>
                    
                 </div>
