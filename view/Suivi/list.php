@@ -8,7 +8,7 @@ EOF;
 
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
-            <a class="ajout" href="index.php?action=createSuivi"><i class="fa fa-plus-circle" aria-hidden="true"></i>  suivi</a>
+            <a class="ajout" href="index.php?action=createSuivi"><i class="fa fa-plus-circle" aria-hidden="true"></i>  Suivi</a>
              
 EOF;
 }
@@ -23,9 +23,7 @@ echo <<<EOF
                   <th>Premier Contact</th>
                   <th>Relance</th>
                   <th>Réponse <a href="index.php?action=listSuiviReponse"><i class="tri fa fa-sort-alpha-asc" aria-hidden="true"></i></th>
-                  <th>Facture</>
-                  <th>Paiement</>
-                  <th>Remarque</> 
+                  
                   
                 </tr>
               </thead>
@@ -67,7 +65,7 @@ foreach ($tab as $v) {
              <tbody>
                 <tr>
                   
-                  <th>{$nomEditeur}</th>
+                  <th><a class="nav-link linkCate" href="index.php?action=detailResa&num={$numEditeur}">{$nomEditeur}</a></th>
                    <th>{$premier}</th>
                    <th>{$relance}</th>
                    <th>{$reponse}</th>
@@ -108,6 +106,7 @@ EOF;
                                 
 
 
+                               
                                <th class="text-center" > <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-pencil"></i></button></th>   
                             </form>
                                

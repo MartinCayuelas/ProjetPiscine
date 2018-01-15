@@ -9,7 +9,7 @@ EOF;
 
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
-           <a class="ajout" href="index.php?action=createSuivi&numEditeur={$numEditeur}">Ajouter un suivi</a>
+           <a class="ajout" href="index.php?action=createSuivi"><i class="fa fa-plus-circle" aria-hidden="true"></i>  Suivi</a>
              
 EOF;
 }

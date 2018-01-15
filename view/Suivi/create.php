@@ -7,20 +7,20 @@
                 <div class="form-row">
                     <div class="col-md-6">
                         <label class="card-header" for="premierContact">Premier contact</label>
-                        <input type="date" value="<?php echo $premierContact ?>" name="premierContact" id="premierContact" required=""/>
+                        <input type="date" value="<?php echo $premierContact ?>" placeholder="aaaa/mm/jj" name="premierContact" id="premierContact" required=""/>
                     </div>
 
                     <div class="col-md-6">
 
                         <label class="card-header" for="relance">Relance</label>
-                        <input type="date" value="<?php echo $relance ?>" name="relance" id="relance"/>
+                        <input type="date" value="<?php echo $relance ?>" placeholder="aaaa/mm/jj" name="relance" id="relance"/>
 
 
                     </div>
                     <div class="col-md-6">
 
                         <label class="card-header" for="nomE">Nom Editeur</label>
-                        <input type="text" value="<?php echo $nom ?>" name="nomE" id="nomE"/>
+                        <input type="text" value="<?php echo $nom ?>" name="nomE" class="rechercheE" id="nomE"/>
 
 
                     </div>
