@@ -31,20 +31,20 @@ echo <<<EOF
               </thead>
 
 EOF;
-
+//on recupere le num editeur 
  foreach ($tabE as $v) {
     $numE=$v->getNumEditeur();
-    
+   //on recupére les jeux en fonctiondu numEditeur récupé precedemment 
     foreach ($tabJ as $j) {
       if ($numE== $j->getNumEditeur()){
         $nomJ=htmlspecialchars($j-> getNomJeu());
         $cat=htmlspecialchars($j-> getcodeCategorie());
         $numJ=htmlspecialchars($j-> getNumJeu());
-        
+     //on recupére la catégorie des jeux recupres   
         foreach ($tabCat as $tc) {
           if ($cat== $tc->getCodeCategorie()){
             $nomCat=htmlspecialchars($tc-> getNomCategorie());
-
+//on recupere des infos sur la resa presentesdans concerner
             foreach ($tabC as $c) {
               if ($numJ== $c-> getNumJeux()){
               $recu=htmlspecialchars($c-> getRecu());
@@ -62,24 +62,24 @@ EOF;
               $ret="non";
             }
             $numR=htmlspecialchars($c->getNumResa());
-
+//on recupere la zone et les emplacements reserves 
             foreach ($tabL as $l) {
               if($numR== $l->getNumResa()){
                 $numZ=htmlspecialchars($l-> getNumZone());
                 $nbP=htmlspecialchars($l-> getNbPlace());
                 $nbP=$nbP/2;
-
+//on recupere le nom de la zone avec le num precedemment trouve 
                 foreach ($tabZ as $z) {
                   if ($numZ== $z->getNumZone()){
                     $nomZ=htmlspecialchars($z-> getNomZone());
-
+//on recupere des infos sur la reservation
                     foreach ($tabR as $r) {
                       if ($numR== $r->getNumResa()){
                         $et=htmlspecialchars($r-> getEtatFacture());
                         $pP=htmlspecialchars($r-> getPrixPlaceNego());
                         $numR=htmlspecialchars($r-> getNumResa());
                         
-
+//on cherche si un logement est voulu sur la reservation 
                         $o=0;
                         foreach ($tabLog as $tl) {
                           $numL=htmlspecialchars($tl-> getNumLogement());
@@ -104,6 +104,7 @@ EOF;
                   <th>{$rec}</th>
                   <th>{$ret}</th>
 EOF;
+         //si on a un logement on fait un lien vers le detail du logement 
           if ($loger=="oui"){ 
        echo <<< EOF
                   <th><a class="nav-link linkCate" href="index.php?action=detailLogement&num={$numL}">{$loger}</a></th>
