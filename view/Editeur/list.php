@@ -34,6 +34,7 @@ echo <<<EOF
                 </tr>
               </thead>
 EOF;
+//on récupére les données des éditeurs qui sont dans $tab
 foreach ($tab as $v) {
 
     $num = htmlspecialchars($v->getNumEditeur());
