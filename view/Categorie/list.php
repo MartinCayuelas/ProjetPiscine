@@ -18,6 +18,7 @@ echo <<<EOF
 {$num} Catégorie{$s} <i class=" fa fa-server"></i>
 </div>
 EOF;
+//on récupére les données relatives aux catégories qui sont dans $cat
 foreach ($cat as $v) {
     $code = htmlspecialchars($v->getCodeCategorie());
     $nom = htmlspecialchars($v->getNomCategorie());
@@ -32,7 +33,7 @@ foreach ($cat as $v) {
                       
  
 EOF;
-                  
+                 
                    if (isset($_SESSION['login']) && Session::is_admin()) {
         echo <<< EOF
                    
@@ -55,6 +56,7 @@ EOF;
                 
 
 EOF;
+ //on récupére les données pour les jeux qui sont dans $games
     foreach ($games as $v) {
         if ($v->getcodeCategorie() == $code) {
             $nomJeu = htmlspecialchars($v->getNomJeu());
