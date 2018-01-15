@@ -47,6 +47,10 @@
 
             </div>
         </div>
+        <footer>
+            <p class="nav-link text-center copy">Polytech Montpellier - IG3 2017 &copy;</p>
+                     
+        </footer>
 
         <!-- Bootstrap core JavaScript-->
         <script src="./vendor/jquery/jquery.min.js"></script>
