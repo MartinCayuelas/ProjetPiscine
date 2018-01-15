@@ -50,7 +50,7 @@
 
                         <label class="card-header" for="nbPlace">Nombre d'espaces</label>
                         <input type="number" value="<?php echo $nbPlace ?>" min="1" name="nbPlace" id="nbPlace" required=""/>
-                        <button class="btn  btn-secondary " onclick="calcul();">Calculer Prix
+                        <button type="button" class="btn  btn-secondary " onclick="calcul();">Calculer Prix
                         </button>
                         </br>
                         
@@ -137,7 +137,7 @@
 
 <!-- Le JS -->
 <!-- Le JS -->
-                        <script type="text/javascript">
+                      <script type="text/javascript">
                              
                             function calcul() { // La fonction
                             var prixB = 15;
@@ -151,5 +151,18 @@
                          
 
                         </script>
+    <!-- <script>
+
+ function calculPrix(){ 
+    var place=document.getElementById('nbPlace').value;
+    var prix=15;
+    var prixPlaceNego= place*prix;
+    document.getElementById('prix').value=prixPlaceNego;
+    setTimeout('calculPrix()',1000);
+}
+
+calculPrix();
+
+ </script>-->
 
 

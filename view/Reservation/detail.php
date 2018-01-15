@@ -2,7 +2,7 @@
 echo <<< EOF
  <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-th"></i> Détail de la reservation </div>
+          <i class="fa fa-th"></i> Détail des réservations  </div>
 
 <div class="card-header">
    
@@ -32,7 +32,7 @@ echo <<<EOF
 
 EOF;
 
-  foreach ($tabE as $v) {
+ foreach ($tabE as $v) {
     $numE=$v->getNumEditeur();
     
     foreach ($tabJ as $j) {
@@ -78,6 +78,7 @@ EOF;
                         $et=htmlspecialchars($r-> getEtatFacture());
                         $pP=htmlspecialchars($r-> getPrixPlaceNego());
                         $numR=htmlspecialchars($r-> getNumResa());
+                        
 
                         $o=0;
                         foreach ($tabLog as $tl) {
@@ -149,7 +150,6 @@ EOF;
 EOF;
   }
 }}}}}}}}}} }  }
-                  
 
    
 echo "</div>";

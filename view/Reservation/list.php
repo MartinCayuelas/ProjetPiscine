@@ -12,15 +12,9 @@ if (isset($_SESSION['login']) && Session::is_admin()) {
              
 EOF;
 }
-
-echo <<< EOF
-     <div class="card-body">
-        Total des recettes : {$chiffre} €
-      </div>
-        
-EOF;
 echo <<<EOF
         <div class="card-body">
+        <p>Total recette : {$chiffre} €</p>
           <div class="table-responsive">
             <table class="table table-bordered" width="100%" cellspacing="0">
                <thead>
@@ -43,10 +37,12 @@ foreach ($tab as $v) {
     $statut = htmlspecialchars($v->getStatut());
     $facture = htmlspecialchars($v->getEtatFacture());
     $com = htmlspecialchars($v->getCommentaire());
-
+    
+    
     foreach ($tabC as $c) {
       if ($num==$c->getNumResa()){
         $numJ=htmlspecialchars($c->getNumJeux());
+      
 
         foreach ($tabJ as $j) {
           if ($numJ==$j->getnumJeu()){
@@ -56,6 +52,11 @@ foreach ($tab as $v) {
           foreach ($tabE as $e) {
             if ($numE==$e->getnumEditeur()){
               $nomE=htmlspecialchars($e->getNomEditeur());
+              
+        
+              
+        
+            
 
         
 
@@ -71,8 +72,10 @@ foreach ($tab as $v) {
                   <th>{$prix}</th>
                    <th>{$facture}</th>
                    <th>{$com}</th>
-                   
+
+
 EOF;
+
     if (isset($_SESSION['login']) && Session::is_admin()) {
 
         echo <<< EOF
@@ -91,6 +94,7 @@ EOF;
                                 
 
 
+                                <br>
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
                                
@@ -104,6 +108,9 @@ EOF;
     }
   }
 }
+
+
+
 
     echo <<< EOF
 

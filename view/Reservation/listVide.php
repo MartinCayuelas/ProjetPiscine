@@ -8,7 +8,7 @@ EOF;
 
 if (isset($_SESSION['login']) && Session::is_admin()) {
     echo <<<EOF
-            <a class="ajout" href="index.php?action=createReservation"><i class="fa fa-plus-circle" aria-hidden="true"></i>  réservation</a>
+            <a class="ajout" href="index.php?action=createReservation"><i class="fa fa-plus-circle" aria-hidden="true"></i>  Réservation</a>
              
 EOF;
 }
