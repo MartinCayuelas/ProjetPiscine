@@ -55,7 +55,6 @@ EOF;
                                 <input type="hidden" name="nbchambre" value="{$nbchambre}" />
                                 <input type="hidden" name="cpn" value="{$cpn}" />
                                 
-                                <br>
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
                                

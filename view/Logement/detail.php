@@ -28,7 +28,8 @@ echo <<<EOF
 EOF;
 
   foreach ($tabL as $v) {
-   $ville=htmlspecialchars($v-> getVilleLogement());;
+    $numL=htmlspecialchars($v-> getNumLogement());
+   $ville=htmlspecialchars($v-> getVilleLogement());
    $rue=htmlspecialchars($v-> getRueLogement());
    $nbC=htmlspecialchars($v-> getNbrsChambresLogement());
    $C=htmlspecialchars($v-> getCoutParNuitLogement());
@@ -47,18 +48,16 @@ EOF;
     if (isset($_SESSION['login']) && Session::is_admin()) {
         echo <<< EOF
                    
-                   <th class="text-center" ><a href="index.php?action=deleteByNum&num={$num}"><button class="btn btn-danger" type="button">Supprimer</button></a></th> 
+                   <th class="text-center" ><a href="index.php?action=deleteLogement&num={$numL}"><button class="btn btn-danger" type="button">Supprimer</button></a></th> 
                              <form action="index.php?action=updated" method = "POST">
                                 
-                                <input type="hidden" name="numJeux" value="" />
-                                <input type="hidden" name="nomJeu" value="" />
-                                <input type="hidden" name="NbreJoueurs" value="" />
+                                <input type="hidden" name="numL" value="$numL" />
+                                <input type="hidden" name="ville" value="$ville" />
+                                <input type="hidden" name="rue" value="$rue" />
                                 <input type="hidden" name="dateSortie" value="" />
-                                <input type="hidden" name="dureePartie" value="" />
-                                <input type="hidden" name="codeCategorie" value="" />
-                                <input type="hidden" name="numEditeur" value="" />
+                                <input type="hidden" name="nbc" value="$nbC" />
+                                <input type="hidden" name="cout" value="$C" />
                                 
-                                <br>
                                <th class="text-center" > <button type="submit" class="btn btn-primary">Modifier</button></th>   
                             </form>
                                

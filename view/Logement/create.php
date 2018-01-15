@@ -24,7 +24,7 @@
                             <input type="number" value="<?php echo $nbchambres ?>"placeholder="NbreChambres" name="nbchambres" id="nbchambres_id"/>
                           	
                           	<label class="card-header" for="cout_id">CoutParNuit</label>
-                            <input type="number" value="<?php echo $cpn ?>"placeholder="CoutParNuit" name="cpn" id="_id"/>
+                            <input type="number" value="<?php echo $cpn ?>"placeholder="CoutParNuit" name="cpn" id="_id"/>>
                         
                         		</div>
                     </div>
