@@ -100,4 +100,13 @@ class ModelLoger {
         return $req->execute($values);
     }
    
+     public function getAllLoger() {
+        $sql = "SELECT * FROM loger";
+        $req = Model::$pdo->query($sql);
+        $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelLoger');
+        if (empty($tab_prod)) {
+            return false;
+        }
+        return $tab_prod;
+    }
 }
