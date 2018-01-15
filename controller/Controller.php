@@ -326,7 +326,7 @@ class Controller {
             $num = $_GET['num'];
             $d = ModelEditeur::deleteByNum($num);
             if ($d == false) {
-                $controller = 'Accueil';
+                $controller = 'Editeur';
                 $view = 'listVide';
                 $pagetitle = 'Impossible à supprimer';
                 require File::build_path(array("view", "view.php"));
@@ -507,35 +507,7 @@ class Controller {
         }
     }
     ####################Suivi##############
-    public function listSuiviB() {
-        /*
-         * Fonction pour afficher la liste des suivis
-         */
-        if (!Session::is_connected()) {
-            Controller::FestivalConnect();
-        } else {
-            $numEditeur = $_GET['numEditeur'];          
-            $num = ModelSuivi::getNbSuivis();
-            $num = $num['totalSuivis'];
-            if ($num == 1) {
-                $s = "";
-            } else {
-                $s = 's';
-            }
-            $tab = ModelSuivi::getSuivisByEditeur($numEditeur);
-            if (empty($tab)) {
-                $controller = 'Suivi';
-                $view = 'listVide';
-                $pagetitle = 'Liste des suivis';
-                require File::build_path(array("view", "view.php"));
-            } else {
-                $controller = 'Suivi';
-                $view = 'list';
-                $pagetitle = 'Liste des suivis';
-                require File::build_path(array("view", "view.php"));
-            }
-        }
-    }
+    
     public function listSuivi() {
         /*
          * Fonction pour afficher la liste des suivis
@@ -627,7 +599,7 @@ class Controller {
             require File::build_path(array("view", "view.php"));
         } else {
             $check = $_POST['reponse'];
-            if ($check == NULL) {
+            if ($check == 0) {
                 $check = 0;
             } else {
                 $check = 1;
@@ -724,6 +696,7 @@ public function listResa() {
             $tabC =ModelConcerner::getAllConcerner();
             $tabJ= ModelJeux::getAllJeux();
             $tabE =ModelEditeur::getAllEditeurs();
+            $tabLog=ModelLoger::getAllLoger();
             $chiffre = ModelReservation::CA();
             
    
@@ -949,6 +922,7 @@ public function listResa() {
             $tabCat= ModelCategorie::getAllCategorie();
             $tabL=ModelLocaliser::getAllLocaliser();
             $tabZ=ModelZone::getAllZone();
+            $tabLog=ModelLoger::getAllLoger();
             
             //$cat = ModelCategorie::getAllCategorie();
             //$edit = ModelEditeur::getAllEditeurs();
@@ -959,6 +933,95 @@ public function listResa() {
             require File::build_path(array("view", "view.php"));
         }
     }
+    
+    ############Logement#############
+    public function detailLogement() {
+        /*
+         * Fonction pour afficher la liste des éditeurs
+         */
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+            $num = $_GET['num'];
+             $tabL=ModelLogement::getLogementById($num);
+            
+            $controller = 'Logement';
+            $view = 'detail';
+            $pagetitle = 'Detail';
+            require File::build_path(array("view", "view.php"));
+        }
+    }
+    
+    public function updateLogement() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $action = 'updatedLogement';
+            $titre = 'Modification';
+            $rue = $_POST['rue'];
+            $num=$_POST['numL'];
+            print_r($num);
+            $ville = $_POST['ville'];
+            $cp= $_POST['cp'];
+            $nbchambres = $_POST['nbc'];
+            $cpn = $_POST['cout'];
+            $controller = 'Logement';
+            $view = 'create';
+            $pagetitle = 'Mise à jour Logement';
+            require FILE::build_path(array("view", "view.php"));
+        }
+    }
+    public function updatedLogement() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            requireFile::build_path(array("view", "view.php"));
+        } else {
+            $edit = new ModelLogement(0,$_POST['rue'],$_POST['ville'], $_POST['cp'], $_POST['nbchambres'],$_POST['cpn']);
+            if ($edit->updated($_POST['numLogement']) == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Erreur lors de la creation';
+                require FILE::build_path(array("view", "view.php"));
+            } else {
+                Controller::listResa();
+            }
+        }
+    }
+    
+     public function deleteLogement() {
+        if (!Session::is_connected()) {
+            self::festivalConnect();
+        } elseif (!Session::is_admin()) {
+            $controller = 'Accueil';
+            $view = 'listVide';
+            $pagetitle = 'Error Accès';
+            require File::build_path(array("view", "view.php"));
+        } else {
+            $idLogement = $_GET['num'];
+            $d2= ModelLoger::deleteByNumLog($idLogement);
+            $d = ModelLogement::deleteByNum($idLogement);
+            if ($d == false) {
+                $controller = 'Accueil';
+                $view = 'listVide';
+                $pagetitle = 'Impossible à supprimer';
+                require File::build_path(array("view", "view.php"));
+            } else {
+                Controller::listResa();
+            }
+        }
+    }
+
+
+    
     ############Festival#############
      public function listFestival() {
         /*
@@ -1114,6 +1177,30 @@ public function listResa() {
                 $pagetitle = 'Liste des jeux';
                 require File::build_path(array("view", "view.php"));
             }
+        }
+    }
+    
+            public function listJeuxSort() {
+        /*
+         * Fonction pour trier la liste des jeux
+         */
+        if (!Session::is_connected()) {
+            Controller::FestivalConnect();
+        } else {
+            $tab = ModelJeux::getAllJeuxSort();
+            $cat = ModelCategorie::getAllCategorie();
+            $edit = ModelEditeur::getAllEditeurs();
+             $num = ModelJeux::getNbJeux();
+             $num = $num['totalJeux'];
+            if ($num == 1) {
+                $s = "";
+            } else {
+                $s = 'x';
+            }
+            $controller = 'Jeux';
+            $view = 'list';
+            $pagetitle = 'Liste des jeux';
+            require File::build_path(array("view", "view.php"));
         }
     }
     public function detailJeu() {
@@ -1366,9 +1453,9 @@ public function listResa() {
             Controller::FestivalConnect();
         } else {
             $tabZ = ModelZone::getAllZone();
-          
+            
             $tabC=ModelOrganiser::getAllOrga();
-               
+             
             $tabJ=ModelJeux::getAllJeux();
 
             $tabCat=ModelCategorie::getAllCategorie();
@@ -1379,17 +1466,28 @@ public function listResa() {
 
             $nbZ = ModelZone::getNbZone();
             $num = $nbZ['totalZone'];
+            
             if ($num == 1) {
                 $s = "";
             } else {
                 $s = 's';
             }
-
+            if (empty($tabZ)){
+            $controller = 'Zones';
+            $view = 'listVide';
+            $pagetitle = 'Liste des zones';
+            require File::build_path(array("view", "view.php"));
+            
+            }else{
             $controller = 'Zones';
             $view = 'list';
             $pagetitle = 'Liste des zones';
             require File::build_path(array("view", "view.php"));
+            
+            
+            }
         }
+    
     }
     
      public static function createZone() {
