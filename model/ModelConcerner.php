@@ -124,5 +124,15 @@ class ModelConcerner {
         return $req->execute($values);
     }
 
+     public function getAllConcerner() {
+        $sql = "SELECT * FROM concerner";
+        $req = Model::$pdo->query($sql);
+        $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelConcerner');
+        if (empty($tab_prod)) {
+            return false;
+        }
+        return $tab_prod;
+    }
+
    
 }

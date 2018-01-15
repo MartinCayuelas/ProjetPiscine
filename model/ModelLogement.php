@@ -106,7 +106,7 @@ class ModelLogement {
     }
    
     public function updated($num) {
-        $sql = "UPDATE = logement SET  rueLogement =:read2, villeLogement =:read3, CPLogement =:read4 ,nbchambresLogement =:read5, coutNuitLogement =:read6 WHERE numLogement=:read7";
+        $sql = "UPDATE logement SET  rueLogement =:read2, villeLogement =:read3, CPLogement =:read4 ,nbchambresLogement =:read5, coutNuitLogement =:read6 WHERE numLogement=:read7";
         $req = Model::$pdo->prepare($sql);
         $values = array(
             "read2" => $this->rueLogement,
@@ -114,7 +114,7 @@ class ModelLogement {
             "read4" => $this->CPLogement,
             "read5" => $this->nbCHambresLogement,
             "read6" => $this->coutNuitLogement,
-
+            "read7" => $num,
         );
         return $req->execute($values);
     }
@@ -125,5 +125,5 @@ class ModelLogement {
         $res=$req2->fetchColumn();
         return $res;
     }
-    
+
 }

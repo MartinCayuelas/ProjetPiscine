@@ -58,7 +58,7 @@ class ModelEditeur {
     public function getAllEditeursSort(){
         $sql = "SELECT * 
                 FROM editeur
-                ORDER BY villeEditeur ASC ";
+                ORDER BY nomEditeur  ASC ";
                 $req = Model::$pdo->query($sql);
         $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelEditeur');
 
@@ -72,7 +72,7 @@ class ModelEditeur {
     public function getAllEditeursSortVille(){
         $sql = "SELECT * 
                 FROM editeur
-                ORDER BY nomEditeur ASC ";
+                ORDER BY villeEditeur ASC ";
                 $req = Model::$pdo->query($sql);
         $tab_prod = $req->FETCHALL(PDO::FETCH_CLASS, 'ModelEditeur');
 

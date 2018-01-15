@@ -45,7 +45,7 @@ class ModelLocaliser {
                 'place' => $this->nbPlace,
                 
             );
-            print_r($values);
+           
             return $req->execute($values);
         } catch (PDOException $e) {
             return false;
