@@ -26,7 +26,7 @@ echo <<<EOF
               </thead>
 
 EOF;
-
+//on recupere les donnée du logement qui est dans $tabL
   foreach ($tabL as $v) {
     $numL=htmlspecialchars($v-> getNumLogement());
    $ville=htmlspecialchars($v-> getVilleLogement());
