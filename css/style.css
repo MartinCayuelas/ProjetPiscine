@@ -141,6 +141,19 @@
 .linkCate:hover{
     color: #FFF;
 }
+
+
+.erreur{
+    color: white;
+}
+
+.cateZone{
+    background-color: #666666;
+}
+.jeuZone{
+    background-color: #999999;
+}
+
 .retour:hover{
     background-color: #fd7e14;
 }
