@@ -24,6 +24,7 @@ echo <<<EOF
                 </tr>
               </thead>
 EOF;
+//on recupere les données du festival qui sont dans $tab
 foreach ($tab as $v) {
     $annee = htmlspecialchars($v->getAnneeFestival());
     $date = htmlspecialchars($v->getDateFestival());
